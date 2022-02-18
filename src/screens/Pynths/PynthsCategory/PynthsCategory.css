@@ -1,0 +1,32 @@
+.flicking-arrow-prev,
+.flicking-arrow-next {
+  position: absolute;
+  cursor: pointer;
+  transform: translateY(-90%);
+  z-index: 2;
+  opacity: 0.6;
+}
+
+
+.flicking-arrow-prev {
+    left: 10px;
+}
+.flicking-arrow-next {
+    right: 10px;
+}
+
+.flicking-arrow-prev.is-outside {
+  left: -74px;
+}
+.flicking-arrow-next.is-outside {
+  right: -74px;
+}
+
+.flicking-arrow-prev::before,
+.flicking-arrow-prev::after,
+.flicking-arrow-next::before,
+
+.flicking-arrow-disabled,
+.flicking-arrow-disabled {
+  cursor: default;
+}

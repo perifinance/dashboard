@@ -1,0 +1,83 @@
+{
+  "name": "dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.5.8",
+    "@egjs/flicking-plugins": "^4.2.3",
+    "@egjs/react-flicking": "^4.4.3",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.25",
+    "@types/react": "^17.0.39",
+    "@types/react-datepicker": "^4.3.4",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "axios": "^0.25.0",
+    "babel": "^6.23.0",
+    "babel-plugin-styled-components": "^1.13.2",
+    "babel-preset-react-app": "^10.0.0",
+    "date-fns": "^2.21.1",
+    "env-cmd": "^10.1.0",
+    "ethers": "^5.5.3",
+    "graphql": "^16.3.0",
+    "i18next": "^19.9.1",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-xhr-backend": "^3.2.2",
+    "process": "^0.11.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.8.8",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "5.0.0",
+    "recharts": "^2.1.4",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.0",
+    "swiper": "^8.0.6",
+    "typescript": "^4.5.5",
+    "victory": "^36.2.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "env-cmd -f .env.development react-scripts start",
+    "start-production": "env-cmd -f .env.production react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "env-cmd -f .env.production npm run build && npm run deploy-s3 && npm run invalidate",
+    "deploy-s3": "aws s3 sync ./build s3://peri.dashboard --profile=peri.dashboard-deploy-s3",
+    "invalidate": "aws cloudfront create-invalidation --profile=peri.dashboard-deploy-s3 --distribution-id ERGVZBLJO62YY --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico",
+    "test-deploy": "env-cmd -f .env.development npm run build && npm run test-deploy-s3 && npm run test-invalidate",
+    "test-deploy-s3": "aws s3 sync ./build s3://test.peri.dashboard --profile=test.peri.dashboard-deploy-s3",
+    "test-invalidate": "aws cloudfront create-invalidation --profile=test.peri.dashboard-deploy-s3 --distribution-id EUY36FH3POXJO --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.22"
+  }
+}

@@ -1,0 +1,27 @@
+header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.logo img {
+    object-fit: contain;
+    content:url(./logo/logo.png);
+}
+
+.active {
+    color: white !important;
+}
+
+@media (min-width: 1024px) {
+    .active {
+        color: #1D86FE !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo img {
+        content:url(./logo/logo_pc.svg);
+    }
+}
