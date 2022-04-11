@@ -40,7 +40,7 @@ const Header = () => {
                 
                 <div className={`absolute ${isOpen ? 'flex' : 'hidden lg:flex'} lg:relative flex-col lg:flex-row z-10 pt-4 lg:p-0 self-center bg-navy-700 text-xl w-full lg:w-auto lg:flex-auto font-normal`}>
                     {Object.keys(routerNames).map(e => {
-                        return <NavLink className="border-gray-700 text-gray-700 lg:text-white border-t lg:border-none px-3 py-2 whitespace-nowrap" activeClassName="active" to={e} key={e}>{routerNames[e]}</NavLink>
+                        return <NavLink className="active border-gray-700 text-gray-700 lg:text-white border-t lg:border-none px-3 py-2 whitespace-nowrap" to={e} key={e}>{routerNames[e]}</NavLink>
                     })}
                 </div>
                 <div className="hidden lg:flex text-sm text-gray-700 items-center text-right">

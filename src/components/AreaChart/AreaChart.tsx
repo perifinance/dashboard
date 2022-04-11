@@ -39,7 +39,7 @@ const AreaChart = ({data, colors}) => {
             >
             <defs>
             {colors.map((color: string, index)=> {
-                return <linearGradient id={index} x1="0" y1="0" x2="0" y2="1">
+                return <linearGradient key={index} id={index} x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor={`${CSSToColors[color]}`} stopOpacity={1}/>
                     <stop offset="95%" stopColor={`${CSSToColors[color]}`} stopOpacity={0}/>
                 </linearGradient>

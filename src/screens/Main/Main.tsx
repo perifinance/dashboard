@@ -1,8 +1,8 @@
 import {
     BrowserRouter as Router,
-    Switch,
+    Routes,
     Route,
-    Redirect
+    Navigate
 } from "react-router-dom";
 
 import Header from '../Header' 
@@ -16,18 +16,12 @@ const Main = () => {
             <Router>
                 <Header></Header>
                 <div className="py-4 lg:max-w-screen-xl xl:pt-6 2xl:pt-14 mx-auto">
-                    <Switch>
-                        <Route path="/stake">
-                            <Stake></Stake>
-                        </Route>
-                        <Route path="/dex">
-                            <Dex></Dex>
-                        </Route>
-                        <Route path="/pynths">
-                            <Pynths></Pynths>
-                        </Route>
-                        <Redirect to="/stake"></Redirect>
-                    </Switch>
+                    <Routes>
+                        <Route path="/stake" element={<Stake/>} />
+                        <Route path="/dex" element={<Dex/>} />
+                        <Route path="/pynths" element={<Pynths/>} />
+                        <Route path="/" element={<Navigate to="/stake"/>} />
+                    </Routes>
                 </div>
             </Router>
         
