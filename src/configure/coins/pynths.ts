@@ -23,23 +23,6 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
                 categories: ['currencies'],
             }
     ],
-} : {
-    42: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            }
-    ],
-    97: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            }
-    ],
     1285: [
         {
             id: 0,
@@ -179,6 +162,23 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
             symbol: "pYFI",
             categories: ['crypto'],
         },
+    ],
+} : {
+    42: [
+            {
+                id: 0,
+                name: "USD",
+                symbol: "pUSD",
+                categories: ['currencies'],
+            }
+    ],
+    97: [
+            {
+                id: 0,
+                name: "USD",
+                symbol: "pUSD",
+                categories: ['currencies'],
+            }
     ],
     1287: [
             {

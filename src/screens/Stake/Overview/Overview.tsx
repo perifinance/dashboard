@@ -23,18 +23,31 @@ const Overview = () => {
 
     const getPer = () => {
         const lastPrice = Number(lastRate.price);
-        const fristPrice = Number(rates[0].price);
-        return (((lastPrice - fristPrice) / fristPrice ) * 100).toFixed(2);
+        const firstPrice = Number(rates[0].price);
+        return (((lastPrice - firstPrice) / firstPrice ) * 100).toFixed(2);
     }
 
     const getMarketCap = () => {
-        return BigInt(Number(lastRate.price) * (10 ** 18)) * circulatingSupply / 10n ** 18n;
+        let tmp = BigInt(BigInt(Number(lastRate.price)*(10**18))*circulatingSupply);
+        for(let i=0 ; i<18 ; i++) {
+            tmp = tmp/10n;
+        }
+        return tmp;
     }
 
     useEffect(() => {
         if(stakeIsReady) {
-            setLastRate(rates[rates.length-1]);
-            
+            console.log("rates", rates);
+            if(rates.length === 0) {
+                setLastRate({
+                    price: '0',
+                    formatPrice: '0.000000',
+                    formatLow: '0.000000',
+                    formatHigh: '0.000000'
+                });
+            } else {
+                setLastRate(rates[rates.length-1]);
+            }
         }
     },[stakeIsReady])
 

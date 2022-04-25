@@ -23,7 +23,6 @@ const AreaChart = ({data, colors}) => {
             setMin(min);
             setMax(max);
         }
-        console.log(data)
     }, [data])
     
     return <>{
