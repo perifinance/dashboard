@@ -59,9 +59,9 @@ const Performance = () => {
                             </tr>
                         </thead>
                         <tbody className="lg:text-base font-normal">
-                            {pynthsByVolumes.map(e => 
+                            {pynthsByVolumes.map((e,i) => 
                                 
-                                e.symbol !== 'pUSD' && <tr className="border-b border-gray-900">
+                                e.symbol !== 'pUSD' && <tr key={i} className="border-b border-gray-900">
                                     <td className="p-2 border-r border-gray-900">
                                         <div className="flex flex-col lg:flex-row lg:gap-2">
                                             <img className="hidden lg:block w-5 h-5 self-center" src={`/images/currencies/${e.symbol}.png`}></img>
@@ -69,7 +69,7 @@ const Performance = () => {
                                             {e.name}
                                         </div>
                                     </td>
-                                    <td className="p-2 text-right border-r border-gray-900">${formatShortenCurrency(utils.formatEther(exchangeRates[e.symbol]))}</td>
+                                    <td className="p-2 text-right border-r border-gray-900">${formatShortenCurrency(utils.formatEther(exchangeRates[e.symbol]===undefined?1000000000000000000n:exchangeRates[e.symbol]))}</td>
                                     <td className={`p-2 text-center border-r border-gray-900 ${Number(rateChanges[e.symbol]) > 0 ? 'text-blue-800' : 'text-red-800'}`}>{Number(rateChanges[e.symbol]) > 0 ? '▲' :'▼'} {rateChanges[e.symbol]}%</td>
                                     <td className="p-2 text-right">${formatShortenCurrency(utils.formatEther(e.usdVolume))}</td>
                                 </tr> 

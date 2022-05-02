@@ -31,7 +31,7 @@ const DebtByNetworks = () => {
             }
         })
         
-        setTotalDebts(Number(utils.formatEther(total)));
+        setTotalDebts(Number(utils.formatEther(total/BigInt(4))));
         setNetworkDebts(networkDebts.sort((a, b) => Number(b.totalDebt) - Number(a.totalDebt)));
     }
 
@@ -54,7 +54,6 @@ const DebtByNetworks = () => {
                                     <div className="text-3xl lg:text-4xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
                                     <div className="text-sm text-gray-700 font-normal">Total Debt</div>
                                 </div>
-                                
                             </div>
                         </div>
                         <div className="flex lg:hidden flex-wrap space-y-2 lg:gap-2">

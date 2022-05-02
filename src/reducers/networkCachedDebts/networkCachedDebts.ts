@@ -12,9 +12,10 @@ export type NetworkCachedDebtsSliceState = {
     total?: debt
     1?: debt
     42?: debt
-	56?: debt
+    56?: debt
     97?: debt
-	137?: debt
+    137?: debt
+    1285?: debt
     1287?: debt
     80001?: debt
 };

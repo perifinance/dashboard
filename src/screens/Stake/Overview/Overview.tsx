@@ -29,15 +29,11 @@ const Overview = () => {
 
     const getMarketCap = () => {
         let tmp = BigInt(BigInt(Number(lastRate.price)*(10**18))*circulatingSupply);
-        for(let i=0 ; i<18 ; i++) {
-            tmp = tmp/10n;
-        }
-        return tmp;
+        return tmp/1000000000000000000n;
     }
 
     useEffect(() => {
         if(stakeIsReady) {
-            console.log("rates", rates);
             if(rates.length === 0) {
                 setLastRate({
                     price: '0',

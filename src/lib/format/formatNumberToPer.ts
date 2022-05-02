@@ -7,7 +7,7 @@ export const formatNumberToPer = (value, total) => {
     
     let per = '0.00';
     try {
-        per = Number(utils.formatEther((value * 10n ** 18n / total * 100n))).toFixed(2);
+        per = Number(utils.formatEther((value * 1000000000000000000n / total * 100n))).toFixed(2);
     } catch(e) {
 
     }

@@ -27,7 +27,9 @@ const Pynths = () => {
         let pynthsByTotalSupplies = pynths[dexNetworkId].map(pynth => {
             
             const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
-                return b.pynthName === pynth.symbol ? a + b.totalSupply * exchangeRates[pynth.symbol] / 10n ** 18n : a;
+                // console.log(pynth.symbol, exchangeRates[pynth.symbol]);
+                let rate = exchangeRates[pynth.symbol]===undefined?1000000000000000000n:exchangeRates[pynth.symbol];
+                return b.pynthName === pynth.symbol ? a + b.totalSupply * rate / 1000000000000000000n : a;
             }, 0n);
 
             const pynthByTotal = totalSupplies.reduce((a, b) => {

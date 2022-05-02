@@ -8,7 +8,7 @@ export const getCachedDebt = ({networkId}) => {
             
             return {
                 networkId: Number(networkId),
-                debt: BigInt(data * 10 ** 18) / 4n
+                debt: BigInt(data * 10 ** 18)
             };
         }
     }

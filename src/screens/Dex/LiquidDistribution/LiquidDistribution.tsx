@@ -29,7 +29,8 @@ const LiquidDistribution = () => {
         let pynthsByTotalSupplies = pynths[dexNetworkId].map(pynth => {
             
             const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
-                return b.pynthName === pynth.symbol ? a + b.totalSupply * exchangeRates[pynth.symbol] / 10n ** 18n : a;
+                let rate = exchangeRates[pynth.symbol] === undefined?1000000000000000000n:exchangeRates[pynth.symbol];
+                return b.pynthName === pynth.symbol ? a + b.totalSupply * rate / 1000000000000000000n : a;
             }, 0n);
             total = total + pynthByTotalUSD; 
 

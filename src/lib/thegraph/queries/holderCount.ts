@@ -4,7 +4,7 @@ export const holderCount = ({networkId}) => {
     
     const RateMapping = (data) => {
         return {
-            count: BigInt(data.count) * 10n ** 18n
+            count: BigInt(data.count) * 1000000000000000000n
         }
     }
     return {

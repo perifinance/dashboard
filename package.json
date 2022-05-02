@@ -53,7 +53,7 @@
     "deploy": "env-cmd -f .env.production npm run build && npm run deploy-s3 && npm run invalidate",
     "deploy-s3": "aws s3 sync ./build s3://peri.dashboard --profile=peri.dashboard-deploy-s3",
     "invalidate": "aws cloudfront create-invalidation --profile=peri.dashboard-deploy-s3 --distribution-id ERGVZBLJO62YY --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico",
-    "test-deploy": "env-cmd -f .env.development npm run build && npm run test-deploy-s3 && npm run test-invalidate",
+    "test-deploy": "env-cmd -f .env.production npm run build && npm run test-deploy-s3 && npm run test-invalidate",
     "test-deploy-s3": "aws s3 sync ./build s3://test.peri.dashboard --profile=test.peri.dashboard-deploy-s3",
     "test-invalidate": "aws cloudfront create-invalidation --profile=test.peri.dashboard-deploy-s3 --distribution-id EUY36FH3POXJO --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },

@@ -26,7 +26,8 @@ const PUSDDistribution = () => {
         let total = 0n;
         const networkByDebts = getSupportedNetworks().map(networkId => {
             const networkByDebt = totalSupplies.reduce((a, b) => {                 
-                return b.networkId === networkId ? a + b.totalSupply * exchangeRates[b.pynthName] / (10n ** 18n) : a;
+                let rate = exchangeRates[b.pynthName]===undefined?1000000000000000000n:exchangeRates[b.pynthName];
+                return b.networkId === networkId ? a + b.totalSupply * rate / (1000000000000000000n) : a;
             }, 0n);
 
             total = total + networkByDebt;

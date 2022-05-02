@@ -41,7 +41,8 @@ const Categories = () => {
                 if(!catagoryByTotalSupply[catagory]) {
                     catagoryByTotalSupply[catagory] = 0n
                 }
-                const pynthByTotalUSD = item.totalSupply * exchangeRates[item.pynthName] / 10n ** 18n
+                let rate = exchangeRates[item.pynthName] === undefined?1000000000000000000n:exchangeRates[item.pynthName];
+                const pynthByTotalUSD = item.totalSupply * rate / 1000000000000000000n
                 catagoryByTotalSupply[catagory] = catagoryByTotalSupply[catagory] + pynthByTotalUSD;
                 total = total + pynthByTotalUSD;
             })
@@ -80,11 +81,11 @@ const Categories = () => {
                     <div className="lg:w-40">
                         <Title>Categories</Title>
                         <div className="flex flex-wrap mt-4">
-                            {pynthsCategories.map(e => {
+                            {pynthsCategories.map((e,i) => {
                                 if(['currencies', 'crypto', 'commodities', 'indices'].includes(e)) {
-                                    return <Progress text={e.charAt(0).toUpperCase() + e.slice(1)} per={formatNumberToPer(categoryByTotalSupplies[e], totalSupply)}></Progress>
+                                    return <Progress key={i} text={e.charAt(0).toUpperCase() + e.slice(1)} per={formatNumberToPer(categoryByTotalSupplies[e], totalSupply)}></Progress>
                                 } else {
-                                    return <></>
+                                    return <div key={i}></div>
                                 }
                             }) }
                         </div>

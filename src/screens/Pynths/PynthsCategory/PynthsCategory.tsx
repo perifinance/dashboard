@@ -58,7 +58,7 @@ const PynthsCategory = ({isActive, setIsActive}) => {
             </div>
             <div className="hidden lg:flex mb-3 gap-3 h-10">
                 {pynthsCategories.map((e, index) => 
-                    <ActiveCard isActive={isActive === e} onClick={() => {setIsActive(e)}}>
+                    <ActiveCard key={index} isActive={isActive === e} onClick={() => {setIsActive(e)}}>
                         <div className="text-lg text-center my-1">{e.toUpperCase()} ({pynthsCategoriesCount[index]})</div>
                     </ActiveCard>
                 )}

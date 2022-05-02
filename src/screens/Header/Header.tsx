@@ -45,7 +45,7 @@ const Header = () => {
                 </div>
                 <div className="hidden lg:flex text-sm text-gray-700 items-center text-right">
                     <div className="w-60">
-                        Last Updated: Jan 10,2022 14:20:00
+                        
                     </div>
                     <div className="flex justify-center items-center w-7 h-7 bg-navy-500 rounded-full ml-2 cursor-pointer" onClick={() => {dispatch(setClear())}}>
                         <img className={`w-4 h-4 ${ stakeIsReady || dexIsReady || pynthsIsReady ? '' : 'animate-spin' }`} src={`/images/icon/refresh.svg`} alt="reFresh"></img>
