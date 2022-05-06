@@ -3,140 +3,139 @@
 @tailwind utilities;
 
 body {
-	font-family: 'Roboto';
+  font-family: "Roboto";
+  background: #131832;
 }
 
 .left {
-	padding-right: 0;
+  padding-right: 0;
 }
 img {
-	object-fit: contain;
+  object-fit: contain;
 }
 @media (min-width: 1280px) {
-	.left {
-		padding-right: 25%;
-	}
+  .left {
+    padding-right: 25%;
+  }
 }
 
 .card-width {
-	width: 335px;
-	min-width: 335px;
+  width: 335px;
+  min-width: 335px;
 }
 
 .notification-info {
-	background-color: #2184F8 !important;
+  background-color: #2184f8 !important;
 }
 
 .notification-success {
-	background-color: #4D984F !important;
+  background-color: #4d984f !important;
 }
 
 .notification-warning {
-	background-color: #E24545 !important;
-}
-  
-.notification-message .title{
-	font-weight: 700 !important;
-	font-size: 1.125 !important;
+  background-color: #e24545 !important;
 }
 
-.notification-message .message{
-	font-weight: 500;
-	font-size: 0.875;
+.notification-message .title {
+  font-weight: 700 !important;
+  font-size: 1.125 !important;
+}
+
+.notification-message .message {
+  font-weight: 500;
+  font-size: 0.875;
 }
 
 .notification-container {
-	width: 100%;
-	min-height: 130px;
-	
-	padding: 20px;
-	top: 40px;
+  width: 100%;
+  min-height: 130px;
+
+  padding: 20px;
+  top: 40px;
 }
 
 .notification {
-	box-sizing: border-box;
-	padding: 40px 25px 40px 80px;
-	box-shadow: 0 0;
-	border-radius: 10px;
-	cursor: pointer;
-	line-height: 1.8em;
-	position: relative;
-	opacity: 1;
-	margin-top: 15px;
+  box-sizing: border-box;
+  padding: 40px 25px 40px 80px;
+  box-shadow: 0 0;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 1.8em;
+  position: relative;
+  opacity: 1;
+  margin-top: 15px;
 }
 .notification:before {
-    position: absolute;
-    top: 50%;
-    left: 26px;
-    margin-top: -14px;
-    display: block;
-    font-family: 'Notification';
-    width: 28px;
-    height: 28px;
-    font-size: 28px;
-    text-align: center;
-    line-height: 28px;
+  position: absolute;
+  top: 50%;
+  left: 26px;
+  margin-top: -14px;
+  display: block;
+  font-family: "Notification";
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 28px;
 }
 .notification-container-empty {
-	width: 0px;
-	height: 0px;
+  width: 0px;
+  height: 0px;
 }
 
 @media (min-width: 1024px) {
-	.notification-container {
-		padding: 0 0 0 0;
-		top: 80px;
-		min-width: 0px;
-		max-width: 335px;
-	}
+  .notification-container {
+    padding: 0 0 0 0;
+    top: 80px;
+    min-width: 0px;
+    max-width: 335px;
+  }
 
-	.notification {
-		border-radius: 10px 0px 0px 10px;
-	}
-
+  .notification {
+    border-radius: 10px 0px 0px 10px;
+  }
 }
 
 button.bg-blue-500:disabled {
-	background-color: #333333;
-	color: #737373;
+  background-color: #333333;
+  color: #737373;
 }
 
 @font-face {
-	font-family: 'Roboto';	
-	font-style: thin;
-	font-weight: 100;
-	src: url(./fonts/Roboto-Thin.ttf) format('truetype');
+  font-family: "Roboto";
+  font-style: thin;
+  font-weight: 100;
+  src: url(./fonts/Roboto-Thin.ttf) format("truetype");
 }
 
 @font-face {
-	font-family: 'Roboto';	
-	font-style: light;
-	font-weight: 300;
-	src: url(./fonts/Roboto-Light.ttf) format('truetype');
+  font-family: "Roboto";
+  font-style: light;
+  font-weight: 300;
+  src: url(./fonts/Roboto-Light.ttf) format("truetype");
 }
 
 @font-face {
-	font-family: 'Roboto';
-	font-style: regular;
-	font-weight: 400;
-	src: url(./fonts/Roboto-Regular.ttf) format('truetype');
-}
-
-
-@font-face {
-	font-family: 'Roboto';
-	font-style: medium;
-	font-weight: 500;
-	src: url(./fonts/Roboto-Medium.ttf) format('truetype');
+  font-family: "Roboto";
+  font-style: regular;
+  font-weight: 400;
+  src: url(./fonts/Roboto-Regular.ttf) format("truetype");
 }
 
 @font-face {
-	font-family: 'Roboto';
-	font-style: bold;
-	font-weight: 700;
-	src: url(./fonts/Roboto-Bold.ttf) format('truetype');
+  font-family: "Roboto";
+  font-style: medium;
+  font-weight: 500;
+  src: url(./fonts/Roboto-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: bold;
+  font-weight: 700;
+  src: url(./fonts/Roboto-Bold.ttf) format("truetype");
 }
 
 ::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
