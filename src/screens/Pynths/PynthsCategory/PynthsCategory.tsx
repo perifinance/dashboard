@@ -48,8 +48,8 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
     }
   }, [pynthsIsReady]);
   return (
-    <>
-      <div className="lg:hidden">
+    <div>
+      <div className="lg:invisible visible">
         <Flicking
           className="h-15 bg-navy-500 mb-5 text-lg font-light p-4"
           plugins={[new Arrow()]}
@@ -98,7 +98,7 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
           </ActiveCard>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default PynthsCategory;

@@ -112,7 +112,7 @@ const Overview = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-20 text-2xs lg:max-w-100 bg-white">
+      <div className="w-full h-20 text-2xs lg:max-w-100">
         <ResponsiveContainer
           width="100%"
           height="100%"
