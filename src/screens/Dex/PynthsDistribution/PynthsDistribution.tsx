@@ -14,7 +14,7 @@ import ColorVerticalLabel from "components/ColorVerticalLabel"
 const colors = ['bg-blue-500', 'bg-pink-500', 'bg-green-500', 'bg-pink-700', 'bg-blue-700', 'bg-orange-500'];
 // const assets = ['PERI', 'USDC', 'DAI'];
 
-const PUSDDistribution = () => {
+const PynthsDistribution = () => {
     const { dexIsReady }  = useSelector((state: RootState) => state.app);
     const { totalSupplies }  = useSelector((state: RootState) => state.totalSupplyPynths);
     
@@ -40,7 +40,7 @@ const PUSDDistribution = () => {
         setTotalDebtUSDValue(total);
         return networkByDebts
     }
-    
+
     const init = () => {
         let pynthsByTotalSupplies = getNetworkByDebts();
 
@@ -53,9 +53,8 @@ const PUSDDistribution = () => {
         }
     },[dexIsReady, totalSupplies])
 
-    
-    return  <Card>
-                <Title>pUSD Distribution</Title>
+        return  <Card>
+                <Title>Pynths Distribution</Title>
                 
                 <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex lg:flex-col gap-5 lg:gap-2">
@@ -80,4 +79,4 @@ const PUSDDistribution = () => {
             </Card>
         
 }
-export default PUSDDistribution;
+export default PynthsDistribution;

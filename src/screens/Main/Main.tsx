@@ -24,8 +24,7 @@ const Main = () => {
                     </Routes>
                 </div>
             </Router>
-        
         </div>
-</div>
+    </div>
 }
 export default Main;

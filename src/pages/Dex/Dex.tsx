@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'reducers'
 import Categories from "screens/Dex/Categories"
-import LiquidDistribution from "screens/Dex/LiquidDistribution"
+import LiquidDistribution from "screens/Dex/LiquidityDistribution"
 import Performance from "screens/Dex/Performance"
-import PUSDDistribution from "screens/Dex/PUSDDistribution"
+import PynthsDistribution from "screens/Dex/PynthsDistribution"
 import TradingVolume from "screens/Dex/TradingVolume"
 
 import { setDexIsReady, setClear } from "reducers/app"
@@ -28,7 +28,7 @@ const Dex = () => {
         const exchangeVolumes = await getExchangeVolumes();
         const exchangeRates = await getLastRates();
         const rateChanges = await getRateChanges();
-        
+
         dispatch(setExchangeRates(exchangeRates));
         dispatch(setTotalSupplyPynths(totalSupplyPynths));
         dispatch(setExchangeVolumes(exchangeVolumes));
@@ -46,7 +46,7 @@ const Dex = () => {
                 <div className="flex flex-col lg:flex-row gap-5 lg:h-72">
                     <LiquidDistribution></LiquidDistribution>
                     <TradingVolume></TradingVolume>
-                    <PUSDDistribution></PUSDDistribution>
+                    <PynthsDistribution></PynthsDistribution>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-5 lg:h-72">
                     <div className="lg:h-80 lg:w-122">

@@ -49,14 +49,20 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
             name: "Chainlink",
             symbol: "pLINK",
             categories: ['crypto'],
+
         }, {
             id: 5,
             name: "Polkadot",
             symbol: "pDOT",
             categories: ['crypto'],
-        }  
+        }
 
         // {
+        //     id: 0,
+        //     name: "USD",
+        //     symbol: "pUSD",
+        //     categories: ['currencies'],  
+        // }, {
         //     id: 1,
         //     name: "1INCH",
         //     symbol: "p1INCH",
@@ -132,7 +138,7 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
         //     id: 13,
         //     name: "EUR",
         //     symbol: "pEUR",
-        //     categories: ['crypto'],
+        //     categories: ['currencies'],
         // },
         // {
         //     id: 14,

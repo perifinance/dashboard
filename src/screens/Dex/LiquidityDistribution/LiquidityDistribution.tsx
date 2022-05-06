@@ -75,7 +75,7 @@ const LiquidDistribution = () => {
     },[dexIsReady, totalSupplies])
     
     return  <Card>
-                <Title>Liquid Distribution</Title>
+                <Title>Liquidity Distribution</Title>
                 <div className="flex space-x-5 my-4">
                     <div className="w-40 lg:w-44 h-40 lg:h-44">
                         <PieChart x={'pynthName'} y={'totalSupplyToUSD'} data={sortByTotalSupplies} colors={colors} total={totalUSDValue}></PieChart>

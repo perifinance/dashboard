@@ -41,7 +41,6 @@ const DebtByNetworks = () => {
         }
     }, [stakeIsReady])
     return  <Card>
-                <>
                 <div className="flex flex-col lg:flex-row lg:justify-between">
                     <div>
                         <Title>Debt by Networks</Title>
@@ -72,7 +71,6 @@ const DebtByNetworks = () => {
                         return <ColorVerticalLabel color={networkDebt.color} text={networkDebt.networkName} per={networkDebt.per} key={networkDebt.networkName}></ColorVerticalLabel>
                     })}
                 </div>
-                </>
             </Card>
 }
 export default DebtByNetworks;

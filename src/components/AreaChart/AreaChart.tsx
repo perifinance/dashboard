@@ -24,11 +24,14 @@ const AreaChart = ({data, colors}) => {
             setMax(max);
         }
     }, [data])
-    
+
+    const toPercent = (decimal, fixed = 0) => `${(decimal * 100).toFixed(fixed)}%`;
+
     return <>{
         <ResponsiveContainer width="100%" height="100%" maxHeight={1250}>
             <RechartsAreaChart
               data={data}
+              stackOffset="expand"
               margin={{
                 top: 0,
                 right: 0,
@@ -46,10 +49,10 @@ const AreaChart = ({data, colors}) => {
             </defs>
 
               <XAxis hide={true}/>
-              <YAxis domain={[0, 'dataMax']} hide={true}/>
+              <YAxis tickFormatter={toPercent} hide={true}/>
               
                 {getSupportedNetworks().map((networkId, index) => 
-                    <Area type="monotone" dataKey={(e) => e[networkId.toString()]} stroke={`${CSSToColors[colors[index]]}`} fillOpacity={1} fill={`url(#${index})`} key={index}/>
+                    <Area type="monotone" stackId="1" dataKey={(e) => e[networkId.toString()]} stroke={`${CSSToColors[colors[index]]}`} fillOpacity={1} fill={`url(#${index})`} key={index}/>
                 )}
             </RechartsAreaChart>
           </ResponsiveContainer>
