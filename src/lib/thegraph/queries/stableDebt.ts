@@ -12,7 +12,7 @@ export const stableDebt = ({networkId}) => {
     return {
         url: `StakingState-${process.env.REACT_APP_ENV === 'production' ? 'Real' : 'Dev'}`,
         query: gql`query GetStakeAmount {
-            stakeAmounts(skip: 0, first:1000) {
+                stakeAmounts(skip: 0, first:1000) {
                     id
                     amount
                 }

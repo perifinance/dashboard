@@ -33,7 +33,24 @@ const TradingVolume = () => {
             }
         })
         setTotalVolume(total);
-        return pynthsByVolumes
+        pynthsByVolumes.splice(pynthsByVolumes.findIndex((el) => el.currencyName==='pUSD'), 1);
+        pynthsByVolumes.sort((a,b) => {
+            if(a.usdVolume<b.usdVolume)
+                return 1;
+            else if(a.usdVolume>b.usdVolume)
+                return -1;
+            else
+                return 0;
+        });
+        let newList = pynthsByVolumes.slice(0,5);
+        let etcList = pynthsByVolumes.slice(5);
+        let sum = 0n;
+        for(let i=0 ; i<etcList.length ; i++) {
+            sum += etcList[i].usdVolume;
+        }
+        newList.push({id:'', currencyName:'ETC', timestamp:"", amount:0n, usdVolume:sum});
+
+        return newList;
     }
 
     const init = () => {

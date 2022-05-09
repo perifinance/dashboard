@@ -29,14 +29,14 @@ export const lastRate = ({currencyName = undefined, skip = 0, first = 1, network
             }
         ` : gql`
             query GetLastRates {
-                lastRates(skip: 0, first:1000) {
+                lastRates(skip: 0, first:1) {
                     price
                     currencyKey
             }
         }`,
         variables: {currencyName, skip, first},
-        mapping: ({data}) => {        
-            if(currencyName === 'pUSD') {
+        mapping: ({data}) => {
+            if(currencyName === 'pUSD' || currencyName === "USD") {
                 return RateMapping({price: 1000000000000000000n, currencyName})
             } else {
                 return RateMapping(data.lastRates[0])      

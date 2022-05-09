@@ -20,7 +20,7 @@ const colors = [
   "bg-orange-500",
 ];
 
-const LiquidDistribution = () => {
+const LiquidityDistribution = () => {
   const { dexIsReady } = useSelector((state: RootState) => state.app);
   const { totalSupplies } = useSelector(
     (state: RootState) => state.totalSupplyPynths
@@ -139,4 +139,4 @@ const LiquidDistribution = () => {
     </Card>
   );
 };
-export default LiquidDistribution;
+export default LiquidityDistribution;
