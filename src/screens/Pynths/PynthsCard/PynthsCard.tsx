@@ -19,7 +19,7 @@ const PynthsCard = ({pynths}) => {
             <div className="flex lg:flex-col items-center w-full lg:w-32 lg:items-start lg:h-full lg:my-auto lg:ml-4 lg:gap-1">
                 <div className="flex flex-1 text-lg font-bold items-center justify-center h-5">
                     <img className="w-5 h-5 mx-2" src={`/images/icon/database.svg`}></img>
-                    {formatCurrency(pynths.totalSupply, 2)}
+                    {formatCurrency(pynths.totalSupply, 5)}
                 </div>
                 <div className="h-8 border-l border-gray-900 lg:hidden"></div>
                 <div className="flex flex-1 text-lg font-bold items-center justify-center">
