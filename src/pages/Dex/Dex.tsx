@@ -34,29 +34,32 @@ const Dex = () => {
         dispatch(setExchangeVolumes(exchangeVolumes));
         dispatch(setRateChanges(rateChanges))
         dispatch(setDexIsReady())
+  };
+
+  useEffect(() => {
+    if (dexIsReady === false) {
+      init();
     }
+  }, [dexIsReady]);
 
-    useEffect(() => {
-        if(dexIsReady === false) {
-            init();
-        }
-    },[dexIsReady])
-
-    return <div className="flex flex-col px-4 lg:px-0 gap-5">
-                <div className="flex flex-col lg:flex-row gap-5 lg:h-72">
-                    <LiquidDistribution></LiquidDistribution>
-                    <TradingVolume></TradingVolume>
-                    <PynthsDistribution></PynthsDistribution>
-                </div>
-                <div className="flex flex-col lg:flex-row gap-5 lg:h-72">
-                    <div className="lg:h-80 lg:w-122">
-                        <Categories></Categories>
-                    </div>
-                    <div className="lg:h-80 lg:flex-1">
-                        <Performance></Performance>
-                    </div>
-                    
-                </div>
-        </div>
-}
+  return (
+    <div className="flex flex-col px-4 lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
+      <div className="lg:flex-1">
+        <LiquidDistribution/>
+      </div>
+      <div className="lg:flex-1">
+        <TradingVolume/>
+      </div>
+      <div className="lg:flex-1">
+        <PynthsDistribution/>
+      </div>
+      <div className="lg:h-80 lg:flex-1">
+        <Categories/>
+      </div>
+      <div className="lg:h-80 lg:flex-1">
+        <Performance/>
+      </div>
+    </div>
+  );
+};
 export default Dex;
