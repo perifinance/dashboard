@@ -8,11 +8,15 @@ import { setPeriChartRates } from "reducers/periChartRates";
 import { setCirculatingSupply } from "reducers/circulatingSupply";
 import { setNetworkByDebtCashes } from "reducers/networkByDebtCashes";
 import { setPeriholderCounts } from "reducers/periholderCounts";
+import { setExchangeRates } from "reducers/exchangeRates";
+import { setPeriRates } from "reducers/periRates";
 import {
   getStableDebt,
   getChartRates,
   getDebtCaches,
   getPeriholderCounts,
+  getLastRates,
+  getLastPeriRates
 } from "lib/thegraph/api";
 import {
   getCachedDebts,
@@ -64,6 +68,8 @@ const Stake = () => {
       circulatingSupply,
       networkByDebtCashes,
       periholderCounts,
+      exchangeRates,
+      periRates,
     ] = await Promise.all([
       getDebts(),
       getTotalAPY(),
@@ -74,12 +80,14 @@ const Stake = () => {
       getTotalCirculatingSupply(),
       getDebtCaches(),
       getPeriholderCounts(),
+      getLastRates(),
+      getLastPeriRates(),
     ]);
 
+    dispatch(setExchangeRates(exchangeRates));
+    dispatch(setPeriRates(periRates));
     dispatch(setNetworkCachedDebts(debt));
-
     dispatch(setAPY(apy));
-
     dispatch(setPeriChartRates(chartRate));
     dispatch(setCirculatingSupply(circulatingSupply));
     dispatch(setNetworkByDebtCashes(networkByDebtCashes));

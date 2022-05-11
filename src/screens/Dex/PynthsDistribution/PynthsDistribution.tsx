@@ -54,7 +54,7 @@ const PynthsDistribution = () => {
     },[dexIsReady, totalSupplies])
 
         return  <Card>
-                <Title>Pynths Distribution</Title>
+                <Title>Pynths Distribution by Network</Title>
                 
                 <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex lg:flex-col gap-5 lg:gap-2">

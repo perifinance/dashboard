@@ -25,7 +25,8 @@ const TradingVolume = () => {
                 return a + b.usdVolume;
             }, 0n);
 
-            total = total + pynthsByVolume;
+            if(volume[0].currencyName !== 'pUSD')
+                total = total + pynthsByVolume;
 
             return {
                 ...volume[0],
@@ -65,7 +66,7 @@ const TradingVolume = () => {
     },[dexIsReady, exchangeVolumes])
 
     return  <Card>
-                <Title>Trading Volume</Title>
+                <Title>24H Trading Volume</Title>
                 <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex lg:flex-col gap-5 lg:gap-2">
                         <div className="w-40 lg:w-36 h-40 lg:h-36">

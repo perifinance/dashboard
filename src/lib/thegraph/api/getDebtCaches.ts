@@ -22,33 +22,36 @@ export const getDebtCaches = async() => {
             days.push(formatDay(Number(day) / 1000));
         }
         return days.map( (day) => {
-            let privios = [];
-            let returnValue = {
-
-            };
+            let previous = [];
+            let returnValue = {};
             debtCaches.forEach((e, i) => {
                 e.forEach(element => {
-                    if(!privios[i]) {
-                        privios[i] = element;
+                    if(!previous[i]) {
+                        previous[i] = element;
                     } 
                     if(day === element.date) {
+                        returnValue['date'] = element.date.split('/').splice(1).join('/');
                         returnValue[supportedNetworks[i].toString()] = element.debtBalanceToNumber;
-                        privios[i] = element;
+                        previous[i] = element;
                     } else {
-                        returnValue[supportedNetworks[i].toString()] = privios[i].debtBalanceToNumber;
+                        returnValue[supportedNetworks[i].toString()] = previous[i].debtBalanceToNumber;
                     }
                 });
             })
             return {
                 ...returnValue,
-                min: Math.min(...Object.values(returnValue).map(e=>Number(e))),
-                max: Math.max(...Object.values(returnValue).map(e=>Number(e)))
+                min: Math.min(...Object.values(returnValue).map(e=>{
+                    if(typeof e === "string")
+                        return 1000000000000000000;
+                    return Number(e);
+                })),
+                max: Math.max(...Object.values(returnValue).map(e=>{
+                    if(typeof e === "string")
+                        return null;
+                    return Number(e);
+                }))
             };
             
         })
-        return debtCaches
     });
-    
-    
-    
 }

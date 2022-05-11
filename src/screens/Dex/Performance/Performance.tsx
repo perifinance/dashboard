@@ -52,8 +52,8 @@ const Performance = () => {
                     <table className="w-full text-xs text-gray-700">
                         <thead className="text-sm bg-navy-800 border-t-2 border-b-2 border-gray-900">
                             <tr>
-                                <th className="px-4 py-1 font-normal border-r border-gray-900">Tokens (pUSD)</th>
-                                <th className="px-4 py-1 font-normal border-r border-gray-900">Price</th>
+                                <th className="px-4 py-1 font-normal border-r border-gray-900">Tokens</th>
+                                <th className="px-4 py-1 font-normal border-r border-gray-900">Price(pUSD)</th>
                                 <th className="px-4 py-1 font-normal border-r border-gray-900">24H Change</th>
                                 <th className="px-4 py-1 font-normal">24H Volume</th>
                             </tr>

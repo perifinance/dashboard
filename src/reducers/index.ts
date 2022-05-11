@@ -5,6 +5,7 @@ import networkCachedDebts from './networkCachedDebts/networkCachedDebts'
 import APY from './APY/APY'
 import circulatingSupply from './circulatingSupply/circulatingSupply'
 import exchangeRates from './exchangeRates/exchangeRates'
+import periRates from './periRates/periRates'
 import periChartRates from './periChartRates/periChartRates'
 import totalSupplyPynths from './totalSupplyPynths/totalSupplyPynths'
 import exchangeVolumes from './exchangeVolumes/exchangeVolumes'
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     APY,
     circulatingSupply,
     exchangeRates,
+    periRates,
     periChartRates,
     totalSupplyPynths,
     exchangeVolumes,
