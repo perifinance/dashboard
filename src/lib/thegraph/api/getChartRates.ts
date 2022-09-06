@@ -26,8 +26,8 @@ export const getChartRates = async({currencyName, networkId, page = undefined, f
             formatPrice: formatCurrency(e.price, 6),
             formatLow: formatCurrency(e.low, 6),
             formatHigh: formatCurrency(e.high, 6),
-            timestamp: e.timestamp / 1000,
-            time: format(e.timestamp, 'HHaa')
+            timestamp: e.timestamp*1000,
+            time: format(e.timestamp*1000, 'HHaa')
         }
     });
 }

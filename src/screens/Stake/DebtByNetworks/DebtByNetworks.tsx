@@ -14,14 +14,11 @@ const colors = ["bg-blue-500", "bg-orange-500", "bg-pink-700", "bg-blue-700"];
 
 const DebtByNetworks = () => {
   const { stakeIsReady } = useSelector((state: RootState) => state.app);
-  const networkCachedDebts = useSelector(
-    (state: RootState) => state.networkCachedDebts
-  );
-  const { networkByDebtCashes } = useSelector(
-    (state: RootState) => state.networkByDebtCashes
-  );
+  const networkCachedDebts = useSelector((state: RootState) => state.networkCachedDebts);
+  const { networkByDebtCashes } = useSelector((state: RootState) => state.networkByDebtCashes);
   const [networkDebts, setNetworkDebts] = useState([]);
   const [totalDebts, setTotalDebts] = useState(0);
+
   const init = () => {
     let total = 0n;
     const networkDebts = getSupportedNetworks().map((e, index) => {

@@ -1,4 +1,5 @@
 export { getLastRates } from './getLastRates'
+export { getLastPeriRates } from './getLastPeriRates'
 export { getChartRates } from './getChartRates'
 export { getStableDebt } from './getStableDebt'
 export { getTotalSupplyPynths } from './getTotalSupplyPynths'

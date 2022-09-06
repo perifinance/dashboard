@@ -11,7 +11,7 @@ import {
 import "./Header.css";
 
 const routerNames = {
-    'stake': 'Staking Key Info',
+    'stake': 'STAKING INFO',
     'dex': 'PERI DEX',
     'pynths': 'PYNTHS'
 }

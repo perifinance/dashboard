@@ -20,11 +20,12 @@ const colors = [
   "bg-orange-500",
 ];
 
-const LiquidityDistribution = () => {
+const PynthsTotalVolume = () => {
   const { dexIsReady } = useSelector((state: RootState) => state.app);
   const { totalSupplies } = useSelector(
     (state: RootState) => state.totalSupplyPynths
   );
+
 
   const exchangeRates = useSelector((state: RootState) => state.exchangeRates);
 
@@ -36,22 +37,30 @@ const LiquidityDistribution = () => {
   const getPynthsByTotalSupplies = () => {
     let total = 0n;
     let pynthsByTotalSupplies = pynths[dexNetworkId].map((pynth) => {
-      const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
-        let rate =
-          exchangeRates[pynth.symbol] === undefined
-            ? 1000000000000000000n
-            : exchangeRates[pynth.symbol];
-        return b.pynthName === pynth.symbol
-          ? a + (b.totalSupply * rate) / 1000000000000000000n
-          : a;
-      }, 0n);
-      total = total + pynthByTotalUSD;
+      if(pynth.symbol !== 'pUSD') {
+        const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
+          let rate =
+            exchangeRates[pynth.symbol] === undefined
+              ? 1000000000000000000n
+              : exchangeRates[pynth.symbol];
+          return b.pynthName === pynth.symbol
+            ? a + (b.totalSupply * rate) / 1000000000000000000n
+            : a;
+        }, 0n);
+        total = total + pynthByTotalUSD;
 
-      return {
-        pynthName: pynth.symbol,
-        totalSupplyToUSD: pynthByTotalUSD,
-        totalSupply: utils.formatEther(pynthByTotalUSD),
-      };
+        return {
+          pynthName: pynth.symbol,
+          totalSupplyToUSD: pynthByTotalUSD,
+          totalSupply: utils.formatEther(pynthByTotalUSD),
+        };
+      } else {
+        return {
+          pynthName: pynth.symbol,
+          totalSupplyToUSD: 0n,
+          totalSupply: 0n,
+        };
+      }
     });
 
     setTotalUSDValue(total);
@@ -95,7 +104,7 @@ const LiquidityDistribution = () => {
 
   return (
     <Card>
-      <Title>Liquid Distribution</Title>
+      <Title>Pynths Total Volume</Title>
       <div className="flex space-x-5 my-4">
         <div className="w-40 lg:w-44 h-40 lg:h-44">
           <PieChart
@@ -112,7 +121,7 @@ const LiquidityDistribution = () => {
             <div className="text-2xl text-gray-500 font-medium">
               ${formatShortenCurrency(Number(utils.formatEther(totalUSDValue)))}
             </div>
-            <div className="text-sm text-gray-700 font-normal">USD Value</div>
+            <div className="text-sm text-gray-700 font-normal">Total Pynths Value(USD)</div>
           </div>
           <div className="hidden lg:flex flex-wrap space-y-2">
             {sortByTotalSupplies.map((e, i) => (
@@ -139,4 +148,4 @@ const LiquidityDistribution = () => {
     </Card>
   );
 };
-export default LiquidityDistribution;
+export default PynthsTotalVolume;

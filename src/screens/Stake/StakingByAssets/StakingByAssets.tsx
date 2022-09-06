@@ -18,14 +18,27 @@ const StakingByAssets = () => {
     const [ TVL, setTVL ] = useState('0');
     const [ stableTVL, setStableTVL ] = useState('0');
     const [ perTVL, setPerTVL] = useState([]);
+    const periRates  = useSelector((state: RootState) => state.periRates);
 
     const getPers = () => {
         const coins = ['PERI', 'USDC', 'DAI'];
-        
-        return coins.map((e,index) => { return {
+
+        let total = networkCachedDebts.total.total;
+        let coinAmount = networkCachedDebts.total['PERI'];
+
+        total -= coinAmount;
+        coinAmount = BigInt(coinAmount) * periRates['PERI'] / 1000000000000000000n;
+        total += coinAmount;
+
+        return coins.map((e,index) => {
+            let coinAmount = networkCachedDebts.total[e];
+            if(e==='PERI')
+                coinAmount = BigInt(coinAmount) * periRates['PERI'] / 1000000000000000000n;
+
+            return {
             coin: e,
             color: colors[index],
-            per: formatNumberToPer(networkCachedDebts.total[e], networkCachedDebts.total.total)
+            per: formatNumberToPer(coinAmount, total)
         }}).sort((a,b) => {
             if (a.per < b.per) {
                 return 1;
@@ -57,7 +70,7 @@ const StakingByAssets = () => {
                             <div className="text-sm text-gray-700 font-normal">PERI Total Value Locked</div>
                         </div>
                         <div>
-                            <div className="text-2xl lg:text-3xl text-gray-500 font-medium">{stableTVL}</div>
+                            <div className="text-2xl lg:text-3xl text-gray-500 font-medium">$ {stableTVL}</div>
                             <div className="text-sm text-gray-700 font-normal">Stable Tokens Total Value Locked</div>
                         </div>
                     </div>

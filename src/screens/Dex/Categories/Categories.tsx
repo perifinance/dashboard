@@ -21,6 +21,7 @@ const Categories = () => {
     const [ totalSupply, setTotalSupply ] = useState(0n);
     const [ totalVolume, setTotalVolume ] = useState(0n);
     const [ exchangeCount, setExchangeCount ] = useState(0);
+
     const getTotalSuppliesAddCatagory = () => {
         return totalSupplies.map(e => {
             const pynth = pynths[dexNetworkId].find(pynth => pynth.symbol === e.pynthName)
@@ -37,16 +38,18 @@ const Categories = () => {
         let catagoryByTotalSupply = {}
 
         totalSuppliesAddCatagory.forEach(item => {
-            item.catagory.forEach(catagory => {
-                if(!catagoryByTotalSupply[catagory]) {
-                    catagoryByTotalSupply[catagory] = 0n
-                }
-                let rate = exchangeRates[item.pynthName] === undefined?1000000000000000000n:exchangeRates[item.pynthName];
-                const pynthByTotalUSD = item.totalSupply * rate / 1000000000000000000n
-                catagoryByTotalSupply[catagory] = catagoryByTotalSupply[catagory] + pynthByTotalUSD;
-                total = total + pynthByTotalUSD;
-            })
-        })
+            if(item.pynthName !== 'pUSD') {
+                item.catagory.forEach(catagory => {
+                    if(!catagoryByTotalSupply[catagory]) {
+                        catagoryByTotalSupply[catagory] = 0n
+                    }
+                    let rate = exchangeRates[item.pynthName] === undefined?1000000000000000000n:exchangeRates[item.pynthName];
+                    const pynthByTotalUSD = item.totalSupply * rate / 1000000000000000000n
+                    catagoryByTotalSupply[catagory] = catagoryByTotalSupply[catagory] + pynthByTotalUSD;
+                    total = total + pynthByTotalUSD;
+                });
+            }
+        });
         setTotalSupply(total);
         return catagoryByTotalSupply;
     }
@@ -54,11 +57,13 @@ const Categories = () => {
     const getTotalVolume = () => {
         let total = 0n
         exchangeVolumes.forEach(volume => {
-            const pynthsByVolume = volume.reduce((a, b) => {                    
-                
-                return a + b.usdVolume;
-            }, 0n);
-            total = total + pynthsByVolume;
+            if(volume[0].currencyName !== 'pUSD') {
+                const pynthsByVolume = volume.reduce((a, b) => {                    
+                    
+                    return a + b.usdVolume;
+                }, 0n);
+                total = total + pynthsByVolume;
+            }
         })
         return total;
     }
@@ -94,7 +99,7 @@ const Categories = () => {
                         <div className="flex flex-col mt-4 lg:mt-0">
                             <Title>24H Exchange Overview</Title>
                             <div className="flex flex-col mb-4">
-                                <div className="text-4xl font-medium">${formatCurrency(totalVolume, 0)}</div>
+                                <div className="text-4xl font-medium">${formatCurrency(totalVolume, 2)}</div>
                                 <div className="text-sm font-normal text-gray-700">Total Trading Volume</div>
                             </div>
                             <div className="flex flex-col mb-4">

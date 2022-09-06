@@ -1,5 +1,5 @@
 export { stableDebt } from './stableDebt'
-export { chartRate, lastRate } from './rate'
+export { chartRate, lastRate, lastPeriRate } from './rate'
 export { totalSupply } from './totalSupply'
 export { exchageVolume } from './exchangeVolume'
 export { exchangeCount } from './exchangeCount'

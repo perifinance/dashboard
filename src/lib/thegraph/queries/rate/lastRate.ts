@@ -31,7 +31,7 @@ export const lastRate = ({currencyName = undefined, skip = 0, first = 1, network
             query GetLastRates {
                 lastRates(skip: 0, first:1) {
                     price
-                    currencyKey
+                    currencyName
             }
         }`,
         variables: {currencyName, skip, first},

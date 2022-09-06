@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'reducers'
 import Categories from "screens/Dex/Categories"
-import LiquidDistribution from "screens/Dex/LiquidityDistribution"
+import PynthsTotalVolume from "screens/Dex/PynthsTotalVolume"
 import Performance from "screens/Dex/Performance"
 import PynthsDistribution from "screens/Dex/PynthsDistribution"
 import TradingVolume from "screens/Dex/TradingVolume"
@@ -45,7 +45,7 @@ const Dex = () => {
   return (
     <div className="flex flex-col px-4 lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
       <div className="lg:flex-1">
-        <LiquidDistribution/>
+        <PynthsTotalVolume />
       </div>
       <div className="lg:flex-1">
         <TradingVolume/>
