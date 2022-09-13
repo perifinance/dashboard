@@ -7,6 +7,7 @@ import { formatCurrency } from "lib";
 
 const Information = () => {
 	const { APY } = useSelector((state: RootState) => state.APY);
+	console.log("APY", APY);
 
 	// 76924719527063029689120n
 	const initialReward = 76924719527063029689120;

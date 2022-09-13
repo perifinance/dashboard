@@ -45,54 +45,68 @@ const Stake = () => {
 		};
 	};
 
-	const getDebts = () => {
+	const getDebts = async () => {
 		const promise = [getCachedDebts(), getStableDebt()];
+
 		const debts = Promise.all(promise).then((data) => {
 			const value = {};
+
 			Object.keys(data[0]).forEach((e) => {
 				value[e] = getPERIandStalbeDebt(Object.assign(data[0][e], data[1][e]));
 			});
+
 			return value;
 		});
+
 		return debts;
 	};
-	const init = async () => {
-		const [
-			debt,
-			apy,
-			chartRate,
-			circulatingSupply,
-			networkByDebtCashes,
-			periholderCounts,
-			exchangeRates,
-			periRates,
-		] = await Promise.all([
-			getDebts(),
-			getTotalAPY(),
-			getChartRates({
-				currencyName: "PERI",
-				networkId: process.env.REACT_APP_ENV === "production" ? 137 : 80001,
-			}),
-			getTotalCirculatingSupply(),
-			getDebtCaches(),
-			getPeriholderCounts(),
-			getLastRates(),
-			getLastPeriRates(),
-		]);
 
-		dispatch(setExchangeRates(exchangeRates));
-		dispatch(setPeriRates(periRates));
-		dispatch(setNetworkCachedDebts(debt));
-		dispatch(setAPY(apy));
-		dispatch(setPeriChartRates(chartRate));
-		dispatch(setCirculatingSupply(circulatingSupply));
-		dispatch(setNetworkByDebtCashes(networkByDebtCashes));
-		dispatch(setPeriholderCounts(periholderCounts));
-		dispatch(setStakeIsReady());
+	const init = async () => {
+		console.time("init");
+		try {
+			const [
+				debt,
+				apy,
+				// chartRate, // ! 에러 원인
+				circulatingSupply,
+				networkByDebtCashes,
+				periholderCounts,
+				exchangeRates,
+				// periRates, // ! 에러 원인
+			] = await Promise.all([
+				getDebts(),
+				getTotalAPY(),
+				// getChartRates({
+				// 	currencyName: "PERI",
+				// 	// networkId: process.env.REACT_APP_ENV === "production" ? 137 : 80001,
+				// 	networkId: 137,
+				// }),
+				getTotalCirculatingSupply(),
+				getDebtCaches(),
+				getPeriholderCounts(),
+				getLastRates(),
+				// getLastPeriRates(),
+			]);
+			console.timeEnd("init");
+
+			dispatch(setNetworkCachedDebts(debt));
+			dispatch(setAPY(apy));
+			// dispatch(setPeriChartRates(chartRate));
+			dispatch(setCirculatingSupply(circulatingSupply));
+			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
+			dispatch(setPeriholderCounts(periholderCounts));
+			dispatch(setExchangeRates(exchangeRates));
+			// dispatch(setPeriRates(periRates));
+		} catch (err) {
+			console.error("init error:", err);
+		} finally {
+			dispatch(setStakeIsReady());
+		}
 	};
 
 	useEffect(() => {
-		if (stakeIsReady === false) {
+		console.log("ready test", stakeIsReady);
+		if (!stakeIsReady) {
 			init();
 		}
 	}, [stakeIsReady]);
@@ -100,9 +114,7 @@ const Stake = () => {
 	return (
 		<div className="flex flex-col px-4 lg:px-0 gap-5">
 			<div className="flex flex-col lg:flex-row gap-5">
-				<div className="lg:h-86">
-					<StakingByAssets></StakingByAssets>
-				</div>
+				<div className="lg:h-86">{/* <StakingByAssets></StakingByAssets> */}</div>
 				<div className="lg:h-86 lg:flex-1">
 					<DebtByNetworks></DebtByNetworks>
 				</div>
