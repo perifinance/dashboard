@@ -11,7 +11,6 @@ export const stableDebt = ({ networkId }) => {
 	};
 
 	return {
-		// url: `StakingState-${process.env.REACT_APP_ENV === 'production' ? 'Real' : 'Dev'}`,
 		url: "",
 		query: gql`
 			query {

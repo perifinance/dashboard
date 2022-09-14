@@ -5,10 +5,11 @@ import { addDays } from "date-fns";
 import { formatDay } from "lib/format";
 export const getDebtCaches = async () => {
 	let day = 30;
-	let searchDate = (Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * 24 * day).toString();
+	let searchDate = Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * 24 * day;
 	let promise = [];
 	const datas = {};
 	const supportedNetworks = getSupportedNetworks();
+
 	supportedNetworks.forEach((networkId) => {
 		promise.push(
 			(async () => {
@@ -16,7 +17,10 @@ export const getDebtCaches = async () => {
 			})()
 		);
 	});
+	console.log("promise", promise);
+
 	return await Promise.all(promise).then((debtCaches) => {
+		console.log("Promise debtCaches", debtCaches);
 		let days = [];
 
 		for (let a = 1; a < day + 1; a++) {
@@ -27,19 +31,24 @@ export const getDebtCaches = async () => {
 			let previous = [];
 			let returnValue = {};
 			debtCaches.forEach((e, i) => {
+				console.log("debtCaches e", e);
 				e.forEach((element) => {
 					if (!previous[i]) {
 						previous[i] = element;
 					}
 					if (day === element.date) {
 						returnValue["date"] = element.date.split("/").splice(1).join("/");
-						returnValue[supportedNetworks[i].toString()] = element.debtBalanceToNumber;
+						// returnValue[supportedNetworks[i].toString()] = element.debtBalanceToNumber;
+						returnValue[element.network] = element.debtBalanceToNumber;
 						previous[i] = element;
 					} else {
-						returnValue[supportedNetworks[i].toString()] = previous[i].debtBalanceToNumber;
+						// returnValue[supportedNetworks[i].toString()] = previous[i].debtBalanceToNumber;
+						returnValue[element.network] = previous[i].debtBalanceToNumber;
 					}
 				});
+				console.log("returnValue", returnValue);
 			});
+
 			return {
 				...returnValue,
 				min: Math.min(

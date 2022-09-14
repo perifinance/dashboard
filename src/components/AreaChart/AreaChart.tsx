@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { AreaChart as RechartsAreaChart, Area, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { getSupportedNetworks } from "configure/network";
 import { CSSToColors } from "configure/color";
+
 const AreaChart = ({ data, colors }) => {
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
+
 	useEffect(() => {
 		if (data.length > 0) {
 			let min;
@@ -23,6 +25,8 @@ const AreaChart = ({ data, colors }) => {
 			setMax(max);
 		}
 	}, [data]);
+
+	console.log("AREACHART DATA", data);
 
 	const toPercent = (decimal, fixed = 0) => {
 		return `${(decimal * 100).toString()}%`;
@@ -64,7 +68,28 @@ const AreaChart = ({ data, colors }) => {
 					<Area
 						type="monotone"
 						stackId="1"
-						dataKey={(e) => e[networkId.toString()]}
+						dataKey={(e) => {
+							let network;
+							switch (networkId) {
+								case 1:
+									network = "ETHEREUM";
+									break;
+								case 56:
+									network = "BSC";
+									break;
+								case 137:
+									network = "POLYGON";
+									break;
+								case 1285:
+									network = "MOONRIVER";
+									break;
+								default:
+									network = "";
+									break;
+							}
+							console.log("datakey", e, e[network]);
+							return e[network];
+						}}
 						stroke={`${CSSToColors[colors[index]]}`}
 						fillOpacity={1}
 						fill={`url(#${index})`}

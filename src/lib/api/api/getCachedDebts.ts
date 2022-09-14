@@ -20,13 +20,6 @@ export const getCachedDebts = async () => {
 			totalDebt = totalDebt + e.debt;
 		});
 
-		console.log("cached debts", item, {
-			total: {
-				total: totalDebt,
-			},
-			...debtInfo,
-		});
-
 		return {
 			total: {
 				total: totalDebt,

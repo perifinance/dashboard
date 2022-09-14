@@ -79,6 +79,7 @@ const DebtByNetworks = () => {
 						<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
 					</div>
 				</div>
+
 				<div className="hidden lg:flex space-y-2 lg:gap-2">
 					{networkDebts.map((networkDebt) => {
 						return (

@@ -62,7 +62,6 @@ const Stake = () => {
 	};
 
 	const init = async () => {
-		console.time("init");
 		try {
 			const [
 				debt,
@@ -78,7 +77,6 @@ const Stake = () => {
 				getTotalAPY(),
 				// getChartRates({
 				// 	currencyName: "PERI",
-				// 	// networkId: process.env.REACT_APP_ENV === "production" ? 137 : 80001,
 				// 	networkId: 137,
 				// }),
 				getTotalCirculatingSupply(),
@@ -87,7 +85,9 @@ const Stake = () => {
 				getLastRates(),
 				// getLastPeriRates(),
 			]);
-			console.timeEnd("init");
+
+			console.log("networkByDebtCashes", networkByDebtCashes);
+			console.log("periholderCounts", periholderCounts);
 
 			dispatch(setNetworkCachedDebts(debt));
 			dispatch(setAPY(apy));
@@ -105,7 +105,6 @@ const Stake = () => {
 	};
 
 	useEffect(() => {
-		console.log("ready test", stakeIsReady);
 		if (!stakeIsReady) {
 			init();
 		}

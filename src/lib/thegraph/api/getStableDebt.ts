@@ -30,8 +30,6 @@ export const getStableDebt = () => {
 			}
 		});
 
-		console.log("stable debt", { total, ...value });
-
 		return {
 			total,
 			...value,
