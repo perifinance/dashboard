@@ -25,6 +25,8 @@ const DebtByNetworks = () => {
 		let total = 0n;
 		const networkDebts = getSupportedNetworks().map((e, index) => {
 			total = total + networkCachedDebts[e.toString()].total;
+			console.log("networkDebts", networkCachedDebts[e.toString()].total, networkCachedDebts);
+
 			return {
 				networkId: e,
 				color: colors[index],

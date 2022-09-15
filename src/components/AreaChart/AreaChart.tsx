@@ -54,15 +54,17 @@ const AreaChart = ({ data, colors }) => {
 						);
 					})}
 				</defs>
-				<XAxis axisLine={false} tickLine={false} dataKey={"date"} />
-				<YAxis
+				<XAxis axisLine={false} tickLine={true} dataKey={"date"} />
+				{/* hide={true} */}
+
+				{/* <YAxis
 					axisLine={false}
 					tickLine={false}
 					ticks={["0", "0.25", "0.5", "0.75", "1"]}
 					interval={0}
 					tickFormatter={toPercent}
 					padding={{ top: 10 }}
-				/>
+				/> */}
 
 				{getSupportedNetworks().map((networkId, index) => (
 					<Area
@@ -87,7 +89,7 @@ const AreaChart = ({ data, colors }) => {
 									network = "";
 									break;
 							}
-							console.log("datakey", e, e[network]);
+							// console.log("datakey", e, e[network]);
 							return e[network];
 						}}
 						stroke={`${CSSToColors[colors[index]]}`}

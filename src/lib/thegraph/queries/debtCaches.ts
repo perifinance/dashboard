@@ -6,7 +6,7 @@ export const debtCaches = ({ page = 0, first = 1000, searchDate = 0, networkId }
 	const skip = page * first;
 
 	const RateMapping = (data) => {
-		console.log("debtCaches", data, {
+		console.log("RateMapping", "date:", formatDay(data.timestamp), data, {
 			debtBalance: BigInt(data.debtBalance),
 			debtBalanceToString: utils.formatEther(data.debtBalance),
 			debtBalanceToNumber: Number(utils.formatEther(data.debtBalance)),
@@ -15,6 +15,8 @@ export const debtCaches = ({ page = 0, first = 1000, searchDate = 0, networkId }
 			date: formatDay(data.timestamp),
 		});
 
+		// 데이터 변환 로직 극 초반
+		// 여기서 데이터가 초반부터 잘못변경되었을 수도 있음 X 여기서 잘못된 것 같진 않음
 		return {
 			debtBalance: BigInt(data.debtBalance),
 			debtBalanceToString: utils.formatEther(data.debtBalance),
@@ -22,7 +24,7 @@ export const debtCaches = ({ page = 0, first = 1000, searchDate = 0, networkId }
 			formatDebtBalance: formatCurrency(BigInt(data.debtBalance), 6),
 			timestamp: Number(data.timestamp),
 			date: formatDay(data.timestamp),
-			network: data.network, // ! new
+			network: data.network,
 		};
 	};
 
@@ -60,6 +62,8 @@ export const debtCaches = ({ page = 0, first = 1000, searchDate = 0, networkId }
 		`,
 		variables: { skip, first, searchDate },
 		mapping: ({ data }) => {
+			console.log("mappingDataSet 이거 매핑도 돌기 전에 완전 썡 값인데?", data);
+
 			return data.dailyDebtCaches.map((item) => RateMapping(item));
 		},
 		errorCallback: () => {
