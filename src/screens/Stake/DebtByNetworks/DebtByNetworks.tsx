@@ -19,13 +19,10 @@ const DebtByNetworks = () => {
 	const [networkDebts, setNetworkDebts] = useState([]);
 	const [totalDebts, setTotalDebts] = useState(0);
 
-	console.log("networkByDebtCashes", networkByDebtCashes);
-
 	const init = () => {
 		let total = 0n;
 		const networkDebts = getSupportedNetworks().map((e, index) => {
 			total = total + networkCachedDebts[e.toString()].total;
-			console.log("networkDebts", networkCachedDebts[e.toString()].total, networkCachedDebts);
 
 			return {
 				networkId: e,

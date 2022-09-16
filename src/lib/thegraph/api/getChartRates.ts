@@ -13,9 +13,10 @@ type ChartRateParameter = {
 };
 export const getChartRates = async ({ currencyName, networkId, page = undefined, first = undefined }: ChartRateParameter) => {
 	let searchDate = (Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * 24).toString();
-
-	// todo 쿼리 변경 예정
 	let data = await get(chartRate({ networkId, currencyName, page, first, searchDate }));
+
+	const today = Math.round(new Date().getTime() / 1000);
+	const yesterday = today - 24 * 3600;
 
 	return data.map((e) => {
 		return {

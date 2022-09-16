@@ -50,13 +50,14 @@ const Stake = () => {
 
 		const debts = Promise.all(promise).then((data) => {
 			const value = {};
-
 			Object.keys(data[0]).forEach((e) => {
 				value[e] = getPERIandStalbeDebt(Object.assign(data[0][e], data[1][e]));
 			});
 
 			return value;
 		});
+
+
 
 		return debts;
 	};
@@ -66,7 +67,7 @@ const Stake = () => {
 			const [
 				debt,
 				apy,
-				// chartRate, // ! 에러 원인
+				chartRate, // ! 에러 원인
 				circulatingSupply,
 				networkByDebtCashes,
 				periholderCounts,
@@ -75,10 +76,10 @@ const Stake = () => {
 			] = await Promise.all([
 				getDebts(),
 				getTotalAPY(),
-				// getChartRates({
-				// 	currencyName: "PERI",
-				// 	networkId: 137,
-				// }),
+				getChartRates({
+					currencyName: "PERI",
+					networkId: 137,
+				}),
 				getTotalCirculatingSupply(),
 				getDebtCaches(),
 				getPeriholderCounts(),
@@ -86,12 +87,15 @@ const Stake = () => {
 				// getLastPeriRates(),
 			]);
 
-			console.log("networkByDebtCashes", networkByDebtCashes);
-			console.log("periholderCounts", periholderCounts);
+			const today = Math.round(new Date().getTime() / 1000);
+			const yesterday = today - 24 * 3600;
+			const filterChartRate = chartRate.filter((rate) => {
+				return rate.timestamp >= yesterday * 1000;
+			});
 
 			dispatch(setNetworkCachedDebts(debt));
 			dispatch(setAPY(apy));
-			// dispatch(setPeriChartRates(chartRate));
+			dispatch(setPeriChartRates(filterChartRate));
 			dispatch(setCirculatingSupply(circulatingSupply));
 			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
 			dispatch(setPeriholderCounts(periholderCounts));

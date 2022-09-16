@@ -26,8 +26,6 @@ const AreaChart = ({ data, colors }) => {
 		}
 	}, [data]);
 
-	console.log("AREACHART DATA", data);
-
 	const toPercent = (decimal, fixed = 0) => {
 		return `${(decimal * 100).toString()}%`;
 	};

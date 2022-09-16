@@ -18,10 +18,12 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 
 	return {
 		// url: `ExchangeRates-${process.env.REACT_APP_ENV === 'production' ? 'Real' : 'Dev'}`,
+		// exchangeRates(skip: ${skip}, first: ${first}, where: { currencyKey: ${currencyKey} }) {
+
 		url: "",
 		query: gql`
 			query {
-				exchangeRates(skip: ${skip}, first: ${first}, where: { currencyKey: ${currencyKey} }) {
+				chartRate(skip: ${skip}, first: ${first}, where: { currencyKey: ${currencyKey} }) {
 					price
 				}
 			}

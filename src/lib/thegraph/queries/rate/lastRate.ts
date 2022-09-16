@@ -38,7 +38,6 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 			  `,
 		variables: { currencyName, skip, first },
 		mapping: ({ data }) => {
-			console.log("lastRate data", data);
 			if (currencyName === "pUSD" || currencyName === "USD") {
 				return RateMapping({ price: 1000000000000000000n, currencyName });
 			} else {

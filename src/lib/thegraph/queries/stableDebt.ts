@@ -3,20 +3,42 @@ import { utils } from "ethers";
 
 export const stableDebt = ({ networkId }) => {
 	const mapping = (data) => {
+		const id = data.id.split("-");
+
 		return {
-			id: utils.parseBytes32String(data.id),
+			id: utils.parseBytes32String(id[0]),
 			amount: BigInt(data.amount),
 			networkId,
 		};
 	};
 
+	let network;
+	switch (networkId) {
+		case 1:
+			network = "ETHEREUM";
+			break;
+		case 56:
+			network = "BSC";
+			break;
+		case 137:
+			network = "POLYGON";
+			break;
+		case 1285:
+			network = "MOONRIVER";
+			break;
+		default:
+			network = "";
+			break;
+	}
+
 	return {
 		url: "",
 		query: gql`
 			query {
-				stakeAmounts(skip: 0, first: 1000) {
+				stakeAmounts(skip: 0, first: 1000, network: "${network}") {
 					id
 					amount
+					network
 				}
 			}
 		`,

@@ -11,7 +11,6 @@ export const getDebtCaches = async () => {
 	const supportedNetworks = getSupportedNetworks();
 
 	supportedNetworks.forEach((networkId) => {
-		console.log("supportedNetworks", networkId);
 		promise.push(
 			(async () => {
 				return (datas[networkId.toString()] = await get(debtCaches({ searchDate, networkId })));
@@ -20,7 +19,6 @@ export const getDebtCaches = async () => {
 	});
 
 	return await Promise.all(promise).then((debtCaches) => {
-		console.log("Promise debtCaches", debtCaches);
 		let days = [];
 
 		// 측정 기간 1개월
@@ -28,8 +26,6 @@ export const getDebtCaches = async () => {
 			let day = addDays(new Date(Number(searchDate) * 1000), a);
 			days.push(formatDay(Number(day) / 1000));
 		}
-
-		console.log("days", days);
 
 		// 데이터 변환 로직
 		return days.map((day) => {
@@ -45,18 +41,14 @@ export const getDebtCaches = async () => {
 					if (day === element.date) {
 						returnValue["date"] = element.date.split("/").splice(1).join("/");
 						// returnValue[supportedNetworks[i].toString()] = element.debtBalanceToNumber;
-						console.log("debtBalance???", element, element.debtBalanceToNumber);
 						returnValue[element.network] = element.debtBalanceToNumber;
 						previous[i] = element;
 					} else {
 						// returnValue[supportedNetworks[i].toString()] = previous[i].debtBalanceToNumber;
-						console.log("checkNetwork", element.network, previous[i].debtBalanceToNumber, previous, previous[i]);
 						returnValue[element.network] = previous[i].debtBalanceToNumber;
 					}
 				});
 			});
-
-			console.log("returnValue", returnValue);
 
 			return {
 				...returnValue,
