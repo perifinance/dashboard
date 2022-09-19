@@ -5,9 +5,9 @@ import dexNetworkId from "configure/network/dexNetworkId";
 
 export const getLastRates = () => {
 	const promise = [];
-
+	
 	pynths[dexNetworkId.toString()].forEach((pynth) => {
-		const currencyName = pynth.symbol;
+		const currencyName = pynth.name;
 		promise.push(get(lastRate({ networkId: dexNetworkId, currencyName })));
 	});
 

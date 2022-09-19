@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 import { utils } from "ethers";
 export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networkId }) => {
-	// const currencyKey = currencyName && utils.formatBytes32String(currencyName);
 	currencyName = currencyName[0] === "p" ? currencyName.substring(1) : currencyName;
 
 	const RateMapping = (data) => {
+
 		let price = 0n;
 		try {
 			price = BigInt(data.price);
@@ -22,7 +22,7 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 		query: currencyName
 			? gql`
 					query {
-						aggregatorLastRates(skip: ${skip}, first: ${first}, id: ${currencyName}) {
+						aggregatorLastRates(skip: ${skip}, first: ${first}, id: "${currencyName}") {
 							price
 							currencyName
 						}
@@ -44,7 +44,8 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 				return RateMapping(data.aggregatorLastRates[0]);
 			}
 		},
-		errorCallback: () => {
+		errorCallback: (e) => {
+			console.log(e);
 			return RateMapping({ price: 0n, currencyName });
 		},
 		networkId,

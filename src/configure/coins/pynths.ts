@@ -1,4 +1,4 @@
-let pynths = process.env.REACT_APP_ENV === 'production' ? {
+let pynths = {
 	1: [
             {
                 id: 0,
@@ -56,7 +56,6 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
         //     symbol: "pDOT",
         //     categories: ['crypto'],
         // }
-
         {
             id: 0,
             name: "USD",
@@ -64,8 +63,8 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
             categories: ['currencies'],  
         }, {
             id: 1,
-            name: "1INCH",
-            symbol: "p1INCH",
+            name: "INCH",
+            symbol: "pINCH",
             categories: ['crypto'],
         },
         {
@@ -118,143 +117,132 @@ let pynths = process.env.REACT_APP_ENV === 'production' ? {
         },
         {
             id: 10,
-            name: "DOGE",
-            symbol: "pDOGE",
-            categories: ['crypto'],
-        },
-        {
-            id: 11,
             name: "DOT",
             symbol: "pDOT",
             categories: ['crypto'],
         },
         {
-            id: 12,
+            id: 11,
             name: "ETH",
             symbol: "pETH",
             categories: ['crypto'],
         },
         {
-            id: 13,
+            id: 12,
             name: "EUR",
             symbol: "pEUR",
             categories: ['currencies'],
         },
         {
-            id: 14,
+            id: 13,
             name: "LINK",
             symbol: "pLINK",
             categories: ['crypto'],
         },
         {
-            id: 15,
-            name: "LUNA",
-            symbol: "pLUNA",
-            categories: ['crypto'],
-        },
-        {
-            id: 16,
+            id: 14,
             name: "MKR",
             symbol: "pMKR",
             categories: ['crypto'],
         },
         {
-            id: 17,
+            id: 15,
             name: "SAND",
             symbol: "pSAND",
             categories: ['crypto'],
         },
         {
-            id: 18,
+            id: 16,
             name: "SNX",
             symbol: "pSNX",
             categories: ['crypto'],
         },
         {
-            id: 19,
+            id: 17,
             name: "SUSHI",
             symbol: "pSUSHI",
             categories: ['crypto'],
         },
         {
-            id: 20,
+            id: 18,
             name: "UNI",
             symbol: "pUNI",
             categories: ['crypto'],
         },
         {
-            id: 21,
+            id: 19,
             name: "XRP",
             symbol: "pXRP",
             categories: ['crypto'],
         },
         {
-            id: 22,
+            id: 20,
             name: "YFI",
             symbol: "pYFI",
             categories: ['crypto'],
         },
     ],
-} : {
-    42: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            }
-    ],
-    97: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            }
-    ],
-    1287: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            },
-            {
-                id: 1,
-                name: "Bitcoin",
-                symbol: "pBTC",
-                categories: ['crypto'],
-            }, {
-                id: 2,
-                name: "Ethereum",
-                symbol: "pETH",
-                categories: ['crypto'],
-            }, {
-                id: 3,
-                name: "Binance Coin",
-                symbol: "pBNB",
-                categories: ['crypto'],
-            }, {
-                id: 4,
-                name: "Chainlink",
-                symbol: "pLINK",
-                categories: ['crypto'],
-            }, {
-                id: 5,
-                name: "Polkadot",
-                symbol: "pDOT",
-                categories: ['crypto'],
-            }  
-    ],
-    80001: [
-            {
-                id: 0,
-                name: "USD",
-                symbol: "pUSD",
-                categories: ['currencies'],
-            }
-    ]
 }
+// } : {
+//     42: [
+//             {
+//                 id: 0,
+//                 name: "USD",
+//                 symbol: "pUSD",
+//                 categories: ['currencies'],
+//             }
+//     ],
+//     97: [
+//             {
+//                 id: 0,
+//                 name: "USD",
+//                 symbol: "pUSD",
+//                 categories: ['currencies'],
+//             }
+//     ],
+//     1287: [
+//             {
+//                 id: 0,
+//                 name: "USD",
+//                 symbol: "pUSD",
+//                 categories: ['currencies'],
+//             },
+//             {
+//                 id: 1,
+//                 name: "Bitcoin",
+//                 symbol: "pBTC",
+//                 categories: ['crypto'],
+//             }, {
+//                 id: 2,
+//                 name: "Ethereum",
+//                 symbol: "pETH",
+//                 categories: ['crypto'],
+//             }, {
+//                 id: 3,
+//                 name: "Binance Coin",
+//                 symbol: "pBNB",
+//                 categories: ['crypto'],
+//             }, {
+//                 id: 4,
+//                 name: "Chainlink",
+//                 symbol: "pLINK",
+//                 categories: ['crypto'],
+//             }, {
+//                 id: 5,
+//                 name: "Polkadot",
+//                 symbol: "pDOT",
+//                 categories: ['crypto'],
+//             }  
+//     ],
+//     80001: [
+//             {
+//                 id: 0,
+//                 name: "USD",
+//                 symbol: "pUSD",
+//                 categories: ['currencies'],
+//             }
+//     ]
+// }
 
     
 export default pynths

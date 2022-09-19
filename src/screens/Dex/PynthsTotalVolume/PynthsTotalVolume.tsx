@@ -26,7 +26,6 @@ const PynthsTotalVolume = () => {
     (state: RootState) => state.totalSupplyPynths
   );
 
-
   const exchangeRates = useSelector((state: RootState) => state.exchangeRates);
 
   const [totalUSDValue, setTotalUSDValue] = useState(0n);
