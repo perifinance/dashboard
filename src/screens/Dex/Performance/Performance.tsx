@@ -64,8 +64,8 @@ const Performance = () => {
 									<tr key={i} className="border-b border-gray-900">
 										<td className="p-2 border-r border-gray-900">
 											<div className="flex flex-col lg:flex-row lg:gap-2">
-												<img className="hidden lg:block w-5 h-5 self-center" src={`/images/currencies/${e.symbol}.png`}></img>
-												<div className="text-sm lg:text-base text-gray-500 font-medium lg:font-bold">{e.symbol}</div>
+												<img className="hidden lg:block w-5 h-5 self-center" src={`/images/currencies/${e.symbol=== "pINCH" ? "p1INCH" : e.symbol}.png`}></img>
+												<div className="text-sm lg:text-base text-gray-500 font-medium lg:font-bold">{e.symbol=== "pINCH" ? "p1INCH" : e.symbol}</div>
 												{e.name}
 											</div>
 										</td>

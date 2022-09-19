@@ -4,7 +4,6 @@ import { utils } from "ethers";
 export const exchageVolume = ({ pynthName, networkId, searchDate = "0" }) => {
 	const currencyKey = pynthName && utils.formatBytes32String(pynthName);
 	const mapping = (data) => {
-		console.log("exchangeVolume data", data);
 		return {
 			id: data.id,
 			amount: BigInt(data.amount),
@@ -13,14 +12,11 @@ export const exchageVolume = ({ pynthName, networkId, searchDate = "0" }) => {
 			usdVolume: BigInt(data.usdVolume),
 		};
 	};
-
-	console.log("args", currencyKey, searchDate);
-
 	return {
 		url: "",
 		query: gql`
 			query {
-				exchangeVolumes({ currencyKey: ${currencyKey}, timestamp: ${searchDate} }) {
+				exchangeVolumes(currencyKey: "${currencyKey}", timestamp: ${Number(searchDate)}) {
 					id
 					currencyKey
 					amount

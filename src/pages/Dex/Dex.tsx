@@ -24,16 +24,16 @@ const Dex = () => {
 	const { dexIsReady } = useSelector((state: RootState) => state.app);
 
 	const init = async () => {
-		// const totalSupplyPynths = await getTotalSupplyPynths();
-		// const exchangeVolumes = await getExchangeVolumes();
-		// const exchangeRates = await getLastRates();
-		// const rateChanges = await getRateChanges();
+		const totalSupplyPynths = await getTotalSupplyPynths();
+		const exchangeVolumes = await getExchangeVolumes();
+		const exchangeRates = await getLastRates();
+		const rateChanges = await getRateChanges();
 
-		// dispatch(setExchangeRates(exchangeRates));
-		// dispatch(setTotalSupplyPynths(totalSupplyPynths));
-		// dispatch(setExchangeVolumes(exchangeVolumes));
-		// dispatch(setRateChanges(rateChanges));
-		// dispatch(setDexIsReady());
+		dispatch(setExchangeRates(exchangeRates));
+		dispatch(setTotalSupplyPynths(totalSupplyPynths));
+		dispatch(setExchangeVolumes(exchangeVolumes));
+		dispatch(setRateChanges(rateChanges));
+		dispatch(setDexIsReady());
 	};
 
 	useEffect(() => {
@@ -47,7 +47,7 @@ const Dex = () => {
 			<div className="lg:flex-1">
 				<PynthsTotalVolume />
 			</div>
-			{/* <div className="lg:flex-1">
+			<div className="lg:flex-1">
 				<TradingVolume />
 			</div>
 			<div className="lg:flex-1">
@@ -58,7 +58,7 @@ const Dex = () => {
 			</div>
 			<div className="lg:h-80 lg:flex-1">
 				<Performance />
-			</div> */}
+			</div>
 		</div>
 	);
 };

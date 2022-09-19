@@ -9,10 +9,10 @@ export const exchangeCount = ({ networkId, searchDate = "0" }) => {
 	};
 
 	return {
-		url: `Exchanger-${process.env.REACT_APP_ENV === "production" ? "Real" : "Dev"}`,
+		url: "",
 		query: gql`
 			query {
-				exchangeCounts(where: { timestamp_gt: ${searchDate} }) {
+				exchangeCounts(timestamp: ${searchDate}) {
 					id
 					count
 				}
