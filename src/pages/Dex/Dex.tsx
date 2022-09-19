@@ -25,13 +25,13 @@ const Dex = () => {
 
 	const init = async () => {
 		// const totalSupplyPynths = await getTotalSupplyPynths();
-		const exchangeVolumes = await getExchangeVolumes();
+		// const exchangeVolumes = await getExchangeVolumes();
 		// const exchangeRates = await getLastRates();
 		// const rateChanges = await getRateChanges();
 
 		// dispatch(setExchangeRates(exchangeRates));
 		// dispatch(setTotalSupplyPynths(totalSupplyPynths));
-		dispatch(setExchangeVolumes(exchangeVolumes));
+		// dispatch(setExchangeVolumes(exchangeVolumes));
 		// dispatch(setRateChanges(rateChanges));
 		// dispatch(setDexIsReady());
 	};

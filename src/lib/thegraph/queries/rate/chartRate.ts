@@ -34,6 +34,7 @@ export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "
 				return data.periChartRate.map((item) => RateMapping(item));
 			},
 			errorCallback: (e) => {
+				console.log(e);
 				return [
 					RateMapping({
 						price: 0,
@@ -74,11 +75,11 @@ export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "
 			url: "",
 			query: gql`
 				query {
-					chartRates(
+					aggregatorChartRates(
 						skip: ${skip}
-						first: ${first}
+						take: ${first}
 						currencyName: "${currencyName}"
-						timestamp_gt: ${searchDate}
+						timestamp: ${searchDate}
 					) {
 						price
 						low
@@ -89,10 +90,10 @@ export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "
 			`,
 			variables: { currencyName, skip, first, searchDate },
 			mapping: ({ data }) => {
-				return data.chartRates.map((item) => RateMapping(item));
+				return data.aggregatorChartRates.map((item) => RateMapping(item));
 			},
-			errorCallback: () => {
-				console.error("chartrate error! :");
+			errorCallback: (e) => {
+				console.error("chartrate error! :",e);
 				return [
 					RateMapping({
 						price: 0,
