@@ -35,7 +35,7 @@ export const stableDebt = ({ networkId }) => {
 		url: "",
 		query: gql`
 			query {
-				stakeAmounts(skip: 0, first: 1000, network: "${network}") {
+				stakeAmounts(skip: ${0}, first: ${1000}, network: "${network}") {
 					id
 					amount
 					network

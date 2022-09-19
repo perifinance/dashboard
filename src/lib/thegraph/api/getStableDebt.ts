@@ -17,6 +17,7 @@ export const getStableDebt = () => {
 			USDC: 0n,
 			DAI: 0n,
 		};
+
 		datas.forEach((item) => {
 			if (!value[item.networkId]) {
 				value[item.networkId] = {};

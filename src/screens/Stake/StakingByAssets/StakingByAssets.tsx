@@ -18,7 +18,7 @@ const StakingByAssets = () => {
 	const [TVL, setTVL] = useState("0");
 	const [stableTVL, setStableTVL] = useState("0");
 	const [perTVL, setPerTVL] = useState([]);
-	const periRates = useSelector((state: RootState) => state.periRates);
+	const periRates: any = useSelector((state: RootState) => state.periRates);
 
 	const getPers = () => {
 		const coins = ["PERI", "USDC", "DAI"];
@@ -27,13 +27,14 @@ const StakingByAssets = () => {
 		let coinAmount = networkCachedDebts.total["PERI"];
 
 		total -= coinAmount;
-		coinAmount = (BigInt(coinAmount) * periRates["PERI"]) / 1000000000000000000n;
+		coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
 		total += coinAmount;
 
 		return coins
 			.map((e, index) => {
 				let coinAmount = networkCachedDebts.total[e];
-				if (e === "PERI") coinAmount = (BigInt(coinAmount) * periRates["PERI"]) / 1000000000000000000n;
+				if (e === "PERI")
+					coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
 
 				return {
 					coin: e,

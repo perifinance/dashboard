@@ -11,8 +11,6 @@ export const getLastRates = () => {
 		promise.push(get(lastRate({ networkId: dexNetworkId, currencyName })));
 	});
 
-	// console.log("promise", promise);
-
 	return Promise.all(promise).then((rates) => {
 		let keys = {};
 		rates.forEach((e) => {

@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client";
 import { utils } from "ethers";
-import { printSourceLocation } from "graphql";
-import { formatHour } from "lib/format";
+
 export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "0", networkId }) => {
 	const currencyKey = currencyName && utils.formatBytes32String(currencyName);
 	currencyName = currencyName[0] === "p" ? currencyName.substring(1) : currencyName;

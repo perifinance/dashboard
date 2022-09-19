@@ -4,18 +4,13 @@ import { get } from "../service";
 import dexNetworkId from "configure/network/dexNetworkId";
 
 export const getLastPeriRates = () => {
-	const promise = [];
+	const promise = get(lastPeriRate({ networkId: dexNetworkId }));
 
-	pynths[dexNetworkId.toString()].forEach((pynth) => {
-		const currencyName = pynth.symbol;
-		promise.push(get(lastPeriRate({ networkId: dexNetworkId })));
-	});
+	console.log("promise", promise);
 
-	return Promise.all(promise).then((rates) => {
+	return promise.then((rates) => {
 		let keys = {};
-		rates.forEach((e) => {
-			keys[e.currencyName] = e.price;
-		});
+		keys[rates.currencyName] = rates.price;
 		return keys;
 	});
 };
