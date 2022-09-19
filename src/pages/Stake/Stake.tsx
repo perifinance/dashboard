@@ -68,7 +68,7 @@ const Stake = () => {
 				chartRate,
 				// circulatingSupply,
 				networkByDebtCashes,
-				// periholderCounts,
+				periholderCounts,
 				// exchangeRates, // ! 에러 원인
 				// periRates, // ! 에러 원인
 			] = await Promise.all([
@@ -80,7 +80,7 @@ const Stake = () => {
 				}),
 				// getTotalCirculatingSupply(),
 				getDebtCaches(),
-				// getPeriholderCounts(),
+				getPeriholderCounts(),
 				// getLastRates(),
 				// getLastPeriRates(),
 			]);
@@ -94,7 +94,7 @@ const Stake = () => {
 			dispatch(setPeriChartRates(filterChartRate));
 			// dispatch(setCirculatingSupply(circulatingSupply));
 			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
-			// dispatch(setPeriholderCounts(periholderCounts));
+			dispatch(setPeriholderCounts(periholderCounts));
 			// dispatch(setExchangeRates(exchangeRates));
 			// dispatch(setPeriRates(periRates));
 			dispatch(setPeriRates(chartRate[chartRate.length - 1])); // ! periRates 임시값
