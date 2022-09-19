@@ -21,21 +21,21 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 		url: "",
 		query: currencyName
 			? gql`
-					query {
-						aggregatorLastRates(skip: ${skip}, first: ${first}, id: "${currencyName}") {
-							price
-							currencyName
-						}
+				query {
+					aggregatorLastRates(skip: ${skip}, first: ${first}, id: "${currencyName}") {
+						price
+						currencyName
 					}
-			  `
+				}
+			`
 			: gql`
-					query {
-						aggregatorLastRates(skip: 0, first: 1) {
-							price
-							currencyName
-						}
+				query {
+					aggregatorLastRates(skip: 0, first: 1) {
+						price
+						currencyName
 					}
-			  `,
+				}
+			`,
 		variables: { currencyName, skip, first },
 		mapping: ({ data }) => {
 			if (currencyName === "pUSD" || currencyName === "USD") {

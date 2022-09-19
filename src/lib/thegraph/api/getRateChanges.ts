@@ -13,13 +13,10 @@ export const getRateChanges = async () => {
 
 	const setData = async (currencyName) => {
 		const datas = await get(chartRate({ networkId: dexNetworkId, currencyName, searchDate }));
-		console.log("datas", datas);
 		if (datas.length > 0) {
 			const lastPrice = Number(utils.formatEther(datas[datas.length - 1].price));
 			const firstPrice = Number(utils.formatEther(datas[0].price));
 			data[currencyName] = (((lastPrice - firstPrice) / firstPrice) * 100).toFixed(2);
-
-			console.log("asdf", lastPrice, firstPrice);
 		} else {
 			data[currencyName] = "0.00";
 		}
