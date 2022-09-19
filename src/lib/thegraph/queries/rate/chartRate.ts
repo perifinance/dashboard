@@ -1,13 +1,7 @@
 import { gql } from "@apollo/client";
 import { utils } from "ethers";
-import { formatHour } from "lib/format";
-export const chartRate = ({
-	currencyName,
-	page = 0,
-	first = 1000,
-	searchDate = "0",
-	networkId,
-}) => {
+
+export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "0", networkId }) => {
 	const currencyKey = currencyName && utils.formatBytes32String(currencyName);
 	currencyName = currencyName[0] === "p" ? currencyName.substring(1) : currencyName;
 	const skip = page * first;
@@ -20,32 +14,26 @@ export const chartRate = ({
 			timestamp: Number(data.timestamp),
 		};
 	};
+
 	if (currencyName === "PERI") {
 		return {
-			// url: `ExchangeRates-${process.env.REACT_APP_ENV === 'production' ? 'Real' : 'Dev'}`,
 			url: "",
 			query: gql`
 				query {
-					chartRates(
-						skip: ${skip}
-						first: ${first}
-						where: { currencyKey: ${currencyKey}, timestamp_gt: ${searchDate} }
-						orderBy: timestamp
-						orderDirection: asc
-					) {
+					periChartRate(first: ${first}, skip: ${skip}, currencyKey: "${currencyKey}", network: ${networkId}) {
+						timestamp
 						price
 						low
 						high
-						timestamp
+						currencyKey
 					}
 				}
 			`,
 			variables: { currencyKey, skip, first, searchDate },
 			mapping: ({ data }) => {
-				return data.chartRates.map((item) => RateMapping(item));
+				return data.periChartRate.map((item) => RateMapping(item));
 			},
 			errorCallback: (e) => {
-				console.error("chartrate error! :", e);
 				return [
 					RateMapping({
 						price: 0,
@@ -89,7 +77,7 @@ export const chartRate = ({
 					chartRates(
 						skip: ${skip}
 						first: ${first}
-						currencyName: ${currencyName}
+						currencyName: "${currencyName}"
 						timestamp_gt: ${searchDate}
 					) {
 						price
@@ -101,7 +89,6 @@ export const chartRate = ({
 			`,
 			variables: { currencyName, skip, first, searchDate },
 			mapping: ({ data }) => {
-				console.log("data", data);
 				return data.chartRates.map((item) => RateMapping(item));
 			},
 			errorCallback: () => {

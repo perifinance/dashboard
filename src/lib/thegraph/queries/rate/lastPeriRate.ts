@@ -5,6 +5,7 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 	const currencyKey = utils.formatBytes32String(currencyName);
 
 	const RateMapping = (data) => {
+		console.log("data", data);
 		let price = 0n;
 		try {
 			price = BigInt(data.price);
@@ -17,17 +18,25 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 	};
 
 	return {
-		// url: `ExchangeRates-${process.env.REACT_APP_ENV === 'production' ? 'Real' : 'Dev'}`,
 		url: "",
 		query: gql`
 			query {
-				exchangeRates(skip: ${skip}, first: ${first}, where: { currencyKey: ${currencyKey} }) {
+				exchangeRate(skip: ${skip}, first: ${first}, currencyKey: ${currencyKey} {
 					price
 				}
 			}
 		`,
+		// ! 원본값
+		// query: gql`
+		// 	query {
+		// 		chartRate(skip: ${skip}, first: ${first}, currencyKey: ${currencyKey} {
+		// 			price
+		// 		}
+		// 	}
+		// `,
 		variables: { currencyKey, skip, first },
 		mapping: ({ data }) => {
+			console.log("data", data.exchangeRates);
 			return RateMapping({ price: data.exchangeRates[0].price, currencyName: "PERI" });
 		},
 		errorCallback: () => {

@@ -18,25 +18,23 @@ const StakingByAssets = () => {
 	const [TVL, setTVL] = useState("0");
 	const [stableTVL, setStableTVL] = useState("0");
 	const [perTVL, setPerTVL] = useState([]);
-	const periRates = useSelector((state: RootState) => state.periRates);
+	const periRates: any = useSelector((state: RootState) => state.periRates);
 
 	const getPers = () => {
 		const coins = ["PERI", "USDC", "DAI"];
-
-		console.log("coinAmount", networkCachedDebts);
 
 		let total = networkCachedDebts.total.total;
 		let coinAmount = networkCachedDebts.total["PERI"];
 
 		total -= coinAmount;
-		coinAmount = (BigInt(coinAmount) * periRates["PERI"]) / 1000000000000000000n;
+		coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
 		total += coinAmount;
 
 		return coins
 			.map((e, index) => {
 				let coinAmount = networkCachedDebts.total[e];
 				if (e === "PERI")
-					coinAmount = (BigInt(coinAmount) * periRates["PERI"]) / 1000000000000000000n;
+					coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
 
 				return {
 					coin: e,
@@ -56,14 +54,9 @@ const StakingByAssets = () => {
 			});
 	};
 	useEffect(() => {
-		console.log("stakeIsReady", stakeIsReady, "TVL 실행 안됨 ㅅㄱ");
 		if (stakeIsReady) {
-			setTVL(
-				formatShortenCurrency(Number(utils.formatEther(networkCachedDebts.total.total.toString())))
-			);
-			setStableTVL(
-				formatShortenCurrency(Number(utils.formatEther(networkCachedDebts.total.stable.toString())))
-			);
+			setTVL(formatShortenCurrency(Number(utils.formatEther(networkCachedDebts.total.total.toString()))));
+			setStableTVL(formatShortenCurrency(Number(utils.formatEther(networkCachedDebts.total.stable.toString()))));
 			setPerTVL(getPers());
 		}
 	}, [stakeIsReady]);
@@ -82,22 +75,13 @@ const StakingByAssets = () => {
 					</div>
 					<div>
 						<div className="text-2xl lg:text-3xl text-gray-500 font-medium">$ {stableTVL}</div>
-						<div className="text-sm text-gray-700 font-normal">
-							Stable Tokens Total Value Locked
-						</div>
+						<div className="text-sm text-gray-700 font-normal">Stable Tokens Total Value Locked</div>
 					</div>
 				</div>
 			</div>
 			<div className="flex flex-wrap space-y-2 lg:gap-2">
 				{perTVL.map((e, i) => {
-					return (
-						<ColorVerticalLabel
-							color={colors[i]}
-							text={e.coin}
-							per={e.per}
-							key={e.coin}
-						></ColorVerticalLabel>
-					);
+					return <ColorVerticalLabel color={colors[i]} text={e.coin} per={e.per} key={e.coin}></ColorVerticalLabel>;
 				})}
 			</div>
 		</Card>

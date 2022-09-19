@@ -50,7 +50,6 @@ const Stake = () => {
 
 		const debts = Promise.all(promise).then((data) => {
 			const value = {};
-
 			Object.keys(data[0]).forEach((e) => {
 				value[e] = getPERIandStalbeDebt(Object.assign(data[0][e], data[1][e]));
 			});
@@ -66,37 +65,39 @@ const Stake = () => {
 			const [
 				debt,
 				apy,
-				// chartRate, // ! 에러 원인
-				circulatingSupply,
+				chartRate,
+				// circulatingSupply,
 				networkByDebtCashes,
-				periholderCounts,
-				exchangeRates,
+				// periholderCounts,
+				// exchangeRates, // ! 에러 원인
 				// periRates, // ! 에러 원인
 			] = await Promise.all([
 				getDebts(),
 				getTotalAPY(),
-				// getChartRates({
-				// 	currencyName: "PERI",
-				// 	networkId: 137,
-				// }),
-				getTotalCirculatingSupply(),
+				getChartRates({
+					currencyName: "PERI",
+					networkId: 137,
+				}),
+				// getTotalCirculatingSupply(),
 				getDebtCaches(),
-				getPeriholderCounts(),
-				getLastRates(),
+				// getPeriholderCounts(),
+				// getLastRates(),
 				// getLastPeriRates(),
 			]);
 
-			console.log("networkByDebtCashes", networkByDebtCashes);
-			console.log("periholderCounts", periholderCounts);
+			const today = Math.round(new Date().getTime() / 1000);
+			const yesterday = today - 24 * 3600;
+			const filterChartRate = chartRate.filter((rate) => rate.timestamp >= yesterday * 1000);
 
 			dispatch(setNetworkCachedDebts(debt));
 			dispatch(setAPY(apy));
-			// dispatch(setPeriChartRates(chartRate));
-			dispatch(setCirculatingSupply(circulatingSupply));
+			dispatch(setPeriChartRates(filterChartRate));
+			// dispatch(setCirculatingSupply(circulatingSupply));
 			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
-			dispatch(setPeriholderCounts(periholderCounts));
-			dispatch(setExchangeRates(exchangeRates));
+			// dispatch(setPeriholderCounts(periholderCounts));
+			// dispatch(setExchangeRates(exchangeRates));
 			// dispatch(setPeriRates(periRates));
+			dispatch(setPeriRates(chartRate[chartRate.length - 1])); // ! periRates 임시값
 		} catch (err) {
 			console.error("init error:", err);
 		} finally {
@@ -113,7 +114,9 @@ const Stake = () => {
 	return (
 		<div className="flex flex-col px-4 lg:px-0 gap-5">
 			<div className="flex flex-col lg:flex-row gap-5">
-				<div className="lg:h-86">{/* <StakingByAssets></StakingByAssets> */}</div>
+				<div className="lg:h-86">
+					<StakingByAssets></StakingByAssets>
+				</div>
 				<div className="lg:h-86 lg:flex-1">
 					<DebtByNetworks></DebtByNetworks>
 				</div>

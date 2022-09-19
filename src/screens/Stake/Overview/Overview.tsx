@@ -28,10 +28,8 @@ const Overview = () => {
 	};
 
 	const getMarketCap = () => {
-		console.log("marketCap", lastRate, circulatingSupply);
-		// let tmp = BigInt(BigInt(Number(lastRate.price) * 10 ** 18) * circulatingSupply);
 		let tmp = BigInt(Number(lastRate.price) * 10 ** 18) * circulatingSupply;
-		// todo 776.94K (22.09.14)
+
 		return tmp / 1000000000000000000n;
 	};
 
@@ -45,13 +43,19 @@ const Overview = () => {
 					formatHigh: "0.000000",
 				});
 			} else {
-				setLastRate(rates[rates.length - 1]);
+				const convertLastRate = { ...rates[rates.length - 1] };
+
+				rates.forEach((rate) => {
+					Number(convertLastRate.formatHigh) < Number(rate.formatHigh) && (convertLastRate.formatHigh = rate.formatHigh);
+					Number(convertLastRate.formatLow) > Number(rate.formatLow) && (convertLastRate.formatLow = rate.formatLow);
+				});
+
+				setLastRate(convertLastRate);
 			}
 		}
 	}, [stakeIsReady]);
 
 	useEffect(() => {
-		console.log("marketCap", stakeIsReady, lastRate.price);
 		if (stakeIsReady && Number(lastRate.price) > 0) {
 			setPer(getPer());
 			setMarketCap(getMarketCap());
