@@ -74,9 +74,9 @@ const DebtByNetworks = () => {
 						</div>
 					</div>
 
-					<div className="w-full h-32 lg:self-center lg:h-44 lg:pl-10">
+					{/* <div className="w-full h-32 lg:self-center lg:h-44 lg:pl-10">
 						<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
-					</div>
+					</div> */}
 				</div>
 
 				<div className="hidden lg:flex space-y-2 lg:gap-2">
