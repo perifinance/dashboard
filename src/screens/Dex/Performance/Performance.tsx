@@ -21,7 +21,6 @@ const Performance = () => {
 			const pynthsByVolume = volume.reduce((a, b) => {
 				return a + b.usdVolume;
 			}, 0n);
-
 			return {
 				...volume[0],
 				...pynths[dexNetworkId].find((e) => volume[0].currencyName === e.symbol),
@@ -35,7 +34,7 @@ const Performance = () => {
 		let pynthsByTotalSupplies = getPynthsByVolumes();
 		setPynthsByVolumes(pynthsByTotalSupplies);
 	};
-
+	
 	useEffect(() => {
 		if (dexIsReady) {
 			init();
@@ -72,7 +71,7 @@ const Performance = () => {
 										<td className="p-2 text-right border-r border-gray-900">
 											$
 											{formatShortenCurrency(
-												utils.formatEther(exchangeRates[e.symbol] === undefined ? 1000000000000000000n : exchangeRates[e.symbol])
+												utils.formatEther(exchangeRates[e.symbol] === undefined ? 1000000000000000000n : exchangeRates[e.symbol] * (10n ** 10n))
 											)}
 										</td>
 										<td

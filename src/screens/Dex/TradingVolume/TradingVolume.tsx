@@ -69,7 +69,7 @@ const TradingVolume = () => {
                 <Title>24H Trading Volume</Title>
                 <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex lg:flex-col gap-5 lg:gap-2">
-                        <div className="w-40 lg:w-36 h-40 lg:h-36">
+                        <div className="flex items-center w-10 lg:w-36 h-40 lg:h-36">
                             {pynthsByVolumes.length > 0 && <PieChart x={'currencyName'} y={'usdVolume'} data={pynthsByVolumes} colors={colors} total={totalVolume}></PieChart>}
                         </div>
                         <div className="flex lg:flex-col self-center flex-1">

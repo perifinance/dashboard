@@ -28,7 +28,6 @@ const Pynths = () => {
   const getPynthsByTotalSupplies = () => {
     let pynthsByTotalSupplies = pynths[dexNetworkId].map((pynth) => {
       const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
-        // console.log(pynth.symbol, exchangeRates[pynth.symbol]);
         let rate =
           exchangeRates[pynth.symbol] === undefined
             ? 1000000000000000000n

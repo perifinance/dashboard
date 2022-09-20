@@ -42,8 +42,8 @@ const PynthsDistribution = () => {
     }
 
     const init = () => {
-        let pynthsByTotalSupplies = getNetworkByDebts();
-
+        let pynthsByTotalSupplies = getNetworkByDebts().sort((a, b) => Number(b.networkByDebt) - Number(a.networkByDebt));
+        console.log(pynthsByTotalSupplies);
         setNetworkByDebts(pynthsByTotalSupplies);
     }
 
@@ -59,7 +59,7 @@ const PynthsDistribution = () => {
                 <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex lg:flex-col gap-5 lg:gap-2">
                         <div className="w-40 lg:w-36 h-40 lg:h-36">
-                        <PieChart x={'networkId'} y={'networkByDebt'} data={networkByDebts} colors={colors} total={totalDebtUSDValue}></PieChart>
+                            <PieChart x={'networkId'} y={'networkByDebt'} data={networkByDebts} colors={colors} total={totalDebtUSDValue}></PieChart>
                         </div>
                         <div className="flex lg:flex-col self-center flex-1">
                             <div className="flex flex-col gap-2 lg:gap-0 items-end lg:items-center">

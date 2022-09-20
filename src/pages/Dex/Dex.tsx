@@ -27,6 +27,7 @@ const Dex = () => {
 		const totalSupplyPynths = await getTotalSupplyPynths();
 		const exchangeVolumes = await getExchangeVolumes();
 		const exchangeRates = await getLastRates();
+		console.log(exchangeRates);
 		const rateChanges = await getRateChanges();
 
 		dispatch(setExchangeRates(exchangeRates));
