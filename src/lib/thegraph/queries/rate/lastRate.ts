@@ -4,8 +4,8 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 	currencyName = currencyName[0] === "p" ? currencyName.substring(1) : currencyName;
 
 	const RateMapping = (data) => {
-
 		let price = 0n;
+
 		try {
 			price = BigInt(data.price);
 		} catch (e) {}
@@ -29,19 +29,19 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 				}
 			`
 			: gql`
-				query {
-					aggregatorLastRates(skip: 0, first: 1) {
-						price
-						currencyName
+					query {
+						aggregatorLastRates(skip: 0, first: 1) {
+							price
+							currencyName
+						}
 					}
-				}
-			`,
+			  `,
 		variables: { currencyName, skip, first },
 		mapping: ({ data }) => {
 			if (currencyName === "pUSD" || currencyName === "USD") {
 				return RateMapping({ price: 1000000000000000000n, currencyName });
 			} else {
-				return RateMapping(data.aggregatorLastRates[0]);
+				return RateMapping({ price: BigInt(data.aggregatorLastRates[0].price) * 10n ** 10n, currencyName });
 			}
 		},
 		errorCallback: (e) => {

@@ -14,9 +14,7 @@ const PynthsCard = ({ pynths }) => {
 							{pynths.symbol}
 							<span className="text-sm font-normal ml-1">{pynths.name}</span>
 						</div>
-						<div className="text-base font-light text-gray-700">
-							${pynths.name === "USD" ? formatCurrency(pynths.totalSupplyToUSD, 2) : formatCurrency(pynths.totalSupplyToUSD * (10n ** 10n), 2)}
-						</div>
+						<div className="text-base font-light text-gray-700">${formatCurrency(pynths.totalSupplyToUSD, 2)}</div>
 					</div>
 				</div>
 				<div className="hidden bg-gray-900 lg:block h-14 w-px mt-2 self-center"></div>
@@ -27,8 +25,7 @@ const PynthsCard = ({ pynths }) => {
 					</div>
 					<div className="h-8 border-l border-gray-900 lg:hidden"></div>
 					<div className="flex flex-1 text-lg font-bold items-center justify-center">
-						<img className="w-5 h-5 mx-2" src={`/images/icon/dollar.svg`}></img>
-						${pynths.name === "USD" ? formatCurrency(pynths.rate, 2) : formatCurrency(pynths.rate * (10n ** 10n), 2)}
+						<img className="w-5 h-5 mx-2" src={`/images/icon/dollar.svg`}></img>${formatCurrency(pynths.rate, 2)}
 					</div>
 				</div>
 			</div>

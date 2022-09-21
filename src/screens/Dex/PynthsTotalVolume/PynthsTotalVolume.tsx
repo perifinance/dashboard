@@ -126,7 +126,7 @@ const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 				<div className="flex lg:flex-col self-center w-52 flex-1">
 					<div className="flex flex-col lg:flex-row gap-2 items-end pl-2">
 						<div className="text-2xl text-gray-500 font-medium">
-							${formatShortenCurrency(Number(utils.formatEther(totalUSDValue * 10n ** 10n)))}
+							${formatShortenCurrency(Number(utils.formatEther(totalUSDValue)))}
 						</div>
 						<div className="text-sm text-gray-700 font-normal">Total Pynths Value(USD)</div>
 					</div>
