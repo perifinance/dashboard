@@ -55,7 +55,7 @@ const Dex = () => {
 	return (
 		<div className="flex flex-col px-4 lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
 			<div className="lg:flex-1">
-				<PynthsTotalVolume togglePUSDHandler={togglePUSDHandler} />
+				<PynthsTotalVolume togglePUSDHandler={togglePUSDHandler} togglePUSD={togglePUSD}/>
 			</div>
 			<div className="lg:flex-1">
 				<TradingVolume togglePUSD={togglePUSD} />
