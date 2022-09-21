@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "reducers";
 import Categories from "screens/Dex/Categories";
@@ -22,6 +22,7 @@ const Dex = () => {
 	const dispatch = useDispatch();
 
 	const { dexIsReady } = useSelector((state: RootState) => state.app);
+	const [togglePUSD, setTogglePUSD] = useState(false);
 
 	const init = async () => {
 		const totalSupplyPynths = await getTotalSupplyPynths();
@@ -36,6 +37,12 @@ const Dex = () => {
 		dispatch(setDexIsReady());
 	};
 
+	const togglePUSDHandler = (toggle: boolean) => {
+		console.log("toggle", toggle);
+		setTogglePUSD(toggle);
+		init();
+	};
+
 	useEffect(() => {
 		if (!dexIsReady) {
 			init();
@@ -45,16 +52,16 @@ const Dex = () => {
 	return (
 		<div className="flex flex-col px-4 lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
 			<div className="lg:flex-1">
-				<PynthsTotalVolume />
+				<PynthsTotalVolume togglePUSDHandler={togglePUSDHandler} />
 			</div>
 			<div className="lg:flex-1">
-				<TradingVolume />
+				<TradingVolume togglePUSD={togglePUSD} />
 			</div>
 			<div className="lg:flex-1">
 				<PynthsDistribution />
 			</div>
 			<div className="lg:h-80 lg:flex-1">
-				<Categories />
+				<Categories togglePUSD={togglePUSD} />
 			</div>
 			<div className="lg:h-80 lg:flex-1">
 				<Performance />

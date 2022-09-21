@@ -11,7 +11,7 @@ import dexNetworkId from "configure/network/dexNetworkId";
 import { getExchangeCount } from "lib/thegraph/api";
 import { formatShortenCurrency, formatNumberToPer, formatCurrency } from "lib/format";
 
-const Categories = () => {
+const Categories = ({ togglePUSD }) => {
 	const { dexIsReady } = useSelector((state: RootState) => state.app);
 	const { totalSupplies } = useSelector((state: RootState) => state.totalSupplyPynths);
 	const { exchangeVolumes } = useSelector((state: RootState) => state.exchangeVolumes);
@@ -38,7 +38,7 @@ const Categories = () => {
 		let categoryByTotalSupply = {};
 
 		totalSuppliesAddCatagory.forEach((item) => {
-			// if (item.pynthName !== "pUSD") {
+			if (item.pynthName !== "pUSD") {
 				item.category.forEach((category) => {
 					if (!categoryByTotalSupply[category]) {
 						categoryByTotalSupply[category] = 0n;
@@ -48,7 +48,17 @@ const Categories = () => {
 					categoryByTotalSupply[category] = categoryByTotalSupply[category] + pynthByTotalUSD;
 					total += pynthByTotalUSD;
 				});
-			// }
+			} else if (item.pynthName === "pUSD" && togglePUSD) {
+				item.category.forEach((category) => {
+					if (!categoryByTotalSupply[category]) {
+						categoryByTotalSupply[category] = 0n;
+					}
+					let rate = exchangeRates[item.pynthName] ? 1000000000000000000n : exchangeRates[item.pynthName];
+					const pynthByTotalUSD = (item.totalSupply * rate) / 1000000000000000000n;
+					categoryByTotalSupply[category] = categoryByTotalSupply[category] + pynthByTotalUSD;
+					total += pynthByTotalUSD;
+				});
+			}
 		});
 		setTotalSupply(total);
 		return categoryByTotalSupply;

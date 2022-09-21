@@ -13,7 +13,7 @@ import { utils } from "ethers";
 
 const colors = ["bg-blue-500", "bg-pink-500", "bg-green-500", "bg-pink-700", "bg-blue-700", "bg-orange-500"];
 
-const PynthsTotalVolume = () => {
+const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 	const { dexIsReady } = useSelector((state: RootState) => state.app);
 	const { totalSupplies } = useSelector((state: RootState) => state.totalSupplyPynths);
 
@@ -23,11 +23,24 @@ const PynthsTotalVolume = () => {
 	const [totalVolume, setTotalVolume] = useState(0n);
 
 	const [sortByTotalSupplies, setSortByTotalSupplies] = useState([]);
+	const [togglePUSD, setTogglePUSD] = useState(false);
 
 	const getPynthsByTotalSupplies = () => {
 		let total = 0n;
 		let pynthsByTotalSupplies = pynths[dexNetworkId].map((pynth) => {
 			if (pynth.symbol !== "pUSD") {
+				const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
+					let rate = exchangeRates[pynth.symbol] === undefined ? 1000000000000000000n : exchangeRates[pynth.symbol];
+					return b.pynthName === pynth.symbol ? a + (b.totalSupply * rate) / 1000000000000000000n : a;
+				}, 0n);
+				total = total + pynthByTotalUSD;
+
+				return {
+					pynthName: pynth.symbol,
+					totalSupplyToUSD: pynthByTotalUSD,
+					totalSupply: utils.formatEther(pynthByTotalUSD),
+				};
+			} else if (pynth.symbol === "pUSD" && togglePUSD) {
 				const pynthByTotalUSD = totalSupplies.reduce((a, b) => {
 					let rate = exchangeRates[pynth.symbol] === undefined ? 1000000000000000000n : exchangeRates[pynth.symbol];
 					return b.pynthName === pynth.symbol ? a + (b.totalSupply * rate) / 1000000000000000000n : a;
@@ -77,6 +90,11 @@ const PynthsTotalVolume = () => {
 		setSortByTotalSupplies(getEtc(pynthsByTotalSupplies));
 	};
 
+	const onToggleHandler = (toggle: boolean) => {
+		setTogglePUSD(toggle);
+		togglePUSDHandler(toggle);
+	};
+
 	useEffect(() => {
 		if (dexIsReady) {
 			init();
@@ -85,7 +103,15 @@ const PynthsTotalVolume = () => {
 
 	return (
 		<Card>
-			<Title>Pynths Total Volume</Title>
+			<div className="flex justify-between items-start w-full">
+				<Title>Pynths Total Volume</Title>
+				<button
+					className={`mb-5 text-lg font-medium ${togglePUSD ? "text-gray-500" : "text-gray-700"} hover:text-gray-300`}
+					onClick={() => onToggleHandler(!togglePUSD)}
+				>
+					add pUSD
+				</button>
+			</div>
 			<div className="flex space-x-5 my-4">
 				<div className="w-40 lg:w-44 h-40 lg:h-44">
 					<PieChart
