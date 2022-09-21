@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "reducers";
-import { setStakeIsReady, setClear } from "reducers/app";
+import { setStakeIsReady, setClear, setLoading } from "reducers/app";
 import { setNetworkCachedDebts } from "reducers/networkCachedDebts";
 import { setAPY } from "reducers/APY";
 import { setPeriChartRates } from "reducers/periChartRates";
@@ -45,54 +45,71 @@ const Stake = () => {
 		};
 	};
 
-	const getDebts = () => {
+	const getDebts = async () => {
 		const promise = [getCachedDebts(), getStableDebt()];
+
 		const debts = Promise.all(promise).then((data) => {
 			const value = {};
 			Object.keys(data[0]).forEach((e) => {
 				value[e] = getPERIandStalbeDebt(Object.assign(data[0][e], data[1][e]));
 			});
+
 			return value;
 		});
+
 		return debts;
 	};
-	const init = async () => {
-		const [
-			debt,
-			apy,
-			chartRate,
-			circulatingSupply,
-			networkByDebtCashes,
-			periholderCounts,
-			exchangeRates,
-			periRates,
-		] = await Promise.all([
-			getDebts(),
-			getTotalAPY(),
-			getChartRates({
-				currencyName: "PERI",
-				networkId: process.env.REACT_APP_ENV === "production" ? 137 : 80001,
-			}),
-			getTotalCirculatingSupply(),
-			getDebtCaches(),
-			getPeriholderCounts(),
-			getLastRates(),
-			getLastPeriRates(),
-		]);
 
-		dispatch(setExchangeRates(exchangeRates));
-		dispatch(setPeriRates(periRates));
-		dispatch(setNetworkCachedDebts(debt));
-		dispatch(setAPY(apy));
-		dispatch(setPeriChartRates(chartRate));
-		dispatch(setCirculatingSupply(circulatingSupply));
-		dispatch(setNetworkByDebtCashes(networkByDebtCashes));
-		dispatch(setPeriholderCounts(periholderCounts));
-		dispatch(setStakeIsReady());
+	const init = async () => {
+		dispatch(setLoading(true));
+
+		try {
+			const [
+				debt,
+				apy,
+				chartRate,
+				circulatingSupply,
+				networkByDebtCashes,
+				periholderCounts,
+				exchangeRates,
+				// periRates,
+			] = await Promise.all([
+				getDebts(),
+				getTotalAPY(),
+				getChartRates({
+					currencyName: "PERI",
+					networkId: 137,
+				}),
+				getTotalCirculatingSupply(),
+				getDebtCaches(),
+				getPeriholderCounts(),
+				getLastRates(),
+				// getLastPeriRates(),
+			]);
+
+			const today = Math.round(new Date().getTime() / 1000);
+			const yesterday = today - 24 * 3600;
+			const filterChartRate = chartRate.filter((rate) => rate.timestamp >= yesterday * 1000);
+			dispatch(setNetworkCachedDebts(debt));
+			dispatch(setAPY(apy));
+			dispatch(setPeriChartRates(filterChartRate));
+			dispatch(setCirculatingSupply(circulatingSupply));
+			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
+			dispatch(setPeriholderCounts(periholderCounts));
+			dispatch(setExchangeRates(exchangeRates));
+			// dispatch(setPeriRates(periRates)); // ! Original setPeriRates Code
+			dispatch(setPeriRates(chartRate[chartRate.length - 1]));
+		} catch (err) {
+			console.error("init error:", err);
+		} finally {
+			dispatch(setStakeIsReady());
+		}
+
+		dispatch(setLoading(false));
 	};
 
 	useEffect(() => {
-		if (stakeIsReady === false) {
+		if (!stakeIsReady) {
 			init();
 		}
 	}, [stakeIsReady]);

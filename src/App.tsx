@@ -1,12 +1,16 @@
-import Main from './screens/Main'
-import './App.css'
+import Main from "./screens/Main";
+import "./App.css";
+import { RootState } from "reducers";
+import { useSelector } from "react-redux";
+import Loading from "components/Loading";
 
 const App = () => {
-    return (
-        <Main></Main>
-    );
-}
-
-
+	return (
+		<>
+			<Loading />
+			<Main></Main>
+		</>
+	);
+};
 
 export default App;

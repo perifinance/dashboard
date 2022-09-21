@@ -7,22 +7,11 @@ import { formatCurrency } from "lib";
 
 const Information = () => {
 	const { APY } = useSelector((state: RootState) => state.APY);
-
-	// 76924719527063029689120n
 	const initialReward = 76924719527063029689120;
 	const inflationStart = 1625875200000;
 	const decayStart = 52;
 	const decayEnd = 172;
 	const decayRate = 0.0125;
-	const terminalSupplyRateAnnual = 0.05;
-
-	// function terminalInflationSupply(totalSupply, numOfWeeks) {
-	//     // rate = (1 + weekly rate) ^ num of weeks
-	//     let effectiveCompoundRate = Math.pow(1+terminalSupplyRateAnnual/52, numOfWeeks);
-
-	//     // return Supply * (effectiveRate - 1) for extra supply to issue based on number of weeks
-	//     return totalSupply * (effectiveCompoundRate - 1);
-	// }
 
 	function tokenDecaySupplyForWeek(counter) {
 		let effectiveDecay = Math.pow(1 - decayRate, counter);
@@ -48,7 +37,6 @@ const Information = () => {
 
 			return tokenDecaySupplyForWeek(decayCount);
 		} else {
-			// return terminalInflationSupply(currentTotalSupply, remainingWeeksToMint);
 			return 0n;
 		}
 	}
@@ -69,7 +57,8 @@ const Information = () => {
 					</div>
 				</div>
 				<div className="flex flex-col w-1/2 pl-5">
-					<Title>　　　　　　　</Title>
+					{/* unusded */}
+					{/* <Title>　　　　　　　</Title>
 					<div className="flex flex-col">
 						<div className="text-2xl lg:text-4xl font-medium text-gray-500">　</div>
 						<div className="text-sm font-normal text-gray-700">　</div>
@@ -77,7 +66,7 @@ const Information = () => {
 					<div className="flex flex-col lg:mt-5">
 						<div className="text-lg font-medium text-gray-700"></div>
 						<div className="text-base font-normal text-gray-700"></div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</Card>
