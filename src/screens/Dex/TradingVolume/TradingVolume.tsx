@@ -36,10 +36,11 @@ const TradingVolume = ({ togglePUSD }) => {
 			};
 		});
 		setTotalVolume(total);
-		pynthsByVolumes.splice(
-			pynthsByVolumes.findIndex((el) => el.currencyName === "pUSD"),
-			1
-		);
+		!togglePUSD &&
+			pynthsByVolumes.splice(
+				pynthsByVolumes.findIndex((el) => el.currencyName === "pUSD"),
+				1
+			);
 		pynthsByVolumes.sort((a, b) => {
 			if (a.usdVolume < b.usdVolume) return 1;
 			else if (a.usdVolume > b.usdVolume) return -1;

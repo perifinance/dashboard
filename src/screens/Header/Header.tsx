@@ -61,11 +61,7 @@ const Header = () => {
 						dispatch(setClear());
 					}}
 				>
-					<img
-						className={`w-4 h-4 ${stakeIsReady && dexIsReady && pynthsIsReady ? "" : "animate-spin"}`}
-						src={`/images/icon/refresh.svg`}
-						alt="reFresh"
-					></img>
+					<img className={`w-4 h-4`} src={`/images/icon/refresh.svg`} alt="reFresh"></img>
 				</div>
 			</div>
 		</div>

@@ -109,7 +109,7 @@ const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 					className={`mb-5 text-lg font-medium ${togglePUSD ? "text-gray-500" : "text-gray-700"} hover:text-gray-300`}
 					onClick={() => onToggleHandler(!togglePUSD)}
 				>
-					add pUSD
+					{`${togglePUSD ? "Remove" : "Add"} pUSD`}
 				</button>
 			</div>
 			<div className="flex space-x-5 my-4">
