@@ -7,7 +7,7 @@ import Performance from "screens/Dex/Performance";
 import PynthsDistribution from "screens/Dex/PynthsDistribution";
 import TradingVolume from "screens/Dex/TradingVolume";
 
-import { setDexIsReady, setClear } from "reducers/app";
+import { setDexIsReady, setClear, setLoading } from "reducers/app";
 import { setTotalSupplyPynths } from "reducers/totalSupplyPynths";
 import { setExchangeVolumes } from "reducers/exchangeVolumes";
 import { setRateChanges } from "reducers/rateChanges";
@@ -25,6 +25,7 @@ const Dex = () => {
 	const [togglePUSD, setTogglePUSD] = useState(false);
 
 	const init = async () => {
+		dispatch(setLoading(true));
 		const totalSupplyPynths = await getTotalSupplyPynths();
 		const exchangeVolumes = await getExchangeVolumes();
 		const exchangeRates = await getLastRates();
@@ -35,12 +36,14 @@ const Dex = () => {
 		dispatch(setExchangeVolumes(exchangeVolumes));
 		dispatch(setRateChanges(rateChanges));
 		dispatch(setDexIsReady());
+		dispatch(setLoading(false));
 	};
 
 	const togglePUSDHandler = (toggle: boolean) => {
-		console.log("toggle", toggle);
+		dispatch(setLoading(true));
 		setTogglePUSD(toggle);
 		init();
+		dispatch(setLoading(false));
 	};
 
 	useEffect(() => {

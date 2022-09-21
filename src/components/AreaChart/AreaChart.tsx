@@ -87,7 +87,6 @@ const AreaChart = ({ data, colors }) => {
 									network = "";
 									break;
 							}
-							// console.log("datakey", e, e[network]);
 							return e[network];
 						}}
 						stroke={`${CSSToColors[colors[index]]}`}

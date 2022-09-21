@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "reducers";
-import { setStakeIsReady, setClear } from "reducers/app";
+import { setStakeIsReady, setClear, setLoading } from "reducers/app";
 import { setNetworkCachedDebts } from "reducers/networkCachedDebts";
 import { setAPY } from "reducers/APY";
 import { setPeriChartRates } from "reducers/periChartRates";
@@ -61,6 +61,8 @@ const Stake = () => {
 	};
 
 	const init = async () => {
+		dispatch(setLoading(true));
+
 		try {
 			const [
 				debt,
@@ -102,6 +104,8 @@ const Stake = () => {
 		} finally {
 			dispatch(setStakeIsReady());
 		}
+
+		dispatch(setLoading(false));
 	};
 
 	useEffect(() => {

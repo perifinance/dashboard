@@ -6,15 +6,6 @@ export const debtCaches = ({ page = 0, first = 1000, searchDate = 0, networkId }
 	const skip = page * first;
 
 	const RateMapping = (data) => {
-		// console.log("RateMapping", data, {
-		// 	debtBalance: BigInt(data.debtBalance),
-		// 	debtBalanceToString: utils.formatEther(data.debtBalance),
-		// 	debtBalanceToNumber: Number(utils.formatEther(data.debtBalance)),
-		// 	formatDebtBalance: formatCurrency(BigInt(data.debtBalance), 6),
-		// 	timestamp: Number(data.timestamp),
-		// 	date: formatDay(data.timestamp),
-		// 	network: data.network,
-		// });
 		return {
 			debtBalance: BigInt(data.debtBalance),
 			debtBalanceToString: utils.formatEther(data.debtBalance),

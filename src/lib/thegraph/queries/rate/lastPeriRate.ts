@@ -5,7 +5,6 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 	const currencyKey = utils.formatBytes32String(currencyName);
 
 	const RateMapping = (data) => {
-		console.log("data", data);
 		let price = 0n;
 		try {
 			price = BigInt(data.price);
@@ -26,14 +25,6 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 				}
 			}
 		`,
-		// ! 원본값
-		// query: gql`
-		// 	query {
-		// 		chartRate(skip: ${skip}, first: ${first}, currencyKey: ${currencyKey} {
-		// 			price
-		// 		}
-		// 	}
-		// `,
 		variables: { currencyKey, skip, first },
 		mapping: ({ data }) => {
 			console.log("data", data.exchangeRates);
