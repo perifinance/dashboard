@@ -46,26 +46,28 @@ const Pynths = () => {
 	};
 
 	const init = async () => {
+		dispatch(setLoading(true));
 		const totalSupplyPynths = await getTotalSupplyPynths();
 		const exchangeRates = await getLastRates();
 
 		dispatch(setExchangeRates(exchangeRates));
 		dispatch(setTotalSupplyPynths(totalSupplyPynths));
 		dispatch(setPynthsIsReady());
+		dispatch(setLoading(false));
 	};
 
 	const appInit = () => {
+		dispatch(setLoading(true));
 		setPynthsByTotalSupplies(getPynthsByTotalSupplies());
+		dispatch(setLoading(false));
 	};
 
 	useEffect(() => {
-		dispatch(setLoading(true));
 		if (pynthsIsReady) {
 			appInit();
 		} else {
 			init();
 		}
-		dispatch(setLoading(false));
 	}, [pynthsIsReady]);
 
 	return (

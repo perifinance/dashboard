@@ -39,10 +39,10 @@ const Dex = () => {
 		dispatch(setLoading(false));
 	};
 
-	const togglePUSDHandler = (toggle: boolean) => {
+	const togglePUSDHandler = async (toggle: boolean) => {
 		dispatch(setLoading(true));
 		setTogglePUSD(toggle);
-		init();
+		await init();
 		dispatch(setLoading(false));
 	};
 
