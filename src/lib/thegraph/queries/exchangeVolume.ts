@@ -12,7 +12,6 @@ export const exchageVolume = ({ pynthName, networkId, searchDate = "0" }) => {
 			usdVolume: BigInt(data.usdVolume),
 		};
 	};
-	console.log("args", currencyKey, searchDate);
 	return {
 		url: "",
 		query: gql`

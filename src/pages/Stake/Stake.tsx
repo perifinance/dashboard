@@ -88,7 +88,6 @@ const Stake = () => {
 			const today = Math.round(new Date().getTime() / 1000);
 			const yesterday = today - 24 * 3600;
 			const filterChartRate = chartRate.filter((rate) => rate.timestamp >= yesterday * 1000);
-			console.log("filterChartRate", chartRate, filterChartRate);
 			dispatch(setNetworkCachedDebts(debt));
 			dispatch(setAPY(apy));
 			dispatch(setPeriChartRates(filterChartRate));

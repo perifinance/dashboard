@@ -38,7 +38,7 @@ const Categories = () => {
 		let categoryByTotalSupply = {};
 
 		totalSuppliesAddCatagory.forEach((item) => {
-			if (item.pynthName !== "pUSD") {
+			// if (item.pynthName !== "pUSD") {
 				item.category.forEach((category) => {
 					if (!categoryByTotalSupply[category]) {
 						categoryByTotalSupply[category] = 0n;
@@ -48,7 +48,7 @@ const Categories = () => {
 					categoryByTotalSupply[category] = categoryByTotalSupply[category] + pynthByTotalUSD;
 					total += pynthByTotalUSD;
 				});
-			}
+			// }
 		});
 		setTotalSupply(total);
 		return categoryByTotalSupply;
@@ -92,7 +92,7 @@ const Categories = () => {
 									<Progress
 										key={i}
 										text={e.charAt(0).toUpperCase() + e.slice(1)}
-										per={formatNumberToPer(categoryByTotalSupplies[e], totalSupply)}
+										per={formatNumberToPer(categoryByTotalSupplies[e], totalSupply, 6)}
 									></Progress>
 								);
 							} else {

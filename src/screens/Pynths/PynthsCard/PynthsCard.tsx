@@ -1,8 +1,6 @@
 import Card from "components/Card";
 import { formatCurrency } from "lib/format";
 const PynthsCard = ({ pynths }) => {
-	console.log(pynths);
-
 	return (
 		<Card>
 			<div className="flex flex-col lg:flex-row">
