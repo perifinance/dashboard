@@ -22,8 +22,6 @@ const Categories = () => {
 	const [totalVolume, setTotalVolume] = useState(0n);
 	const [exchangeCount, setExchangeCount] = useState(0);
 
-	console.log("totalSupplies", totalSupplies);
-
 	const getTotalSuppliesAddCatagory = () => {
 		return totalSupplies.map((e) => {
 			const pynth = pynths[dexNetworkId].find((pynth) => pynth.symbol === e.pynthName);
@@ -37,23 +35,23 @@ const Categories = () => {
 	const getCategoryByTotalSupply = () => {
 		let total = 0n;
 		const totalSuppliesAddCatagory = getTotalSuppliesAddCatagory();
-		let catagoryByTotalSupply = {};
+		let categoryByTotalSupply = {};
 
 		totalSuppliesAddCatagory.forEach((item) => {
 			if (item.pynthName !== "pUSD") {
 				item.category.forEach((category) => {
-					if (!catagoryByTotalSupply[category]) {
-						catagoryByTotalSupply[category] = 0n;
+					if (!categoryByTotalSupply[category]) {
+						categoryByTotalSupply[category] = 0n;
 					}
-					let rate = exchangeRates[item.pynthName] === undefined ? 1000000000000000000n : exchangeRates[item.pynthName];
+					let rate = exchangeRates[item.pynthName] ? 1000000000000000000n : exchangeRates[item.pynthName];
 					const pynthByTotalUSD = (item.totalSupply * rate) / 1000000000000000000n;
-					catagoryByTotalSupply[category] = catagoryByTotalSupply[category] + pynthByTotalUSD;
-					total = total + pynthByTotalUSD;
+					categoryByTotalSupply[category] = categoryByTotalSupply[category] + pynthByTotalUSD;
+					total += pynthByTotalUSD;
 				});
 			}
 		});
 		setTotalSupply(total);
-		return catagoryByTotalSupply;
+		return categoryByTotalSupply;
 	};
 
 	const getTotalVolume = () => {
@@ -63,7 +61,7 @@ const Categories = () => {
 				const pynthsByVolume = volume.reduce((a, b) => {
 					return a + b.usdVolume;
 				}, 0n);
-				total = total + pynthsByVolume;
+				total += pynthsByVolume;
 			}
 		});
 		return total;
@@ -71,7 +69,6 @@ const Categories = () => {
 
 	const init = async () => {
 		const exchangeCount = await getExchangeCount();
-		console.log("exchangeCount", exchangeCount);
 		setCategoryByTotalSupplies(getCategoryByTotalSupply());
 		setTotalVolume(getTotalVolume());
 		setExchangeCount(exchangeCount);

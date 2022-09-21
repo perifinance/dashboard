@@ -8,8 +8,6 @@ export const exchangeCount = ({ networkId, searchDate = "0" }) => {
 		};
 	};
 
-	console.log("searchDate", searchDate);
-
 	return {
 		url: "",
 		query: gql`

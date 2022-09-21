@@ -66,11 +66,11 @@ const Stake = () => {
 				debt,
 				apy,
 				chartRate,
-				// circulatingSupply,
+				circulatingSupply,
 				networkByDebtCashes,
 				periholderCounts,
-				// exchangeRates, // ! 에러 원인
-				// periRates, // ! 에러 원인
+				exchangeRates,
+				// periRates,
 			] = await Promise.all([
 				getDebts(),
 				getTotalAPY(),
@@ -78,26 +78,26 @@ const Stake = () => {
 					currencyName: "PERI",
 					networkId: 137,
 				}),
-				// getTotalCirculatingSupply(),
+				getTotalCirculatingSupply(),
 				getDebtCaches(),
 				getPeriholderCounts(),
-				// getLastRates(),
+				getLastRates(),
 				// getLastPeriRates(),
 			]);
 
 			const today = Math.round(new Date().getTime() / 1000);
 			const yesterday = today - 24 * 3600;
 			const filterChartRate = chartRate.filter((rate) => rate.timestamp >= yesterday * 1000);
-
+			console.log("filterChartRate", chartRate, filterChartRate);
 			dispatch(setNetworkCachedDebts(debt));
 			dispatch(setAPY(apy));
 			dispatch(setPeriChartRates(filterChartRate));
-			// dispatch(setCirculatingSupply(circulatingSupply));
+			dispatch(setCirculatingSupply(circulatingSupply));
 			dispatch(setNetworkByDebtCashes(networkByDebtCashes));
 			dispatch(setPeriholderCounts(periholderCounts));
-			// dispatch(setExchangeRates(exchangeRates));
-			// dispatch(setPeriRates(periRates));
-			dispatch(setPeriRates(chartRate[chartRate.length - 1])); // ! periRates 임시값
+			dispatch(setExchangeRates(exchangeRates));
+			// dispatch(setPeriRates(periRates)); // ! Original setPeriRates Code
+			dispatch(setPeriRates(chartRate[chartRate.length - 1]));
 		} catch (err) {
 			console.error("init error:", err);
 		} finally {
