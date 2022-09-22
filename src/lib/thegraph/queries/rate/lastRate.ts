@@ -41,7 +41,7 @@ export const lastRate = ({ currencyName = undefined, skip = 0, first = 1, networ
 			if (currencyName === "pUSD" || currencyName === "USD") {
 				return RateMapping({ price: 1000000000000000000n, currencyName });
 			} else {
-				return RateMapping({ price: BigInt(data.aggregatorLastRates[0].price) * 10n ** 10n, currencyName });
+				return RateMapping({ price: BigInt(data.aggregatorLastRates[0].price) * 10000000000n, currencyName });
 			}
 		},
 		errorCallback: (e) => {

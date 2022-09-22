@@ -13,7 +13,7 @@ import { utils } from "ethers";
 
 const colors = ["bg-blue-500", "bg-pink-500", "bg-green-500", "bg-pink-700", "bg-blue-700", "bg-orange-500"];
 
-const PynthsTotalVolume = ({ togglePUSDHandler }) => {
+const PynthsTotalVolume = ({ togglePUSDHandler, togglePUSD }) => {
 	const { dexIsReady } = useSelector((state: RootState) => state.app);
 	const { totalSupplies } = useSelector((state: RootState) => state.totalSupplyPynths);
 
@@ -23,7 +23,7 @@ const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 	const [totalVolume, setTotalVolume] = useState(0n);
 
 	const [sortByTotalSupplies, setSortByTotalSupplies] = useState([]);
-	const [togglePUSD, setTogglePUSD] = useState(false);
+	// const [togglePUSD, setTogglePUSD] = useState(false);
 
 	const getPynthsByTotalSupplies = () => {
 		let total = 0n;
@@ -90,10 +90,10 @@ const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 		setSortByTotalSupplies(getEtc(pynthsByTotalSupplies));
 	};
 
-	const onToggleHandler = (toggle: boolean) => {
-		setTogglePUSD(toggle);
-		togglePUSDHandler(toggle);
-	};
+	// const onToggleHandler = (toggle: boolean) => {
+	// 	setTogglePUSD(toggle);
+	// 	togglePUSDHandler(toggle);
+	// };
 
 	useEffect(() => {
 		if (dexIsReady) {
@@ -107,7 +107,7 @@ const PynthsTotalVolume = ({ togglePUSDHandler }) => {
 				<Title>Pynths Total Volume</Title>
 				<button
 					className={`mb-5 text-lg font-medium ${togglePUSD ? "text-gray-500" : "text-gray-700"} hover:text-gray-300`}
-					onClick={() => onToggleHandler(!togglePUSD)}
+					onClick={() => togglePUSDHandler(!togglePUSD)}
 				>
 					{`${togglePUSD ? "Remove" : "Add"} pUSD`}
 				</button>
