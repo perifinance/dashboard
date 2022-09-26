@@ -1,0 +1,8 @@
+tbody::-webkit-scrollbar {
+	display: none;
+}
+
+tbody {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}

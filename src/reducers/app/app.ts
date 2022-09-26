@@ -1,45 +1,45 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export type AppSliceState = {
 	stakeIsReady: boolean;
 	dexIsReady: boolean;
-	pynthsIsReady: boolean
+	pynthsIsReady: boolean;
+	loadings: boolean;
 };
 
 const initialState: AppSliceState = {
 	stakeIsReady: false,
 	dexIsReady: false,
-	pynthsIsReady: false
+	pynthsIsReady: false,
+	loadings: false,
 };
 
-const sliceName = 'app';
+const sliceName = "app";
 
 export const appSlice = createSlice({
 	name: sliceName,
 	initialState,
 	reducers: {
-		setStakeIsReady: state => {
+		setStakeIsReady: (state) => {
 			state.stakeIsReady = true;
 		},
-		setDexIsReady: state => {
+		setDexIsReady: (state) => {
 			state.dexIsReady = true;
 		},
-		setPynthsIsReady: state => {
+		setPynthsIsReady: (state) => {
 			state.pynthsIsReady = true;
 		},
-		setClear: state => {
+		setClear: (state) => {
 			state.stakeIsReady = false;
 			state.dexIsReady = false;
 			state.pynthsIsReady = false;
-		}
+		},
+		setLoading: (state, action) => {
+			state.loadings = action.payload;
+		},
 	},
 });
 
-export const {
-	setStakeIsReady,
-	setDexIsReady,
-	setPynthsIsReady,
-	setClear
-} = appSlice.actions;
+export const { setStakeIsReady, setDexIsReady, setPynthsIsReady, setClear, setLoading } = appSlice.actions;
 
 export default appSlice.reducer;
