@@ -1,103 +1,68 @@
 import { useEffect, useState } from "react";
 import { useSelector, useStore } from "react-redux";
 import { RootState } from "reducers";
-import { formatCurrency } from "lib/format";
+import { formatCurrency, formatDecimal } from "lib/format";
 import { ResponsiveContainer, AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
 import Card from "components/Card";
 import Title from "components/Title";
 import { utils } from "ethers";
+import { hi } from "date-fns/locale";
 
 const Overview = () => {
 	const { stakeIsReady } = useSelector((state: RootState) => state.app);
-	const { rates } = useSelector((state: RootState) => state.periChartRates);
+	const { lastPrice, high24hr, low24hr, change } = useSelector((state: RootState) => state.periTicker);
 	const { circulatingSupply } = useSelector((state: RootState) => state.circulatingSupply);
 
-	const [lastRate, setLastRate] = useState({
-		price: "0",
-		formatPrice: "0.000000",
-		formatLow: "0.000000",
-		formatHigh: "0.000000",
-	});
-	const [per, setPer] = useState("0.00");
+	
 	const [marketCap, setMarketCap] = useState(0n);
 
-	const getPer = () => {
-		const lastPrice = Number(lastRate.price);
-		const firstPrice = Number(rates[0].price);
-		return (((lastPrice - firstPrice) / firstPrice) * 100).toFixed(2);
-	};
-
 	const getMarketCap = () => {
-		let tmp = BigInt(Number(lastRate.price) * 10 ** 18) * circulatingSupply;
+		let tmp = lastPrice * circulatingSupply;
 
 		return tmp / 1000000000000000000n;
 	};
 
 	useEffect(() => {
-		if (stakeIsReady) {
-			if (rates.length === 0) {
-				setLastRate({
-					price: "0",
-					formatPrice: "0.000000",
-					formatLow: "0.000000",
-					formatHigh: "0.000000",
-				});
-			} else {
-				const convertLastRate = { ...rates[rates.length - 1] };
-
-				rates.forEach((rate) => {
-					Number(convertLastRate.formatHigh) < Number(rate.formatHigh) && (convertLastRate.formatHigh = rate.formatHigh);
-					Number(convertLastRate.formatLow) > Number(rate.formatLow) && (convertLastRate.formatLow = rate.formatLow);
-				});
-
-				setLastRate(convertLastRate);
-			}
-		}
-	}, [stakeIsReady]);
-
-	useEffect(() => {
-		if (stakeIsReady && Number(lastRate.price) > 0) {
-			setPer(getPer());
+		if (stakeIsReady && lastPrice > 0) {
+			console.log("high", high24hr);
 			setMarketCap(getMarketCap());
 		}
-	}, [stakeIsReady, lastRate]);
+	}, [stakeIsReady, lastPrice]);
 
 	return (
 		<Card>
 			<Title>24 Hours Overview</Title>
-			<div className="flex mt-4 lg:gap-5">
-				<div className="flex flex-col w-1/2 lg:w-max mb-4">
-					<div className="text-sm font-light text-gray-700">Market Cap</div>
-					<div className="text-xl font-medium text-blue-500 ">${formatCurrency(marketCap, 0)}</div>
-				</div>
+			<div className="flex flex-col mt-4">
+				<div className="flex flex-row w-full justify-between">
+					<div className="flex flex-col x-fit xs:w-1/3 mb-4">
+						<div className="text-nowrap text-sm font-light text-gray-700">Market Cap</div>
+						<div className="text-xl font-medium text-blue-500 ">${formatCurrency(marketCap, 0)}</div>
+					</div>
 
-				<div className="flex flex-col w-1/2 lg:w-max pl-5">
-					<div className="text-sm font-light text-gray-700">PERI Current Price</div>
-					<div className="flex flex-col lg:flex-row lg:gap-5 lg:items-end">
-						<div className="text-xl font-medium text-blue-500">${lastRate.formatPrice}</div>
-						<div
-							className={`flex w-20 h-6 rounded-xl ${
-								Number(per) > 0 ? "text-blue-800 bg-blue-900" : "text-red-800 bg-red-900"
-							} text-sm font-medium items-center lg:mb-1`}
-						>
-							<div className="leading-none text-center mx-2">
-								{Number(per) > 0 ? "▲" : "▼"} {per}%
+					<div className="flex flex-col w-fit lg:pl-5 items-start">
+						<div className="text-nowrap text-sm font-light text-gray-700">PERI Price</div>
+						<div className="flex flex-row gap-5 items-end">
+							<div className="flex flex-row flex-nowrap text-xl font-medium text-blue-500">
+								${formatCurrency(lastPrice, 4)}
+								<p className={`text-[10px] ml-1 text-nowrap align-text-bottom ${change ? change > 0 ? " text-red-600":" text-blue-500":"hidden"}`}>
+									{/* {change > 0 ? "▲" : "▼"}  */}{Number(utils.formatEther(change))*100}%
+								</p>
 							</div>
 						</div>
 					</div>
-					{/* ▲ -0.54% */}
 				</div>
-
-				<div className="flex flex-col w-1/2 lg:w-max mb-4">
-					<div className="text-sm font-light text-gray-700">24H High</div>
-					<div className="text-lg font-light text-gray-700">${lastRate.formatHigh}</div>
-				</div>
-				<div className="flex flex-col w-1/2 lg:w-max pl-5">
-					<div className="text-sm font-light text-gray-700">24H Low</div>
-					<div className="text-lg font-light text-gray-700">${lastRate.formatLow}</div>
+				<div className="flex flex-row w-full justify-between">
+					<div className="flex flex-col x-fit lg:w-max mb-4">
+						<div className="text-nowrap text-sm font-light text-gray-700">24H High</div>
+						<div className="text-lg font-semibold text-gray-700">${formatCurrency(high24hr, 4)}</div>
+					</div>
+					<div className="flex flex-col w-[108px] pr-3 items-start">
+						<div className="w-16 text-nowrap text-sm font-light text-gray-700">24H Low</div>
+						<div className="text-lg font-semibold text-gray-700">${formatCurrency(low24hr, 4)}</div>
+					</div>
 				</div>
 			</div>
-			<div className="w-full h-20 text-2xs lg:max-w-100">
+			{/* <div className="w-full h-20 text-2xs lg:max-w-100">
 				<ResponsiveContainer width="100%" height="100%" debounce={1} maxHeight={80}>
 					<AreaChart data={rates} margin={{ top: 5, right: 0, left: 0, bottom: 20 }}>
 						<defs>
@@ -110,12 +75,12 @@ const Overview = () => {
 						<XAxis dataKey="time" height={1} axisLine={false} tickLine={false} />
 						<YAxis dataKey="price" domain={["dataMin", "dataMax"]} tickFormatter={(e) => e} hide={true} />
 
-						{/* 라인 */}
+						{/* 라인 }
 
 						<Area type="monotone" dataKey="price" fillOpacity={1} stroke="#1D86FE" fill="url(#colorUv)" strokeWidth={3} />
 					</AreaChart>
 				</ResponsiveContainer>
-			</div>
+			</div> */}
 		</Card>
 	);
 };

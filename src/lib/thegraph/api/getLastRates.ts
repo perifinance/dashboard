@@ -1,20 +1,21 @@
 import pynths from "configure/coins/pynths";
+import dexNetworkId from "configure/network/dexNetworkId";
+
 import { lastRate } from "../queries";
 import { get } from "../service";
-import dexNetworkId from "configure/network/dexNetworkId";
 
 export const getLastRates = () => {
 	const promise = [];
 	
 	pynths[dexNetworkId.toString()].forEach((pynth) => {
-		const currencyName = pynth.name;
-		promise.push(get(lastRate({ networkId: dexNetworkId, currencyName })));
+		const currencyKeys = pynth.name;
+		promise.push(get(lastRate({ networkId: dexNetworkId, currencyKeys })));
 	});
 
 	return Promise.all(promise).then((rates) => {
 		let keys = {};
 		rates.forEach((e) => {
-			keys[e.currencyName] = e.price;
+			keys[e.currencyKeys] = e.price;
 		});
 		return keys;
 	});

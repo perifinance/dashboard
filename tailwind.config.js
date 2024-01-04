@@ -10,7 +10,10 @@ module.exports = {
             '86': '21.5rem',
         },
         extend: {
-            
+            screens: {
+                'xs': '320px',
+                'ss': '440px'
+            },
             maxWidth: {
                 '100': '25.833rem'
             },

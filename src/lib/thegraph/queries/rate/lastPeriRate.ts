@@ -20,14 +20,14 @@ export const lastPeriRate = ({ skip = 0, first = 1, networkId }) => {
 		url: "",
 		query: gql`
 			query {
-				exchangeRate(skip: ${skip}, first: ${first}, currencyKey: ${currencyKey} {
+				exchangeRate(skip: ${skip}, first: ${first}, currencyKey: "${currencyKey}") {
 					price
 				}
 			}
 		`,
 		variables: { currencyKey, skip, first },
 		mapping: ({ data }) => {
-			console.log("data", data.exchangeRates);
+			console.log("PERI data", data.exchangeRates);
 			return RateMapping({ price: data.exchangeRates[0].price, currencyName: "PERI" });
 		},
 		errorCallback: () => {

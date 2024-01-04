@@ -1,16 +1,21 @@
+import { getSupportedNetworks } from "configure/network";
+
 import { stableDebt } from "../queries";
 import { get } from "../service";
-import { getSupportedNetworks } from "configure/network";
 export const getStableDebt = () => {
 	let promise = [];
 	getSupportedNetworks().forEach((networkId) => {
 		promise.push(get(stableDebt({ networkId })));
 	});
 
+	
+
 	return Promise.all(promise).then((debts) => {
 		const datas = debts.reduce((a, b) => {
 			return a.concat(b);
 		});
+
+		console.log(debts, datas);
 
 		let value = {};
 		let total = {

@@ -33,6 +33,8 @@ const DebtByNetworks = () => {
 			};
 		});
 
+		console.log(networkByDebtCashes);
+
 		setTotalDebts(Number(utils.formatEther(total / BigInt(4))));
 		setNetworkDebts(networkDebts.sort((a, b) => Number(b.totalDebt) - Number(a.totalDebt)));
 	};
@@ -45,53 +47,51 @@ const DebtByNetworks = () => {
 
 	return (
 		<Card>
-			<>
-				<div className="flex flex-col lg:flex-row lg:justify-between">
-					<div>
-						<Title>Debt by Networks</Title>
-						<div className="flex space-x-5 my-4 items-center">
-							<div className="w-40 lg:w-52 h-40 lg:h-52">
-								<PieChart x={"networkName"} y={"per"} data={networkDebts} colors={getColors(networkDebts)}></PieChart>
-							</div>
-							<div className="space-y-3 lg:space-y-5 self-center flex-1">
-								<div>
-									<div className="text-3xl lg:text-4xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
-									<div className="text-sm text-gray-700 font-normal">Total Debt</div>
-								</div>
-							</div>
+			<div className="flex flex-col lg:flex-row lg:justify-between">
+				<div>
+					<Title>Debt by Networks</Title>
+					<div className="flex space-x-5 my-4 items-center">
+						<div className="w-40 lg:w-52 h-40 lg:h-52">
+							<PieChart x={"networkName"} y={"per"} data={networkDebts} colors={getColors(networkDebts)}></PieChart>
 						</div>
-						<div className="flex lg:hidden flex-wrap space-y-2 lg:gap-2">
-							{networkDebts.map((networkDebt) => {
-								return (
-									<ColorVerticalLabel
-										color={networkDebt.color}
-										text={networkDebt.networkName}
-										per={networkDebt.per}
-										key={networkDebt.networkName}
-									></ColorVerticalLabel>
-								);
-							})}
+						<div className="space-y-3 lg:space-y-5 self-center flex-1">
+							<div>
+								<div className="text-2xl xs:text-3xl lg:text-4xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
+								<div className="text-xs xs:text-sm text-gray-700 font-normal">Total Debt</div>
+							</div>
 						</div>
 					</div>
-
-					{/* <div className="w-full h-32 lg:self-center lg:h-44 lg:pl-10">
-						<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
-					</div> */}
+					<div className="flex lg:hidden flex-nowrap space-x-1 ss:space-x-2 lg:gap-2">
+						{networkDebts.map((networkDebt) => {
+							return (
+								<ColorVerticalLabel
+									color={networkDebt.color}
+									text={networkDebt.networkName}
+									per={networkDebt.per}
+									key={networkDebt.networkName}
+								></ColorVerticalLabel>
+							);
+						})}
+					</div>
 				</div>
 
-				<div className="hidden lg:flex space-y-2 lg:gap-2">
-					{networkDebts.map((networkDebt) => {
-						return (
-							<ColorVerticalLabel
-								color={networkDebt.color}
-								text={networkDebt.networkName}
-								per={networkDebt.per}
-								key={networkDebt.networkName}
-							></ColorVerticalLabel>
-						);
-					})}
-				</div>
-			</>
+				{/* <div className="w-full h-52 lg:self-center lg:h-44 lg:pl-10">
+					<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
+				</div> */}
+			</div>
+
+			<div className="hidden lg:flex space-y-2 lg:gap-2">
+				{networkDebts.map((networkDebt) => {
+					return (
+						<ColorVerticalLabel
+							color={networkDebt.color}
+							text={networkDebt.networkName}
+							per={networkDebt.per}
+							key={networkDebt.networkName}
+						></ColorVerticalLabel>
+					);
+				})}
+			</div>
 		</Card>
 	);
 };

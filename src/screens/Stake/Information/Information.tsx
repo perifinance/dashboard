@@ -44,29 +44,15 @@ const Information = () => {
 
 	return (
 		<Card>
-			<div className="flex lg:gap-5">
-				<div className="flex flex-col w-1/2">
-					<Title>PERI APY</Title>
-					<div className="flex flex-col">
-						<div className="text-2xl lg:text-4xl font-medium text-gray-500">{APY}%</div>
-						<div className="text-sm font-normal text-gray-700">Est. APY</div>
-					</div>
-					<div className="flex flex-col lg:mt-5">
-						<div className="text-lg font-medium text-gray-700">{weeklyReward}</div>
-						<div className="text-base font-normal text-gray-700">PERI Weekly Reward</div>
-					</div>
+			<Title>PERI APY</Title>
+			<div className="flex flex-col items-end lg:gap-5">
+				<div className="flex flex-col w-24">
+					<div className="text-2xl lg:text-4xl font-medium text-gray-500">{APY}%</div>
+					<div className="text-nowrap text-sm font-light text-gray-700">Est. APY</div>
 				</div>
-				<div className="flex flex-col w-1/2 pl-5">
-					{/* unusded */}
-					{/* <Title>　　　　　　　</Title>
-					<div className="flex flex-col">
-						<div className="text-2xl lg:text-4xl font-medium text-gray-500">　</div>
-						<div className="text-sm font-normal text-gray-700">　</div>
-					</div>
-					<div className="flex flex-col lg:mt-5">
-						<div className="text-lg font-medium text-gray-700"></div>
-						<div className="text-base font-normal text-gray-700"></div>
-					</div> */}
+				<div className="flex flex-col w-24 mt-5">
+					<div className="text-lg font-medium text-gray-700">{weeklyReward}</div>
+					<div className="text-nowrap text-sm font-light text-gray-700">Weekly Reward</div>
 				</div>
 			</div>
 		</Card>

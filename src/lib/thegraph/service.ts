@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+
 import { SUPPORTED_NETWORKS } from "configure/network";
 
 export const get = ({ url, query, mapping, variables, errorCallback, networkId }) => {
 	return new ApolloClient({
-		uri: "https://dex-api.peri.finance/", // ! 임시 주석처리
-		// uri: "http://localhost:4000/",
+		uri: `${process.env.REACT_APP_THEGRAPH_URL}`,
 		cache: new InMemoryCache(),
 		connectToDevTools: true,
 	})

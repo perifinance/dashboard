@@ -27,14 +27,14 @@ const StakingByAssets = () => {
 		let coinAmount = networkCachedDebts.total["PERI"];
 
 		total -= coinAmount;
-		coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
+		coinAmount = BigInt(coinAmount) * periRates.price;
 		total += coinAmount;
 
 		return coins
 			.map((e, index) => {
 				let coinAmount = networkCachedDebts.total[e];
 				if (e === "PERI")
-					coinAmount = (BigInt(coinAmount) * BigInt(periRates.price * 1000000000000000000)) / 1000000000000000000n;
+					coinAmount = BigInt(coinAmount) * periRates.price;
 
 				return {
 					coin: e,
@@ -71,11 +71,13 @@ const StakingByAssets = () => {
 				<div className="space-y-3 lg:space-y-5 self-center flex-1">
 					<div>
 						<div className="text-2xl lg:text-4xl text-gray-500 font-medium">{TVL}</div>
-						<div className="text-sm text-gray-700 font-normal">PERI Total Value Locked</div>
+						<div className="hidden ss:block text-sm text-gray-700 font-light">PERI Total Value Locked</div>
+						<div className="ss:hidden text-sm text-gray-700 font-light">PERI TVL</div>
 					</div>
 					<div>
 						<div className="text-2xl lg:text-3xl text-gray-500 font-medium">$ {stableTVL}</div>
-						<div className="text-sm text-gray-700 font-normal">Stable Tokens Total Value Locked</div>
+						<div className="hidden ss:block text-sm text-gray-700 font-light">Stable Total Value Locked</div>
+						<div className="ss:hidden text-sm text-gray-700 font-light">Stable TVL</div>
 					</div>
 				</div>
 			</div>

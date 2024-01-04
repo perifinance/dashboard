@@ -1,7 +1,10 @@
 import { gql } from "@apollo/client";
+
 import { utils } from "ethers";
 
 export const stableDebt = ({ networkId }) => {
+	const skip = 0;
+	const first = 1000;
 	const mapping = (data) => {
 		const id = data.id.split("-");
 
@@ -31,19 +34,22 @@ export const stableDebt = ({ networkId }) => {
 			break;
 	}
 
+	console.log("network", networkId, network);
+
 	return {
 		url: "",
 		query: gql`
 			query {
-				stakeAmounts(skip: ${0}, first: ${1000}, network: "${network}") {
+				stakeAmounts(skip: ${skip}, first: ${first}, network: "${network}") {
 					id
 					amount
 					network
 				}
 			}
 		`,
-		variables: {},
+		variables: {skip, first, network},
 		mapping: ({ data }) => {
+			console.log(data);
 			return data.stakeAmounts.map((item) => {
 				return mapping(item);
 			});
