@@ -29,6 +29,7 @@ const Dex = () => {
 		const totalSupplyPynths = await getTotalSupplyPynths();
 		const exchangeVolumes = await getExchangeVolumes();
 		const exchangeRates = await getLastRates();
+		console.log("exchangeRates", exchangeRates);
 		const rateChanges = await getRateChanges();
 
 		dispatch(setExchangeRates(exchangeRates));
@@ -53,20 +54,20 @@ const Dex = () => {
 	}, [dexIsReady]);
 
 	return (
-		<div className="flex flex-col px-4 lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
-			<div className="lg:flex-1">
+		<div className="flex flex-col w-[92%] lg:w-full lg:flex-row lg:px-0 gap-5 lg:h-144 flex-wrap">
+			<div className="w-full lg:flex-1">
 				<PynthsTotalVolume togglePUSDHandler={togglePUSDHandler} togglePUSD={togglePUSD}/>
 			</div>
-			<div className="lg:flex-1">
+			<div className="w-full lg:flex-1">
 				<TradingVolume togglePUSD={togglePUSD} />
 			</div>
-			<div className="lg:flex-1">
+			<div className="w-full lg:flex-1">
 				<PynthsDistribution />
 			</div>
-			<div className="lg:h-80 lg:flex-1">
+			<div className="lg:w-3/5 lg:h-80 lg:flex-1">
 				<Categories togglePUSD={togglePUSD} />
 			</div>
-			<div className="lg:h-80 lg:flex-1">
+			<div className="lg:w-2/5 lg:h-80 lg:flex-1">
 				<Performance />
 			</div>
 		</div>

@@ -71,14 +71,14 @@ const TradingVolume = ({ togglePUSD }) => {
 	return (
 		<Card>
 			<Title>24H Trading Volume</Title>
-			<div className="flex flex-col lg:flex-row gap-5">
+			<div className="flex lg:flex-row flex-col lg:justify-between lg:h-[80%]">
 				<div className="flex lg:flex-col gap-5 lg:gap-2">
-					<div className="flex items-center w-10 lg:w-36 h-40 lg:h-36">
+					<div className="w-40 lg:w-44 h-40 lg:h-44 my-auto">
 						{pynthsByVolumes.length > 0 && (
 							<PieChart x={"currencyName"} y={"usdVolume"} data={pynthsByVolumes} colors={colors} total={totalVolume}></PieChart>
 						)}
 					</div>
-					<div className="flex lg:flex-col self-center flex-1">
+					<div className="flex lg:flex-col self-center justify-center items-end lg:items-center w-40 lg:w-52">
 						<div className="flex flex-col gap-2 lg:gap-1 items-end lg:items-center">
 							<div className="text-2xl text-gray-500 font-medium leading-none">
 								${formatShortenCurrency(Number(utils.formatEther(totalVolume)))}
@@ -87,17 +87,18 @@ const TradingVolume = ({ togglePUSD }) => {
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-wrap space-y-2 lg:hidden">
+				<div className="flex lg:flex-col space-x-1 lg:space-y-1 lg:space-x-0 lg:w-[25%]">
 					{pynthsByVolumes.map((e, i) => (
 						<ColorVerticalLabel
 							key={i}
 							color={colors[i]}
+							size="sm"
 							text={e.currencyName}
 							per={formatNumberToPer(e.usdVolume, totalVolume)}
 						></ColorVerticalLabel>
 					))}
 				</div>
-				<div className="hidden lg:flex flex-wrap lg:flex-nowrap flex-col space-y-3">
+				{/* <div className="hidden lg:flex flex-wrap lg:flex-nowrap flex-col space-y-3">
 					{pynthsByVolumes.map((e, i) => (
 						<ColorVerticalLabel
 							size="sm"
@@ -107,7 +108,7 @@ const TradingVolume = ({ togglePUSD }) => {
 							per={formatNumberToPer(e.usdVolume, totalVolume)}
 						></ColorVerticalLabel>
 					))}
-				</div>
+				</div> */}
 			</div>
 		</Card>
 	);

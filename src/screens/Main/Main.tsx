@@ -11,7 +11,7 @@ const Main = () => {
 			<div className="2xl:container py-4 xl:pt-6 2xl:pt-14 mx-auto">
 				<Router>
 					<Header></Header>
-					<div className="py-4 lg:max-w-screen-xl xl:pt-6 2xl:pt-14 mx-auto">
+					<div className="flex justify-center py-4 w-full lg:max-w-screen-xl xl:pt-6 2xl:pt-14 mx-auto">
 						<Routes>
 							<Route path="/stake" element={<Stake />} />
 							<Route path="/dex" element={<Dex />} />

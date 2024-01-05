@@ -46,11 +46,11 @@ const Information = () => {
 		<Card>
 			<Title>PERI APY</Title>
 			<div className="flex flex-col items-end lg:gap-5">
-				<div className="flex flex-col w-24">
+				<div className="flex flex-col w-28 md:w-24 lg:w-32">
 					<div className="text-2xl lg:text-4xl font-medium text-gray-500">{APY}%</div>
 					<div className="text-nowrap text-sm font-light text-gray-700">Est. APY</div>
 				</div>
-				<div className="flex flex-col w-24 mt-5">
+				<div className="flex flex-col w-28 md:w-24 lg:w-32 mt-5">
 					<div className="text-lg font-medium text-gray-700">{weeklyReward}</div>
 					<div className="text-nowrap text-sm font-light text-gray-700">Weekly Reward</div>
 				</div>

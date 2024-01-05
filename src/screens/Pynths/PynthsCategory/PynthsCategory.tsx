@@ -8,8 +8,7 @@ import { Arrow } from "@egjs/flicking-plugins";
 import ActiveCard from "components/ActiveCard";
 import categories from "configure/coins/categories";
 import pynths from "configure/coins/pynths";
-import dexNetworkId from "configure/network/dexNetworkId";
-import "swiper/css";
+// import "swiper/css";
 import "./PynthsCategory.css";
 
 const PynthsCategory = ({ isActive, setIsActive }) => {
@@ -21,16 +20,25 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
 
   const getCount = () => {
     let value = [];
+
+    const uniqPynths = Object.keys(pynths).map((e) => pynths[e]).flat().reduce(function(acc, current) {
+      if (acc.findIndex(({ symbol }) => symbol === current.symbol) === -1) {
+        acc.push(current);
+      }
+      return acc;
+    }, []);
+
     pynthsCategories.forEach((category) => {
       if (category === "all") {
-        value.push(pynths[dexNetworkId].length);
+        value.push(uniqPynths.length);
       } else {
-        value.push(
-          pynths[dexNetworkId].filter((e) => e.categories.includes(category))
+        const count = uniqPynths.filter((e) => e.categories.includes(category))
             .length
-        );
+        count && value.push(count);
       }
     });
+
+    console.log(value);
     setPynthsCategoriesCount(value);
   };
 
@@ -48,8 +56,8 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
     }
   }, [pynthsIsReady]);
   return (
-    <div>
-      <div className="lg:invisible visible">
+    <div className="flex w-full justify-center">
+      <div className="hidden mb-3 gap-1 text-lg font-light p-4">
         <Flicking
           className="h-15 bg-navy-500 mb-5 text-lg font-light p-4"
           plugins={[new Arrow()]}
@@ -57,7 +65,8 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
           bound={true}
         >
           {pynthsCategories.map((e, index) => (
-            <span
+
+            pynthsCategoriesCount[index] && <span
               className={`button ${
                 index === activeCategory
                   ? "font-medium text-blue-500"
@@ -72,27 +81,27 @@ const PynthsCategory = ({ isActive, setIsActive }) => {
               {e.toUpperCase()} ({pynthsCategoriesCount[index]})
             </span>
           ))}
-          <ViewportSlot>
+         <ViewportSlot>
             <span className="flicking-arrow-prev w-8">
-              <img src="/images/icon/left-arrow.svg" />
+              <img src="/images/icon/left-arrow.svg" alt="left_arrow"/>
             </span>
             <span className="flicking-arrow-next w-8">
-              <img src="/images/icon/right-arrow.svg" />
+              <img src="/images/icon/right-arrow.svg" alt="right_arrow"/>
             </span>
           </ViewportSlot>
         </Flicking>
       </div>
 
-      <div className="hidden lg:flex mb-3 gap-3 h-10">
+      <div className="flex mb-3 gap-1 h-10 w-[90%] lg:w-full">
         {pynthsCategories.map((e, index) => (
-          <ActiveCard
+          pynthsCategoriesCount[index] && <ActiveCard
             key={index}
             isActive={isActive === e}
             onClick={() => {
               setIsActive(e);
             }}
           >
-            <div className="text-lg text-center my-1">
+            <div className="inline-block text-sm lg:text-lg font-bold">
               {e.toUpperCase()} ({pynthsCategoriesCount[index]})
             </div>
           </ActiveCard>

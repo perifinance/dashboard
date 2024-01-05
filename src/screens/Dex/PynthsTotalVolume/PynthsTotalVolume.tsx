@@ -112,8 +112,8 @@ const PynthsTotalVolume = ({ togglePUSDHandler, togglePUSD }) => {
 					{`${togglePUSD ? "Remove" : "Add"} pUSD`}
 				</button>
 			</div>
-			<div className="flex space-x-5 my-4">
-				<div className="w-40 lg:w-44 h-40 lg:h-44">
+			<div className="flex justify-between lg:h-[80%]">
+				<div className="w-40 lg:w-44 h-40 lg:h-44 my-auto">
 					<PieChart
 						x={"pynthName"}
 						y={"totalSupplyToUSD"}
@@ -123,26 +123,29 @@ const PynthsTotalVolume = ({ togglePUSDHandler, togglePUSD }) => {
 					></PieChart>
 				</div>
 
-				<div className="flex lg:flex-col self-center w-52 flex-1">
-					<div className="flex flex-col lg:flex-row gap-2 items-end pl-2">
+				<div className="flex lg:flex-col self-center justify-center items-end w-40 lg:w-52">
+					<div className="flex flex-col items-start lg:items-center mb-5 w-4/5">
 						<div className="text-2xl text-gray-500 font-medium">
 							${formatShortenCurrency(Number(utils.formatEther(totalUSDValue)))}
 						</div>
-						<div className="text-sm text-gray-700 font-normal">Total Pynths Value(USD)</div>
+						<div className="text-sm text-gray-700 font-normal text-nowrap">Total Pynths Value</div>
 					</div>
-					<div className="hidden lg:flex flex-wrap space-y-2">
-						{sortByTotalSupplies.map((e, i) => (
-							<ColorVerticalLabel
-								key={i}
-								color={colors[i]}
-								text={e.pynthName}
-								per={formatNumberToPer(e.totalSupplyToUSD, totalUSDValue)}
-							></ColorVerticalLabel>
-						))}
+					<div className="hidden lg:flex justify-end w-full">
+						<div className="flex flex-row flex-wrap gap-2 w-[85%]">
+							{sortByTotalSupplies.map((e, i) => (
+								<ColorVerticalLabel
+									key={i}
+									color={colors[i]}
+									text={e.pynthName}
+									size="sm"
+									per={formatNumberToPer(e.totalSupplyToUSD, totalUSDValue)}
+								></ColorVerticalLabel>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-wrap space-y-2 lg:hidden">
+			<div className="flex flex-wrap space-y-2 lg:hidden gap-1">
 				{sortByTotalSupplies.map((e, i) => (
 					<ColorVerticalLabel
 						key={i}

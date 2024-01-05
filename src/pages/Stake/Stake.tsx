@@ -105,8 +105,8 @@ const Stake = () => {
     }, [stakeIsReady]);
 
     return (
-        <div className="flex flex-col w-full h-full px-4 lg:px-0 gap-5">
-            <div className="flex flex-col w-full md:h-2/3 md:flex-row gap-5">
+        <div className="flex flex-col w-[92%] lg:w-full h-full min-w-[220px] gap-5">
+            <div className="flex flex-col w-full md:h-3/5 md:flex-row gap-5">
                 <div className="md:h-86">
                     <StakingByAssets></StakingByAssets>
                 </div>
@@ -114,14 +114,14 @@ const Stake = () => {
                     <DebtByNetworks></DebtByNetworks>
                 </div>
             </div>
-            <div className="flex flex-col w-full md:h-1/3 md:flex-row gap-5">
-                <div className="md:w-[40%] md:h-60 flex-1">
+            <div className="flex flex-col w-full md:h-2/5 md:flex-row gap-5">
+                <div className="md:w-[40%]">
                     <Overview></Overview>
                 </div>
-                <div className="md:w-[30%] md:h-60">
+                <div className="md:w-[35%]">
                     <Information></Information>
                 </div>
-                <div className="md:w-[30%] md:h-60">
+                <div className="md:w-[25%]">
                     <Holders></Holders>
                 </div>
             </div>

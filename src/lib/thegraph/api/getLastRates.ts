@@ -5,18 +5,27 @@ import { lastRate } from "../queries";
 import { get } from "../service";
 
 export const getLastRates = () => {
-	const promise = [];
+	const currencyKeys = [];
 	
 	pynths[dexNetworkId.toString()].forEach((pynth) => {
-		const currencyKeys = pynth.name;
-		promise.push(get(lastRate({ networkId: dexNetworkId, currencyKeys })));
+		currencyKeys.push(pynth.symbol);
 	});
 
-	return Promise.all(promise).then((rates) => {
+	return get(lastRate({ networkId: dexNetworkId, currencyKeys })).then((data) => {
 		let keys = {};
-		rates.forEach((e) => {
-			keys[e.currencyKeys] = e.price;
+		keys["pUSD"] = 10n ** 18n;
+		data.forEach((e) => {
+			keys[`p${e.currencyKey}`] = e.price;
 		});
 		return keys;
 	});
+
+
+	// return Promise.all(promise).then((rates) => {
+	// 	let keys = {};
+	// 	rates.forEach((e) => {
+	// 		keys[e.currencyKeys] = e.price;
+	// 	});
+	// 	return keys;
+	// });
 };

@@ -42,11 +42,11 @@ const Overview = () => {
 					<div className="flex flex-col w-fit lg:pl-5 items-start">
 						<div className="text-nowrap text-sm font-light text-gray-700">PERI Price</div>
 						<div className="flex flex-row gap-5 items-end">
-							<div className="flex flex-row flex-nowrap text-xl font-medium text-blue-500">
+							<div className="flex flex-row items-end flex-nowrap text-xl font-medium text-blue-500">
 								${formatCurrency(lastPrice, 4)}
-								<p className={`text-[10px] ml-1 text-nowrap align-text-bottom ${change ? change > 0 ? " text-red-600":" text-blue-500":"hidden"}`}>
-									{/* {change > 0 ? "▲" : "▼"}  */}{Number(utils.formatEther(change))*100}%
-								</p>
+								<span className={`text-[10px] ml-1 h-7 text-nowrap ${change ? change > 0 ? " text-red-600":" text-blue-500":"hidden"}`}>
+									{change > 0 ? "▲" : "▼"} {Math.round(Number(utils.formatEther(change))*100)/100}%
+								</span>
 							</div>
 						</div>
 					</div>

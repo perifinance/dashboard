@@ -37,13 +37,16 @@ const Categories = ({ togglePUSD }) => {
 		const totalSuppliesAddCatagory = getTotalSuppliesAddCatagory();
 		let categoryByTotalSupply = {};
 
+		console.log(totalSuppliesAddCatagory);
+		console.log(exchangeRates);
+
 		totalSuppliesAddCatagory.forEach((item) => {
 			if (item.pynthName !== "pUSD") {
 				item.category.forEach((category) => {
 					if (!categoryByTotalSupply[category]) {
 						categoryByTotalSupply[category] = 0n;
 					}
-					let rate = exchangeRates[item.pynthName] ? 1000000000000000000n : exchangeRates[item.pynthName];
+					let rate = exchangeRates[item.pynthName] ? exchangeRates[item.pynthName] : 1000000000000000000n;
 					const pynthByTotalUSD = (item.totalSupply * rate) / 1000000000000000000n;
 					categoryByTotalSupply[category] = categoryByTotalSupply[category] + pynthByTotalUSD;
 					total += pynthByTotalUSD;
@@ -92,8 +95,8 @@ const Categories = ({ togglePUSD }) => {
 
 	return (
 		<Card>
-			<div className="flex flex-col lg:flex-row gap-5 lg:gap-14">
-				<div className="lg:w-40">
+			<div className="flex flex-col lg:flex-row gap-5 lg:justify-between">
+				<div className="lg:w-2/5 lg:min-w-40">
 					<Title>Categories</Title>
 					<div className="flex flex-wrap mt-4">
 						{pynthsCategories.map((e, i) => {
@@ -111,7 +114,7 @@ const Categories = ({ togglePUSD }) => {
 						})}
 					</div>
 				</div>
-				<div>
+				<div className="lg:w-1/2">
 					<div className="flex flex-col mt-4 lg:mt-0">
 						<Title>24H Exchange Overview</Title>
 						<div className="flex flex-col mb-4">

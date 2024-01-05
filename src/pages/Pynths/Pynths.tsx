@@ -71,7 +71,7 @@ const Pynths = () => {
 	}, [pynthsIsReady]);
 
 	return (
-		<>
+		<div className="w-full">
 			<PynthsCategory isActive={isActive} setIsActive={setIsActive}></PynthsCategory>
 
 			<div className="flex flex-col lg:flex-row lg:flex-wrap px-4 lg:px-0 gap-5">
@@ -87,7 +87,7 @@ const Pynths = () => {
 					}
 				})}
 			</div>
-		</>
+		</div>
 	);
 };
 export default Pynths;

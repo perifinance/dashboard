@@ -1,3 +1,3 @@
-let pynthsCategories = ['currencies', 'crypto', 'commodities', 'indices', 'stocks']
-    
-export default pynthsCategories
+let pynthsCategories = ["crypto", "currencies", "commodities", "indices", "stocks"];
+
+export default pynthsCategories;

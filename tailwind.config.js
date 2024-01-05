@@ -2,14 +2,14 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
     darkMode: 'class',
     theme: {
-        minWidth: {
-            '12': '3rem',
-            '52': '13rem',
-            '36': '9rem',
-            '80': '20rem',
-            '86': '21.5rem',
-        },
         extend: {
+            minWidth: {
+                '12': '3rem',
+                '52': '13rem',
+                '36': '9rem',
+                '80': '20rem',
+                '86': '21.5rem',
+            },
             screens: {
                 'xs': '320px',
                 'ss': '440px'

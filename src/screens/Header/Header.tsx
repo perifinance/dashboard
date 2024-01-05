@@ -45,8 +45,8 @@ const Header = () => {
     }, [closeModalHandler]);
 
 	return (
-		<div className="relative md:flex md:mx-auto w-full justify-center px-5 lg:max-w-screen-xl ">
-			<div className="flex justify-between items-center w-full md:w-2/12 md:h-16 lg:px-0">
+		<div className="relative md:flex md:mx-auto w-full justify-center md:justify-start px-5 lg:max-w-screen-xl ">
+			<div className="flex justify-between items-center w-full md:w-[17%] lg:w-[13%] md:h-16 lg:px-0">
 				<Link className="logo" to="/">
 					<img className="w-8 h-8 md:w-24 md:h-16" alt="Logo" />
 				</Link>
@@ -56,13 +56,12 @@ const Header = () => {
 					</div>
 				</div>
 				<div id="menu_caller" className="flex justify-center items-center md:hidden" onClick={() => setIsOpen(!isOpen)}>
-					<img id="menu_caller" className="w-4 mx-2" src={`/images/icon/drawer.svg`} alt="mobil_menu"></img>
+					<img id="menu_caller" className="w-5 mx-2" src={`/images/icon/drawer.svg`} alt="mobil_menu"></img>
 				</div>
 			</div>
-			
 
 			<div
-				className={`absolute md:relative md:w-9/12 ${
+				className={`absolute md:relative md:w-[78%] lg:w-[82%] ${
 					isOpen ? "flex" : "hidden md:flex"
 				} flex-col md:flex-row z-10 self-center border-[0.5px] md:border-none border-gray-900 rounded-md md:rounded-none right-5 bg-navy-700 text-xs md:text-xl w-fit md:w-auto font-normal`}
 			>
@@ -78,7 +77,7 @@ const Header = () => {
 					);
 				})}
 			</div>
-			<div className="hidden md:flex text-sm text-gray-700 items-center justify-end w-1/12">
+			<div className="hidden md:flex text-sm text-gray-700 items-center justify-end w-[5%]">
 				<div
 					className="flex justify-center items-center w-7 h-7 bg-navy-500 rounded-full ml-2 cursor-pointer"
 					onClick={() => {

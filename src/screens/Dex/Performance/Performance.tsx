@@ -31,6 +31,8 @@ const Performance = () => {
 	};
 
 	const init = () => {
+		console.log(exchangeRates);
+		
 		let pynthsByTotalSupplies = getPynthsByVolumes();
 		setPynthsByVolumes(pynthsByTotalSupplies);
 	};
@@ -43,50 +45,52 @@ const Performance = () => {
 
 	return (
 		<Card>
-			<div className="h-full overflow-y-scroll">
-				<div className="inline-block static">
-					<Title>Performance</Title>
-				</div>
-				<table className="w-full text-xs text-gray-700">
-					<thead className="text-sm bg-navy-800 border-t-2 border-b-2 border-gray-900 sticky">
-						<tr>
+			<div className="inline-block w-full">
+				<Title>Performance</Title>
+			</div>
+			<div className="h-full w-full lg:h-[84%] overflow-y-scroll ">
+				<table className="w-full text-xs text-gray-700 border-b border-gray-900">
+					<thead className="text-xs sm:text-sm border-t border-b border-gray-900 w-full">
+						<tr className="h-9 my-auto">
 							<th className="px-4 py-1 font-normal border-r border-gray-900">Tokens</th>
-							<th className="px-4 py-1 font-normal border-r border-gray-900">Price(pUSD)</th>
-							<th className="px-4 py-1 font-normal border-r border-gray-900">24H Change</th>
+							<th className="px-4 py-1 font-normal ">Price (pUSD)</th>
+							<th className="px-4 py-1 font-normal ">24H Change</th>
 							<th className="px-4 py-1 font-normal">24H Volume</th>
 						</tr>
 					</thead>
-					<tbody className="lg:text-base font-normal overflow-auto">
+					<tbody className="text-xs md:text-sm lg:text-base font-normal w-full ">
 						{pynthsByVolumes.map(
 							(e, i) =>
 								e.symbol !== "pUSD" && (
-									<tr key={i} className="border-b border-gray-900">
+									<tr key={i} className=" w-full selection:">
 										<td className="p-2 border-r border-gray-900">
-											<div className="flex flex-col lg:flex-row lg:gap-2">
+											<div className="flex flex-col sm:flex-row lg:gap-2 leading-3 ">
 												<img
-													className="hidden lg:block w-5 h-5 self-center"
-													src={`/images/currencies/${e.symbol === "pINCH" ? "p1INCH" : e.symbol}.png`}
+													className="inline-block w-5 h-5 self-center"
+													src={`/images/currencies/${e.symbol === "pINCH" ? "p1INCH" : e.symbol}.svg`}
+													alt={e.symbol}
 												></img>
-												<div className="text-sm lg:text-base text-gray-500 font-medium lg:font-bold">
+												<span className="text-xs xs:text-sm align-middle text-center lg:text-base ss:min-w-[56px] mx-auto sm:mx-0 text-gray-500 font-medium lg:font-bold">
 													{e.symbol === "pINCH" ? "p1INCH" : e.symbol}
-												</div>
-												{e.name}
+												</span>
+												<span className="hidden ss:block text-sm mx-auto sm:mx-0">{e.name}</span>
+												
 											</div>
 										</td>
-										<td className="p-2 text-right border-r border-gray-900">
+										<td className="p-2 text-right ">
 											$
 											{formatShortenCurrency(
 												utils.formatEther(exchangeRates[e.symbol] === undefined ? 1000000000000000000n : exchangeRates[e.symbol])
 											)}
 										</td>
 										<td
-											className={`p-2 text-center border-r border-gray-900 ${
+											className={`p-2 text-center ${
 												Number(rateChanges[e.symbol]) > 0 ? "text-blue-800" : "text-red-800"
 											}`}
 										>
 											{Number(rateChanges[e.symbol]) > 0 ? "▲" : "▼"} {rateChanges[e.symbol]}%
 										</td>
-										<td className="p-2 text-right">${formatShortenCurrency(utils.formatEther(e.usdVolume))}</td>
+										<td className="p-2 text-right selection:">${formatShortenCurrency(utils.formatEther(e.usdVolume))}</td>
 									</tr>
 								)
 						)}
