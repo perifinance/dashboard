@@ -87,7 +87,7 @@ const TradingVolume = ({ togglePUSD }) => {
 						</div>
 					</div>
 				</div>
-				<div className="flex lg:flex-col space-x-1 lg:space-y-1 lg:space-x-0 lg:w-[25%]">
+				<div className="flex flex-wrap lg:flex-col gap-1 lg:w-[25%]">
 					{pynthsByVolumes.map((e, i) => (
 						<ColorVerticalLabel
 							key={i}

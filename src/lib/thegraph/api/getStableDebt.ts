@@ -15,7 +15,7 @@ export const getStableDebt = () => {
 			return a.concat(b);
 		});
 
-		console.log(debts, datas);
+		// console.log(debts, datas);
 
 		let value = {};
 		let total = {

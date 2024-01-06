@@ -34,7 +34,8 @@ export const stableDebt = ({ networkId }) => {
 			break;
 	}
 
-	console.log("network", networkId, network);
+	// console.log("network", networkId, network);
+	// 39701982763780331075n
 
 	return {
 		url: "",
@@ -49,7 +50,7 @@ export const stableDebt = ({ networkId }) => {
 		`,
 		variables: {skip, first, network},
 		mapping: ({ data }) => {
-			console.log(data);
+			// console.log(data);
 			return data.stakeAmounts.map((item) => {
 				return mapping(item);
 			});

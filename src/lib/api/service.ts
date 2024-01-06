@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const get = ({ url, params, mapping }) => {
-	const API_URL = `${process.env.REACT_APP_THEGRAPH_URL_LIVE}api/v1/`;
+	const API_URL = `${process.env.REACT_APP_THEGRAPH_URL}api/v1/`;
 
 	axios.defaults.withCredentials = true;
 	return axios({

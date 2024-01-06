@@ -37,8 +37,8 @@ const Categories = ({ togglePUSD }) => {
 		const totalSuppliesAddCatagory = getTotalSuppliesAddCatagory();
 		let categoryByTotalSupply = {};
 
-		console.log(totalSuppliesAddCatagory);
-		console.log(exchangeRates);
+		// console.log(totalSuppliesAddCatagory);
+		// console.log(exchangeRates);
 
 		totalSuppliesAddCatagory.forEach((item) => {
 			if (item.pynthName !== "pUSD") {

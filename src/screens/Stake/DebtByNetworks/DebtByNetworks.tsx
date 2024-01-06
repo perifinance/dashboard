@@ -33,7 +33,7 @@ const DebtByNetworks = () => {
 			};
 		});
 
-		console.log(networkByDebtCashes);
+		// console.log(networkByDebtCashes);
 
 		setTotalDebts(Number(utils.formatEther(total / BigInt(4))));
 		setNetworkDebts(networkDebts.sort((a, b) => Number(b.totalDebt) - Number(a.totalDebt)));

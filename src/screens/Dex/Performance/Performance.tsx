@@ -31,8 +31,8 @@ const Performance = () => {
 	};
 
 	const init = () => {
-		console.log(exchangeRates);
-		
+		// console.log(exchangeRates);
+
 		let pynthsByTotalSupplies = getPynthsByVolumes();
 		setPynthsByVolumes(pynthsByTotalSupplies);
 	};
