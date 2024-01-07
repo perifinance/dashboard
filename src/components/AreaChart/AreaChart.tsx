@@ -55,14 +55,17 @@ const AreaChart = ({ data, colors }) => {
 				<XAxis axisLine={false} tickLine={true} dataKey={"date"} />
 				{/* hide={true} */}
 
-				{/* <YAxis
+				<YAxis
 					axisLine={false}
 					tickLine={false}
 					ticks={["0", "0.25", "0.5", "0.75", "1"]}
 					interval={0}
 					tickFormatter={toPercent}
 					padding={{ top: 10 }}
-				/> */}
+					orientation="right"
+					width={30}
+
+				/>
 
 				{getSupportedNetworks().map((networkId, index) => (
 					<Area

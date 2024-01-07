@@ -9,7 +9,7 @@ export const getTotalSupplyPynths = async () => {
 	
 	getSupportedNetworks().forEach((networkId) => {
 		coin[networkId.toString()].forEach((pynth) => {
-			const pynthName = pynth.symbol;
+			const pynthName = pynth.symbol === "p1INCH" ? "pINCH" : pynth.symbol;
 			promise.push(get(totalSupply({pynthName, networkId})));
 		});
 	});

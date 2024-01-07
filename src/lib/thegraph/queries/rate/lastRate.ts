@@ -10,7 +10,8 @@ export const lastRate = ({currencyKeys, networkId}) => {
 	const variables = { currencyKeys: currencyName };
 
 	const RateMapping = (data) => {
-        return {currencyKey:data.currencyName, price: BigInt(data.price) * 10n ** 10n, timestamp: data.timestamp};
+		const name = data.currencyName === "INCH" ? "1INCH" : data.currencyName;
+        return {currencyKey:name, price: BigInt(data.price) * 10n ** 10n, timestamp: data.timestamp};
     };
 
     return {

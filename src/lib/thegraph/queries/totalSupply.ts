@@ -8,10 +8,12 @@ const network = {
 }
 
 export const totalSupply = ({ pynthName, networkId }) => {
+
 	const mapping = (data) => {
+		const pynthName = data.pynthName === "pINCH" ? "p1INCH" : data.pynthName;
 		return {
 			totalSupply: BigInt(data.totalSupply),
-			pynthName: data.pynthName,
+			pynthName: pynthName,
 			networkId,
 		};
 	};

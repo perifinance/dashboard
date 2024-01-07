@@ -6,6 +6,7 @@ import APY from "./APY/APY";
 import circulatingSupply from "./circulatingSupply/circulatingSupply";
 import exchangeRates from "./exchangeRates/exchangeRates";
 import periRates from "./periRates/periRates";
+import periChartRates from "./periChartRates/periChartRates";
 import periTicker from "./periTicker/periTicker";
 import totalSupplyPynths from "./totalSupplyPynths/totalSupplyPynths";
 import exchangeVolumes from "./exchangeVolumes/exchangeVolumes";
@@ -20,6 +21,7 @@ const reducer = combineReducers({
     circulatingSupply,
     exchangeRates,
     periRates,
+    periChartRates,
     periTicker,
     totalSupplyPynths,
     exchangeVolumes,

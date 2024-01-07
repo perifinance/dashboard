@@ -47,21 +47,19 @@ const DebtByNetworks = () => {
 
 	return (
 		<Card>
+			<Title>Debt by Networks</Title>
 			<div className="flex flex-col lg:flex-row lg:justify-between">
-				<div>
-					<Title>Debt by Networks</Title>
-					<div className="flex space-x-5 my-4 items-center">
+				<div className="flex justify-between mx-2 mb-4 sm:mb-0">
+					<div className="flex lg:mb-4 items-center justify-center">
 						<div className="w-40 lg:w-52 h-40 lg:h-52">
 							<PieChart x={"networkName"} y={"per"} data={networkDebts} colors={getColors(networkDebts)}></PieChart>
 						</div>
-						<div className="space-y-3 lg:space-y-5 self-center flex-1">
-							<div>
-								<div className="text-2xl xs:text-3xl lg:text-4xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
-								<div className="text-xs xs:text-sm text-gray-700 font-normal">Total Debt</div>
-							</div>
+						<div className=" absolute space-y-1 self-center justify-center">
+							<div className="text-xl xs:text-2xl lg:text-3xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
+							<div className="text-xs xs:text-sm text-gray-700 text-center font-normal">Total Debt</div>
 						</div>
 					</div>
-					<div className="flex lg:hidden flex-nowrap space-x-1 ss:space-x-2 lg:gap-2">
+					<div className="flex flex-col mb-4 lg:mb-0 lg:hidden flex-nowrap lg:gap-2">
 						{networkDebts.map((networkDebt) => {
 							return (
 								<ColorVerticalLabel
@@ -75,9 +73,9 @@ const DebtByNetworks = () => {
 					</div>
 				</div>
 
-				{/* <div className="w-full h-52 lg:self-center lg:h-44 lg:pl-10">
+				<div className="w-full h-32 lg:h-52 lg:self-end lg:pb-3 lg:pl-10 text-[10px]">
 					<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
-				</div> */}
+				</div>
 			</div>
 
 			<div className="hidden lg:flex space-y-2 lg:gap-2">

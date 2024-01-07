@@ -64,27 +64,29 @@ const StakingByAssets = () => {
 	return (
 		<Card>
 			<Title>Staking by Assets</Title>
-			<div className="flex space-x-5 my-4">
-				<div className="w-40 lg:w-52 h-40 lg:h-52">
-					<PieChart x={"coin"} y={"per"} data={perTVL} colors={getColors(perTVL)}></PieChart>
-				</div>
-				<div className="space-y-3 lg:space-y-5 self-center flex-1">
-					<div>
-						<div className="text-2xl lg:text-4xl text-gray-500 font-medium">{TVL}</div>
-						<div className="hidden ss:block text-sm text-gray-700 font-light">PERI Total Value Locked</div>
-						<div className="ss:hidden text-sm text-gray-700 font-light">PERI TVL</div>
+			<div className="flex flex-col md:gap-14 lg:gap-0">
+				<div className="flex justify-between lg:space-x-5 my-4">
+					<div className="w-40 lg:w-52 h-40 lg:h-52">
+						<PieChart x={"coin"} y={"per"} data={perTVL} colors={getColors(perTVL)}></PieChart>
 					</div>
-					<div>
-						<div className="text-2xl lg:text-3xl text-gray-500 font-medium">$ {stableTVL}</div>
-						<div className="hidden ss:block text-sm text-gray-700 font-light">Stable Total Value Locked</div>
-						<div className="ss:hidden text-sm text-gray-700 font-light">Stable TVL</div>
+					<div className="space-y-3 lg:space-y-5 self-center w-fit md:pl-3 md:flex-1">
+						<div className="w-fit">
+							<div className="text-2xl lg:text-4xl text-gray-500 font-medium">{TVL}</div>
+							<div className="hidden ss:block text-sm text-gray-700 font-light">PERI Total Value Locked</div>
+							<div className="ss:hidden text-sm text-gray-700 font-light">PERI TVL</div>
+						</div>
+						<div className="w-fit">
+							<div className="text-2xl lg:text-3xl text-gray-500 font-medium">$ {stableTVL}</div>
+							<div className="hidden ss:block text-sm text-gray-700 font-light">Stable Total Value Locked</div>
+							<div className="ss:hidden text-sm text-gray-700 font-light">Stable TVL</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="flex flex-wrap space-y-2 lg:gap-2">
-				{perTVL.map((e, i) => {
-					return <ColorVerticalLabel color={colors[i]} text={e.coin} per={e.per} key={e.coin}></ColorVerticalLabel>;
-				})}
+				<div className="flex self-start md:gap-2 lg:gap-0 ">
+					{perTVL.map((e, i) => {
+						return <ColorVerticalLabel color={colors[i]} text={e.coin} per={e.per} key={i}></ColorVerticalLabel>;
+					})}
+				</div>
 			</div>
 		</Card>
 	);

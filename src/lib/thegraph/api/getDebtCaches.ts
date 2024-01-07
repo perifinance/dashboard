@@ -27,15 +27,26 @@ export const getDebtCaches = async () => {
 			days.push(formatDay(Number(day) / 1000));
 		}
 
+		console.log(debtCaches);
+
 		// 데이터 변환 로직
 		return days.map((day) => {
 			let previous = [];
 			let returnValue = {};
+			let tempDebtBalanceToNumber = 14611.70139393982;
 
 			debtCaches.forEach((e: any[], i: number) => {
 				e.forEach((element) => {
 					if (!previous[i]) {
 						previous[i] = element;
+					}
+
+					if (element.network === "ETHEREUM" ) {
+						if (tempDebtBalanceToNumber < 10) {
+							element.debtBalanceToNumber = tempDebtBalanceToNumber;
+						} else {
+							tempDebtBalanceToNumber = element.debtBalanceToNumber;
+						}
 					}
 
 					if (day === element.date) {

@@ -10,7 +10,7 @@ import { setNetworkByDebtCashes } from "reducers/networkByDebtCashes";
 import { setPeriholderCounts } from "reducers/periholderCounts";
 import { setExchangeRates } from "reducers/exchangeRates";
 import { setPeriRates } from "reducers/periRates";
-import { getStableDebt, getDebtCaches, getPeriholderCounts, getLastRates, getTokenTicker } from "lib/thegraph/api";
+import { getStableDebt, getDebtCaches, getPeriholderCounts, getLastRates, getTokenTicker, getChartRates } from "lib/thegraph/api";
 import { getCachedDebts, getTotalAPY, getTotalCirculatingSupply } from "lib/api/api";
 
 import StakingByAssets from "screens/Stake/StakingByAssets";
@@ -18,6 +18,7 @@ import DebtByNetworks from "screens/Stake/DebtByNetworks";
 import Overview from "screens/Stake/Overview";
 import Information from "screens/Stake/Information";
 import Holders from "screens/Stake/Holders";
+import { setPeriChartRates } from "reducers/periChartRates";
 
 const Stake = () => {
     const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const Stake = () => {
             const [
                 debt,
                 apy,
+                chartRate,
                 tokenTicker,
                 circulatingSupply,
                 networkByDebtCashes,
@@ -69,6 +71,10 @@ const Stake = () => {
             ] = await Promise.all([
                 getDebts(),
                 getTotalAPY(),
+                getChartRates({
+					currencyName: "PERI",
+					networkId: 137,
+				}),
                 getTokenTicker({
                     currencyName: "PERI",
                     networkId: 137,
@@ -79,7 +85,15 @@ const Stake = () => {
                 getLastRates(),
                 // getLastPeriRates(),
             ]);
+            const today = Math.round(new Date().getTime() / 1000);
+			const quoterDay = today - 6 * 3600;
+			const filterChartRate = chartRate.filter((rate) => {
+				return rate.timestamp >= quoterDay * 1000;
+			});
 
+            console.log("networkByDebtCashes", networkByDebtCashes);
+            
+            dispatch(setPeriChartRates(filterChartRate));
             dispatch(setNetworkCachedDebts(debt));
             dispatch(setAPY(apy));
             dispatch(setPeriTicker(tokenTicker));

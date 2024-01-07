@@ -49,6 +49,8 @@ const Pynths = () => {
 		dispatch(setLoading(true));
 		const totalSupplyPynths = await getTotalSupplyPynths();
 		const exchangeRates = await getLastRates();
+		console.log("exchangeRates", exchangeRates);
+		console.log("totalSupplyPynths", totalSupplyPynths);
 
 		dispatch(setExchangeRates(exchangeRates));
 		dispatch(setTotalSupplyPynths(totalSupplyPynths));

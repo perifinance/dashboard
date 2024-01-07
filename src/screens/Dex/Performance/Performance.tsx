@@ -64,16 +64,16 @@ const Performance = () => {
 								e.symbol !== "pUSD" && (
 									<tr key={i} className=" w-full selection:">
 										<td className="p-2 border-r border-gray-900">
-											<div className="flex flex-col sm:flex-row lg:gap-2 leading-3 ">
+											<div className="flex flex-col sm:flex-row lg:gap-2 leading-5 lg:leading-6">
 												<img
-													className="inline-block w-5 h-5 self-center"
+													className="inline-block w-5 h-5 self-center align-middle"
 													src={`/images/currencies/${e.symbol === "pINCH" ? "p1INCH" : e.symbol}.svg`}
 													alt={e.symbol}
 												></img>
-												<span className="text-xs xs:text-sm align-middle text-center lg:text-base ss:min-w-[56px] mx-auto sm:mx-0 text-gray-500 font-medium lg:font-bold">
+												<span className="inline-block text-xs xs:text-sm align-middle text-center lg:text-base ss:min-w-[56px] mx-auto sm:mx-0 text-gray-500 font-medium lg:font-bold">
 													{e.symbol === "pINCH" ? "p1INCH" : e.symbol}
 												</span>
-												<span className="hidden ss:block text-sm mx-auto sm:mx-0">{e.name}</span>
+												<span className="hidden align-middle ss:inline-block text-[11px] sm:text-sm mx-auto sm:mx-0">{e.name}</span>
 												
 											</div>
 										</td>
@@ -85,10 +85,10 @@ const Performance = () => {
 										</td>
 										<td
 											className={`p-2 text-center ${
-												Number(rateChanges[e.symbol]) > 0 ? "text-blue-800" : "text-red-800"
+												Number(rateChanges[e.symbol]) !== 0 ? Number(rateChanges[e.symbol]) > 0 ? "text-blue-800" : "text-red-800" : ""
 											}`}
 										>
-											{Number(rateChanges[e.symbol]) > 0 ? "▲" : "▼"} {rateChanges[e.symbol]}%
+											{Number(rateChanges[e.symbol]) !== 0 ? Number(rateChanges[e.symbol]) > 0 ? "▲" : "▼" : ""} {rateChanges[e.symbol]}%
 										</td>
 										<td className="p-2 text-right selection:">${formatShortenCurrency(utils.formatEther(e.usdVolume))}</td>
 									</tr>

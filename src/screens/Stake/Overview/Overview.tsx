@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { useSelector, useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "reducers";
-import { formatCurrency, formatDecimal } from "lib/format";
+import { formatCurrency } from "lib/format";
 import { ResponsiveContainer, AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
 import Card from "components/Card";
 import Title from "components/Title";
 import { utils } from "ethers";
-import { hi } from "date-fns/locale";
 
 const Overview = () => {
 	const { stakeIsReady } = useSelector((state: RootState) => state.app);
 	const { lastPrice, high24hr, low24hr, change } = useSelector((state: RootState) => state.periTicker);
 	const { circulatingSupply } = useSelector((state: RootState) => state.circulatingSupply);
-
+	const { rates } = useSelector((state: RootState) => state.periChartRates);
 	
 	const [marketCap, setMarketCap] = useState(0n);
 
@@ -34,7 +33,7 @@ const Overview = () => {
 			<Title>24 Hours Overview</Title>
 			<div className="flex flex-col mt-4">
 				<div className="flex flex-row w-full justify-between">
-					<div className="flex flex-col x-fit xs:w-1/3 mb-4">
+					<div className="flex flex-col x-fit xs:w-1/3 mb-2">
 						<div className="text-nowrap text-sm font-light text-gray-700 ml-1">Market Cap</div>
 						<div className="text-xl font-medium text-blue-500 ">${formatCurrency(marketCap, 0)}</div>
 					</div>
@@ -62,8 +61,8 @@ const Overview = () => {
 					</div>
 				</div>
 			</div>
-			{/* <div className="w-full h-20 text-2xs lg:max-w-100">
-				<ResponsiveContainer width="100%" height="100%" debounce={1} maxHeight={80}>
+			<div className="w-full h-[100px] text-2xs lg:max-w-100">
+				<ResponsiveContainer width="100%" height="100%" debounce={1} maxHeight={100}>
 					<AreaChart data={rates} margin={{ top: 5, right: 0, left: 0, bottom: 20 }}>
 						<defs>
 							<linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -75,12 +74,10 @@ const Overview = () => {
 						<XAxis dataKey="time" height={1} axisLine={false} tickLine={false} />
 						<YAxis dataKey="price" domain={["dataMin", "dataMax"]} tickFormatter={(e) => e} hide={true} />
 
-						{/* 라인 *//*}
-
 						<Area type="monotone" dataKey="price" fillOpacity={1} stroke="#1D86FE" fill="url(#colorUv)" strokeWidth={3} />
 					</AreaChart>
 				</ResponsiveContainer>
-			</div> */}
+			</div>
 		</Card>
 	);
 };
