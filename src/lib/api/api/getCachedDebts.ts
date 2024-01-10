@@ -1,6 +1,7 @@
-import { get } from "../service";
-import { getCachedDebt } from "../queries";
 import { getSupportedNetworks } from "configure/network";
+
+import { getCachedDebt } from "../queries";
+import { get } from "../service";
 export const getCachedDebts = async () => {
 	const promise = [];
 

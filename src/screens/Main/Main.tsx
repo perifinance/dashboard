@@ -7,7 +7,7 @@ import Pynths from "pages/Pynths";
 
 const Main = () => {
 	return (
-		<div className="bg-navy-700 h-full xl:h-screen text-white font-light lg:ml-5 lg:mr-5">
+		<div className=" h-full xl:h-screen text-white font-light lg:ml-5 lg:mr-5">
 			<div className="2xl:container py-4 xl:pt-6 2xl:pt-14 mx-auto">
 				<Router>
 					<Header></Header>

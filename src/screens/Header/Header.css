@@ -14,8 +14,8 @@ header {
 }
 
 @media (min-width: 768px) {
-    .active {
-        color: #1d86fe !important;
+    .hover {
+        color: #0e23e3 !important;
     }
 }
 

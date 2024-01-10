@@ -117,15 +117,17 @@ const Categories = ({ togglePUSD }) => {
 				<div className="lg:w-1/2">
 					<div className="flex flex-col mt-4 lg:mt-0">
 						<Title>24H Exchange Overview</Title>
-						<div className="flex flex-col mb-4">
-							<div className="text-4xl font-medium">${formatCurrency(totalVolume, 2)}</div>
-							<div className="text-sm font-normal text-gray-700">Total Trading Volume</div>
+						<div className="flex flex-col items-start pl-2">
+							<div className="flex flex-col mb-4 lg:w-full">
+								<div className=" text-3xl ss:text-4xl font-medium">${formatCurrency(totalVolume, 2)}</div>
+								<div className="text-sm font-normal text-gray-700">Total Trading Volume</div>
+							</div>
+							<div className="flex flex-col mb-4 lg:w-full">
+								<div className="text-2xl font-medium text-gray-700">{exchangeCount}</div>
+								<div className="text-sm font-normal text-gray-700">Total Trades</div>
+							</div>
+							<div className="flex space-x-4">
 						</div>
-						<div className="flex flex-col mb-4">
-							<div className="text-2xl font-medium text-gray-700">{exchangeCount}</div>
-							<div className="text-sm font-normal text-gray-700">Total Trades</div>
-						</div>
-						<div className="flex space-x-4">
 							{/* <div className="flex flex-col">
                                     <div className="text-4xl font-medium">5.29%</div>
                                     <div className="text-sm font-normal text-gray-700">Debt Inflation</div>

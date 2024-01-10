@@ -49,14 +49,14 @@ const DebtByNetworks = () => {
 		<Card>
 			<Title>Debt by Networks</Title>
 			<div className="flex flex-col lg:flex-row lg:justify-between">
-				<div className="flex justify-between mx-2 mb-4 sm:mb-0">
-					<div className="flex lg:mb-4 items-center justify-center">
+				<div className="flex justify-between mx-4 ss:mx-2 mb-4 sm:mb-0">
+					<div className="flex lg:mb-4 items-center justify-center ">
 						<div className="w-40 lg:w-52 h-40 lg:h-52">
 							<PieChart x={"networkName"} y={"per"} data={networkDebts} colors={getColors(networkDebts)}></PieChart>
 						</div>
 						<div className=" absolute space-y-1 self-center justify-center">
-							<div className="text-xl xs:text-2xl lg:text-3xl text-blue-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
-							<div className="text-xs xs:text-sm text-gray-700 text-center font-normal">Total Debt</div>
+							<div className="text-sm xs:text-lg lg:text-2xl text-gray-500 font-medium">{formatShortenCurrency(totalDebts)}</div>
+							<div className="text-[10px] ss:text-xs text-gray-700 text-center font-normal">Total Debt</div>
 						</div>
 					</div>
 					<div className="flex flex-col mb-4 lg:mb-0 lg:hidden flex-nowrap lg:gap-2">
@@ -73,7 +73,7 @@ const DebtByNetworks = () => {
 					</div>
 				</div>
 
-				<div className="w-full h-32 lg:h-52 lg:self-end lg:pb-3 lg:pl-10 text-[10px]">
+				<div className="w-[95%] mx-auto h-32 lg:h-52 lg:self-end lg:pb-3 lg:pl-10 text-[10px]">
 					<AreaChart data={networkByDebtCashes} colors={colors}></AreaChart>
 				</div>
 			</div>

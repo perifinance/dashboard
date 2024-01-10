@@ -1,8 +1,11 @@
+import { getSupportedNetworks } from "configure/network/getSupportedNetworks";
+
+import { addDays } from "date-fns";
+
+import { formatDay } from "lib/format";
+
 import { debtCaches } from "../queries";
 import { get } from "../service";
-import { getSupportedNetworks } from "configure/network/getSupportedNetworks";
-import { addDays } from "date-fns";
-import { formatDay } from "lib/format";
 export const getDebtCaches = async () => {
 	let day = 30;
 	let searchDate = Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * 24 * day;
@@ -27,7 +30,7 @@ export const getDebtCaches = async () => {
 			days.push(formatDay(Number(day) / 1000));
 		}
 
-		console.log(debtCaches);
+		// console.log(debtCaches);
 
 		// 데이터 변환 로직
 		return days.map((day) => {

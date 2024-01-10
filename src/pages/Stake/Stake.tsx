@@ -74,6 +74,7 @@ const Stake = () => {
                 getChartRates({
 					currencyName: "PERI",
 					networkId: 137,
+                    timePeriod: 6,
 				}),
                 getTokenTicker({
                     currencyName: "PERI",
@@ -85,15 +86,16 @@ const Stake = () => {
                 getLastRates(),
                 // getLastPeriRates(),
             ]);
-            const today = Math.round(new Date().getTime() / 1000);
-			const quoterDay = today - 6 * 3600;
-			const filterChartRate = chartRate.filter((rate) => {
-				return rate.timestamp >= quoterDay * 1000;
-			});
+            // const today = Math.round(new Date().getTime() / 1000);
+			// const startTime = today - 6 * 3600;
+			// const filterChartRate = chartRate.filter((rate) => {
+			// 	return rate.timestamp >= startTime * 1000;
+			// });
 
-            console.log("networkByDebtCashes", networkByDebtCashes);
+            console.log("debt", debt);
+            // console.log("apy", apy);
             
-            dispatch(setPeriChartRates(filterChartRate));
+            dispatch(setPeriChartRates(chartRate));
             dispatch(setNetworkCachedDebts(debt));
             dispatch(setAPY(apy));
             dispatch(setPeriTicker(tokenTicker));

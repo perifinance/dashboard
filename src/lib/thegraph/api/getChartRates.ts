@@ -1,18 +1,21 @@
+import { format } from "date-fns";
+
+import { utils } from "ethers";
+
+import { formatCurrency } from "lib";
+
 import { chartRate } from "../queries";
 import { get } from "../service";
-import { format } from "date-fns";
-import { utils } from "ethers";
-import { formatCurrency } from "lib";
 
 type ChartRateParameter = {
 	currencyName: String;
 	networkId: number;
 	page?: number;
 	first?: number;
-	chartTime?: String;
+	timePeriod?: number;
 };
-export const getChartRates = async ({ currencyName, networkId, page = undefined, first = undefined }: ChartRateParameter) => {
-	let searchDate = (Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * 24).toString();
+export const getChartRates = async ({ currencyName, networkId, page = undefined, first = undefined, timePeriod = 24 }: ChartRateParameter) => {
+	let searchDate = (Number((new Date().getTime() / 1000).toFixed(0)) - 60 * 60 * timePeriod).toString();
 	let data = await get(chartRate({ networkId, currencyName, page, first, searchDate }));
 
 	return data.map((e) => {
@@ -24,7 +27,7 @@ export const getChartRates = async ({ currencyName, networkId, page = undefined,
 			formatLow: formatCurrency(e.low, 6),
 			formatHigh: formatCurrency(e.high, 6),
 			timestamp: e.timestamp * 1000,
-			time: format(e.timestamp * 1000, "HHaa"),
+			time: format(e.timestamp * 1000, "HH:mm"),
 		};
 	});
 };

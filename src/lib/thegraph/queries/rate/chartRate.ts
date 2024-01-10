@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+
 import { utils } from "ethers";
 
 export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "0", networkId }) => {
@@ -8,9 +9,9 @@ export const chartRate = ({ currencyName, page = 0, first = 1000, searchDate = "
 
 	const RateMapping = (data) => {
 		return {
-			price: BigInt(data.price),
-			low: BigInt(data.low),
-			high: BigInt(data.high),
+			price: BigInt(data.price) * 10n ** 10n,
+			low: BigInt(data.low) * 10n ** 10n,
+			high: BigInt(data.high) * 10n ** 10n,
 			timestamp: Number(data.timestamp),
 		};
 	};

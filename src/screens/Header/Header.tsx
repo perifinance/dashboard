@@ -61,14 +61,14 @@ const Header = () => {
 			</div>
 
 			<div
-				className={`absolute md:relative md:w-[78%] lg:w-[82%] ${
+				className={`absolute md:relative md:w-[78%] lg:w-[82%] bg-navy-700 ${
 					isOpen ? "flex" : "hidden md:flex"
-				} flex-col md:flex-row z-10 self-center border-[0.5px] md:border-none border-gray-900 rounded-md md:rounded-none right-5 bg-navy-700 text-xs md:text-xl w-fit md:w-auto font-normal`}
+				} flex-col md:flex-row z-10 self-center border-[0.5px] md:border-none border-gray-900 rounded-md md:rounded-none right-5 text-sm md:text-xl w-fit md:w-auto font-normal`}
 			>
 				{Object.keys(routerNames).map((e) => {
 					return (
 						<NavLink
-							className="active border-gray-700 text-gray-700 px-3 py-2 whitespace-nowrap"
+							className="active border-gray-700  px-3 py-2 whitespace-nowrap"
 							to={e}
 							key={e}
 						>

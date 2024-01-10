@@ -85,7 +85,7 @@ const Performance = () => {
 										</td>
 										<td
 											className={`p-2 text-center ${
-												Number(rateChanges[e.symbol]) !== 0 ? Number(rateChanges[e.symbol]) > 0 ? "text-blue-800" : "text-red-800" : ""
+												Number(rateChanges[e.symbol]) !== 0 ? Number(rateChanges[e.symbol]) > 0 ? "text-blue-500" : "text-red-800" : ""
 											}`}
 										>
 											{Number(rateChanges[e.symbol]) !== 0 ? Number(rateChanges[e.symbol]) > 0 ? "▲" : "▼" : ""} {rateChanges[e.symbol]}%
